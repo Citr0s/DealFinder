@@ -1,8 +1,0 @@
-/Users/miloszdura/work/DealFinder/DealFinder.Api/DealFinder.Api/bin/Debug/netcoreapp1.1/DealFinder.Api.deps.json
-/Users/miloszdura/work/DealFinder/DealFinder.Api/DealFinder.Api/bin/Debug/netcoreapp1.1/DealFinder.Api.runtimeconfig.json
-/Users/miloszdura/work/DealFinder/DealFinder.Api/DealFinder.Api/bin/Debug/netcoreapp1.1/DealFinder.Api.runtimeconfig.dev.json
-/Users/miloszdura/work/DealFinder/DealFinder.Api/DealFinder.Api/bin/Debug/netcoreapp1.1/DealFinder.Api.dll
-/Users/miloszdura/work/DealFinder/DealFinder.Api/DealFinder.Api/bin/Debug/netcoreapp1.1/DealFinder.Api.pdb
-/Users/miloszdura/work/DealFinder/DealFinder.Api/DealFinder.Api/obj/Debug/netcoreapp1.1/DealFinder.Api.AssemblyInfo.cs
-/Users/miloszdura/work/DealFinder/DealFinder.Api/DealFinder.Api/obj/Debug/netcoreapp1.1/DealFinder.Api.dll
-/Users/miloszdura/work/DealFinder/DealFinder.Api/DealFinder.Api/obj/Debug/netcoreapp1.1/DealFinder.Api.pdb
