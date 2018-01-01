@@ -1,4 +1,4 @@
 export const environment = {
-  production: true,
-  backendUrl: 'https://fyp.miloszdura.com/api/'
+    production: true,
+    backendUrl: 'http://localhost:5000/api/'
 };

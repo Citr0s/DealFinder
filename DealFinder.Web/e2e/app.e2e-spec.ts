@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('awesome-project App', () => {
+describe('deal-finder.web App', () => {
   let page: AppPage;
 
   beforeEach(() => {
