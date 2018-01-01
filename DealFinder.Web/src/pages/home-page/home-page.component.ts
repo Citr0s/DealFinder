@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
-import { environment } from "../../environments/environment";
+import {Component, Input} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../../environments/environment';
 
 @Component({
     selector: 'home-page',
@@ -20,10 +20,10 @@ export class HomePageComponent {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
                 this._httpClient
-                .get(`${environment.backendUrl}deals/${position.coords.latitude}/${position.coords.longitude}`)
-                .subscribe((payload) => {
-                    this.feedback = JSON.stringify(payload, null, 2);
-                });
+                    .get(`${environment.backendUrl}deals/${position.coords.latitude}/${position.coords.longitude}`)
+                    .subscribe((payload) => {
+                        this.feedback = JSON.stringify(payload, null, 2);
+                    });
             });
             return;
         }
