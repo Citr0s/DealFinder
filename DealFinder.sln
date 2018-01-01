@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DealFinder.Api", "DealFinder.Api\DealFinder.Api.csproj", "{98532A4A-FE00-4F89-8EDF-A7396CD259E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DealFinder.Api", "DealFinder.Api\DealFinder.Api.csproj", "{98532A4A-FE00-4F89-8EDF-A7396CD259E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DealFinder.Data", "DealFinder.Data\DealFinder.Data.csproj", "{68BDAC52-0C1E-4E29-81E8-B63344D6D656}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{98532A4A-FE00-4F89-8EDF-A7396CD259E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98532A4A-FE00-4F89-8EDF-A7396CD259E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98532A4A-FE00-4F89-8EDF-A7396CD259E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68BDAC52-0C1E-4E29-81E8-B63344D6D656}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68BDAC52-0C1E-4E29-81E8-B63344D6D656}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68BDAC52-0C1E-4E29-81E8-B63344D6D656}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68BDAC52-0C1E-4E29-81E8-B63344D6D656}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
