@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DealFinder.Api", "DealFinde
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DealFinder.Data", "DealFinder.Data\DealFinder.Data.csproj", "{68BDAC52-0C1E-4E29-81E8-B63344D6D656}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DealFinder.Core", "DealFinder.Core\DealFinder.Core.csproj", "{75AB9497-15B9-4BE4-A6E8-73BD38B60C58}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{68BDAC52-0C1E-4E29-81E8-B63344D6D656}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68BDAC52-0C1E-4E29-81E8-B63344D6D656}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68BDAC52-0C1E-4E29-81E8-B63344D6D656}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75AB9497-15B9-4BE4-A6E8-73BD38B60C58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75AB9497-15B9-4BE4-A6E8-73BD38B60C58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75AB9497-15B9-4BE4-A6E8-73BD38B60C58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75AB9497-15B9-4BE4-A6E8-73BD38B60C58}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

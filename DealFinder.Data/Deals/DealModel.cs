@@ -4,6 +4,7 @@
     {
         public Location Location { get; set; }
         public string Title { get; set; }
+        public double DistanceInMiles { get; set; }
     }
 
     public class Location
