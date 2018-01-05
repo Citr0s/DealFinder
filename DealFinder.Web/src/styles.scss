@@ -1,1 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+@import "styles/normalize";
+
+$success-dark: #27ae60;
+$success-light: #2ecc71;
+$failure-dark: #c0392b;
+$failure-light: #e74c3c;
+
+body {
+  font-family: 'Ubuntu', sans-serif;
+}

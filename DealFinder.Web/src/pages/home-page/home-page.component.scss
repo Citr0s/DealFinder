@@ -1,0 +1,40 @@
+@import "../../styles";
+
+.deals-wrapper {
+  padding: 15px;
+
+  .deal {
+    background-color: #f3f3f3;
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    margin: 15px 0;
+    position: relative;
+
+    .title {
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .distance {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 5px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      font-weight: bold;
+
+      small {
+        font-size: 0.6rem;
+      }
+    }
+  }
+
+  .alert {
+    padding: 15px;
+    margin: 15px 0;
+    border: 1px solid $failure-dark;
+    background-color: $failure-light;
+  }
+}

@@ -1,5 +1,12 @@
-<h1>Deal Finder</h1>
-<button (click)="findLocation()">Get my location</button>
-<div>
-    <pre>{{ feedback }}</pre>
+<div class="deals-wrapper">
+    <h1>Deal Finder</h1>
+    <button (click)="findLocation()">Get my location</button>
+    <div class="deal" *ngFor="let deal of deals">
+        <div class="title">{{ deal.title }}</div>
+        <div class="distance">
+            {{ deal.distanceInMiles }}
+            <small>miles away</small>
+        </div>
+    </div>
+    <div class="alert" *ngIf="deals.length === 0">No deals found!</div>
 </div>
