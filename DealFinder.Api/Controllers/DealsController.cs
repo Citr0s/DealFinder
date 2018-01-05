@@ -10,7 +10,7 @@ namespace DealFinder.Api.Controllers
         
         public DealsController()
         {
-            _dealsService = new DealsService();
+            _dealsService = new DealsService(new DealsRepository());
         }
         
         [HttpGet("{latitude}/{longitude}")]
