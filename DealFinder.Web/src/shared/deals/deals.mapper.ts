@@ -8,6 +8,7 @@ export class DealsMapper {
         payload.forEach((item) => {
             response.push({
                 title: item.title,
+                summary: item.summary,
                 distanceInMiles: item.distanceInMiles,
                 location: {
                     latitude: item.location.latitude,

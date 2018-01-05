@@ -23,7 +23,8 @@ namespace DealFinder.Data.Deals
                         Longitude = -2
                     },
                     DistanceInMiles = Haversine.Calculate(latitude, longitude, 50, -2),
-                    Title = "Books £5 each!"
+                    Title = "Books £5 each!",
+                    Summary = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab corporis deserunt excepturi harum libero nihil porro ratione sapiente sint. Alias amet eligendi enim eveniet illo natus reprehenderit similique soluta sunt."
                 },
                 new DealModel
                 {
@@ -33,7 +34,8 @@ namespace DealFinder.Data.Deals
                         Longitude = -2.5
                     },
                     DistanceInMiles = Haversine.Calculate(latitude, longitude, 56, -2.5),
-                    Title = "Socks 50% off!"
+                    Title = "Socks 50% off!",
+                    Summary = "Aliquam amet aspernatur at autem consectetur consequuntur delectus doloremque esse excepturi fuga illo laboriosam nostrum obcaecati omnis pariatur porro praesentium quae quasi rem sit soluta sunt, tempore tenetur vitae voluptatum."
                 },
                 new DealModel
                 {
@@ -43,7 +45,8 @@ namespace DealFinder.Data.Deals
                         Longitude = -2.1794
                     },
                     DistanceInMiles = Haversine.Calculate(latitude, longitude, 53.0027, -2.1794),
-                    Title = "Great deal on electronics"
+                    Title = "Great deal on electronics",
+                    Summary = "Ab at corporis id, laboriosam mollitia numquam odit provident repellat sapiente vel! Architecto numquam similique tempore? Architecto dicta est in iusto natus praesentium quae sunt suscipit ut veniam? Ea, quos."
                 },
                 new DealModel
                 {
@@ -53,7 +56,8 @@ namespace DealFinder.Data.Deals
                         Longitude = -1.6428
                     },
                     DistanceInMiles = Haversine.Calculate(latitude, longitude, 52.8094, -1.6428),
-                    Title = "Apple Macbook Pro £200 off at Currrys"
+                    Title = "Apple Macbook Pro £200 off at Currrys",
+                    Summary = "Cupiditate ea eos iste praesentium similique? At est facilis hic ipsam nulla optio quia saepe totam! Adipisci assumenda eius exercitationem facere. Accusantium aliquam, exercitationem minima quia similique suscipit tenetur voluptatem!"
                 }
             };
 
