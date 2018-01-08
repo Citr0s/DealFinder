@@ -5,11 +5,10 @@
         public bool HasError { get; set; }
         public Error Error { get; set; }
 
-        public CommunicationResponse AddError(Error error)
+        public void AddError(Error error)
         {
             HasError = true;
             Error = error;
-            return this;
         }
     }
 }

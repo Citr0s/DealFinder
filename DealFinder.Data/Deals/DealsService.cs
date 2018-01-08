@@ -7,9 +7,9 @@ namespace DealFinder.Data.Deals
 {
     public interface IDealsService
     {
-        List<DealModel> GetByLocation(double latitude, double longitude);
+        GetDealsByLocationResponse GetByLocation(double latitude, double longitude);
     }
-        
+
     public class DealsService : IDealsService
     {
         private readonly IDealsRepository _dealsRepository;
@@ -19,14 +19,20 @@ namespace DealFinder.Data.Deals
             _dealsRepository = dealsRepository;
         }
 
-        public List<DealModel> GetByLocation(double latitude, double longitude)
+        public GetDealsByLocationResponse GetByLocation(double latitude, double longitude)
         {
+            var response = new GetDealsByLocationResponse();
+
             var getDealsByLocationResponse = _dealsRepository.GetByLocation(latitude, longitude);
 
-            if(getDealsByLocationResponse.HasError)
-                return new List<DealModel>();
+            if (getDealsByLocationResponse.HasError)
+            {
+                response.AddError(getDealsByLocationResponse.Error);
+                return response;
+            }
 
-            return DealsMapper.Map(getDealsByLocationResponse.Deals).OrderBy(x => x.DistanceInMeters).ToList();
+            response.Deals = DealsMapper.Map(getDealsByLocationResponse.Deals).OrderBy(x => x.DistanceInMeters).ToList();
+            return response;
         }
     }
 }
