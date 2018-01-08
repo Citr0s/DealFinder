@@ -1,5 +1,6 @@
 import {GetDealsByLocationResponse} from './getDealsByLocationResponse';
 import {Deal} from './deal';
+import {DealRecord} from './deal.record';
 
 export class DealsMapper {
     private static ONE_MILE_IN_METERS: number = 1609;
@@ -10,7 +11,7 @@ export class DealsMapper {
         if (payload.hasError)
             return response;
 
-        payload.deals.forEach((item) => {
+        payload.deals.forEach((item: DealRecord) => {
             response.push({
                 title: item.title,
                 summary: item.summary,
