@@ -7,6 +7,6 @@ namespace DealFinder.Data.Deals
         public string Title { get; set; }
         public string Summary { get; set; }
         public Location Location { get; set; }
-        public double DistanceInMiles { get; set; }
+        public double DistanceInMeters { get; set; }
     }
 }

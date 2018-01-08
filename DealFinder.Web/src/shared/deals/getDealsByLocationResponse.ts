@@ -1,7 +1,7 @@
 export class GetDealsByLocationResponse {
     title: string;
     summary: any;
-    distanceInMiles: number;
+    distanceInMeters: number;
     location: Location;
 }
 

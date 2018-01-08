@@ -1,7 +1,7 @@
 export class Deal {
     title: string;
     summary: string;
-    distanceInMiles: number;
+    distanceDescription: string;
     location: {
         latitude: number;
         longitude: number;

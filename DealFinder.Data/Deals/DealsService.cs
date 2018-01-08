@@ -26,7 +26,7 @@ namespace DealFinder.Data.Deals
             if(getDealsByLocationResponse.HasError)
                 return new List<DealModel>();
 
-            return DealsMapper.Map(getDealsByLocationResponse.Deals).OrderBy(x => x.DistanceInMiles).ToList();
+            return DealsMapper.Map(getDealsByLocationResponse.Deals).OrderBy(x => x.DistanceInMeters).ToList();
         }
     }
 }

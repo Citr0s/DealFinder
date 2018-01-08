@@ -1,7 +1,9 @@
-import { GetDealsByLocationResponse } from "./getDealsByLocationResponse";
-import { Deal } from "./deal";
+import {GetDealsByLocationResponse} from './getDealsByLocationResponse';
+import {Deal} from './deal';
 
 export class DealsMapper {
+    private static ONE_MILE_IN_METERS: number = 1609;
+
     static map(payload: GetDealsByLocationResponse[]): Deal[] {
         let response = [];
 
@@ -9,7 +11,7 @@ export class DealsMapper {
             response.push({
                 title: item.title,
                 summary: item.summary,
-                distanceInMiles: item.distanceInMiles,
+                distanceDescription: this.generateAppropriateDistanceUnit(item.distanceInMeters),
                 location: {
                     latitude: item.location.latitude,
                     longitude: item.location.longitude
@@ -18,5 +20,14 @@ export class DealsMapper {
         });
 
         return response;
+    }
+
+    private static generateAppropriateDistanceUnit(distanceInMeters: number): string {
+        let distanceInMiles = Math.floor(distanceInMeters / this.ONE_MILE_IN_METERS);
+
+        if (distanceInMiles > 0)
+            return `${distanceInMiles} mile${distanceInMiles === 1 ? '' : 's'} away`;
+
+        return `${Math.floor(distanceInMeters)} meter${distanceInMeters === 1 ? '' : 's'} away`;
     }
 }

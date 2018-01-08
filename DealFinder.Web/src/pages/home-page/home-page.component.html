@@ -3,10 +3,7 @@
     <button (click)="findLocation()">Get my location</button>
     <div class="deal" *ngFor="let deal of dealsModel.deals">
         <div class="title">{{ deal.title }}</div>
-        <div class="distance">
-            {{ deal.distanceInMiles }}
-            <small>mile{{ deal.distanceInMiles === 1 ? '' : 's' }} away</small>
-        </div>
+        <div class="distance">{{ deal.distanceDescription }}</div>
         <div class="summary">{{ deal.summary }}</div>
     </div>
     <div class="alert" *ngIf="dealsModel.hasError">{{ dealsModel.error }}</div>

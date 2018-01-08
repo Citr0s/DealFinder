@@ -14,7 +14,7 @@ namespace DealFinder.Data.Deals
                 {
                     Title = dealRecord.Title,
                     Summary = dealRecord.Summary,
-                    DistanceInMiles = dealRecord.DistanceInMiles,
+                    DistanceInMeters = dealRecord.DistanceInMeters,
                     Location = dealRecord.Location
                 });   
             }
