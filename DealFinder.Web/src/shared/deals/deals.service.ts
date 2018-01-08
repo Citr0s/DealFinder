@@ -15,7 +15,7 @@ export class DealsService {
         return new Promise((resolve, reject) => {
             this._dealsRepository.getDealsByLocation(latitude, longitude)
                 .subscribe(
-                    (payload: GetDealsByLocationResponse[]) => {
+                    (payload: GetDealsByLocationResponse) => {
                         resolve(DealsMapper.map(payload));
                     },
                     (error) => {
