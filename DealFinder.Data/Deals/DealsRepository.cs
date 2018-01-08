@@ -56,7 +56,7 @@ namespace DealFinder.Data.Deals
                         Longitude = -1.6428
                     },
                     DistanceInMiles = Haversine.Calculate(latitude, longitude, 52.8094, -1.6428),
-                    Title = "Apple Macbook Pro £200 off at Currrys",
+                    Title = "Apple Macbook Pro £200 off at Currys",
                     Summary = "Cupiditate ea eos iste praesentium similique? At est facilis hic ipsam nulla optio quia saepe totam! Adipisci assumenda eius exercitationem facere. Accusantium aliquam, exercitationem minima quia similique suscipit tenetur voluptatem!"
                 }
             };

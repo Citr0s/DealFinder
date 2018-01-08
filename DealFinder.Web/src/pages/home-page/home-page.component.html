@@ -1,7 +1,7 @@
 <div class="deals-wrapper">
     <h1>Deal Finder</h1>
     <button (click)="findLocation()">Get my location</button>
-    <div class="deal" *ngFor="let deal of deals">
+    <div class="deal" *ngFor="let deal of dealsModel.deals">
         <div class="title">{{ deal.title }}</div>
         <div class="distance">
             {{ deal.distanceInMiles }}
@@ -9,5 +9,5 @@
         </div>
         <div class="summary">{{ deal.summary }}</div>
     </div>
-    <div class="alert" *ngIf="deals.length === 0">No deals found!</div>
+    <div class="alert" *ngIf="dealsModel.hasError">{{ dealsModel.error }}</div>
 </div>
