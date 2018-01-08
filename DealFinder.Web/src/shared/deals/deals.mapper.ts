@@ -4,10 +4,13 @@ import {Deal} from './deal';
 export class DealsMapper {
     private static ONE_MILE_IN_METERS: number = 1609;
 
-    static map(payload: GetDealsByLocationResponse[]): Deal[] {
+    static map(payload: GetDealsByLocationResponse): Deal[] {
         let response = [];
 
-        payload.forEach((item) => {
+        if (payload.hasError)
+            return response;
+
+        payload.deals.forEach((item) => {
             response.push({
                 title: item.title,
                 summary: item.summary,
