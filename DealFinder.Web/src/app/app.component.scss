@@ -9,8 +9,16 @@
   left: 0;
   right: 0;
 
+  @media(max-width: 600px) {
+    top: 56px;
+  }
+
   .sidenav {
     min-width: 250px;
+
+    @media(max-width: 600px) {
+      min-width: 100%;
+    }
 
     button {
       width: 100%;
