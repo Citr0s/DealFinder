@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using DealFinder.Core.Distance;
+﻿using System.Linq;
 
 namespace DealFinder.Data.Deals
 {
@@ -12,6 +10,8 @@ namespace DealFinder.Data.Deals
     public class DealsService : IDealsService
     {
         private readonly IDealsRepository _dealsRepository;
+
+        public DealsService(DealContext context) : this(new DealsRepository(context)) { }
 
         public DealsService(IDealsRepository dealsRepository)
         {

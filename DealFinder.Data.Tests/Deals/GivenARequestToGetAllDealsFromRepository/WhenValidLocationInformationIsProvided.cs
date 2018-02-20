@@ -1,7 +1,7 @@
 ﻿using DealFinder.Data.Deals;
 using NUnit.Framework;
 
-namespace DealFinder.Data.Tests.Deals.GivenARequestToGetAllDeals
+namespace DealFinder.Data.Tests.Deals.GivenARequestToGetAllDealsFromRepository
 {
     [TestFixture]
     public class WhenCorrectLocationInformationIsProvided
@@ -11,7 +11,7 @@ namespace DealFinder.Data.Tests.Deals.GivenARequestToGetAllDeals
         [OneTimeSetUp]
         public void SetUp()
         {
-            var subject = new DealsRepository();
+            var subject = new DealsRepository(null);
             _result = subject.GetByLocation(50, 5);
         }
 

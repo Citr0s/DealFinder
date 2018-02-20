@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using DealFinder.Core.Communication;
 using DealFinder.Core.Distance;
 
 namespace DealFinder.Data.Deals
@@ -10,60 +11,39 @@ namespace DealFinder.Data.Deals
 
     public class DealsRepository : IDealsRepository
     {
+        private readonly DealContext _context;
+
+        public DealsRepository(DealContext context)
+        {
+            _context = context;
+        }
+
         public GetByLocationResponse GetByLocation(double latitude, double longitude)
         {
-            var deals =  new List<DealRecord>
+            var response = new GetByLocationResponse();
+            using (_context)
             {
-                new DealRecord
+                try
                 {
-                    LocationRecord = new LocationRecord
-                    {
-                        Latitude = 50,
-                        Longitude = -2
-                    },
-                    DistanceInMeters = Haversine.Calculate(latitude, longitude, 50, -2),
-                    Title = "Books £5 each!",
-                    Summary = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab corporis deserunt excepturi harum libero nihil porro ratione sapiente sint. Alias amet eligendi enim eveniet illo natus reprehenderit similique soluta sunt."
-                },
-                new DealRecord
-                {
-                    LocationRecord = new LocationRecord
-                    {
-                        Latitude = 56,
-                        Longitude = -2.5
-                    },
-                    DistanceInMeters = Haversine.Calculate(latitude, longitude, 56, -2.5),
-                    Title = "Socks 50% off!",
-                    Summary = "Aliquam amet aspernatur at autem consectetur consequuntur delectus doloremque esse excepturi fuga illo laboriosam nostrum obcaecati omnis pariatur porro praesentium quae quasi rem sit soluta sunt, tempore tenetur vitae voluptatum."
-                },
-                new DealRecord
-                {
-                    LocationRecord = new LocationRecord
-                    {
-                        Latitude = 53.0027,
-                        Longitude = -2.1794
-                    },
-                    DistanceInMeters = Haversine.Calculate(latitude, longitude, 53.0027, -2.1794),
-                    Title = "Great deal on electronics",
-                    Summary = "Ab at corporis id, laboriosam mollitia numquam odit provident repellat sapiente vel! Architecto numquam similique tempore? Architecto dicta est in iusto natus praesentium quae sunt suscipit ut veniam? Ea, quos."
-                },
-                new DealRecord
-                {
-                    LocationRecord = new LocationRecord
-                    {
-                        Latitude = 52.8094,
-                        Longitude = -1.6428
-                    },
-                    DistanceInMeters = Haversine.Calculate(latitude, longitude, 52.8094, -1.6428),
-                    Title = "Apple Macbook Pro £200 off at Currys",
-                    Summary = "Cupiditate ea eos iste praesentium similique? At est facilis hic ipsam nulla optio quia saepe totam! Adipisci assumenda eius exercitationem facere. Accusantium aliquam, exercitationem minima quia similique suscipit tenetur voluptatem!"
-                }
-            };
+                    var dealRecords = _context.Deals;
 
-            return new GetByLocationResponse
-            {
-                Deals = deals
-            };
+                    foreach (var dealRecord in dealRecords)
+                    {
+                        dealRecord.DistanceInMeters = Haversine.Calculate(latitude, longitude, dealRecord.Location.Latitude, dealRecord.Location.Longitude);
+                        response.Deals.Add(dealRecord);
+                    }
+                }
+                catch (Exception exception)
+                {
+                    response.AddError(new Error
+                    {
+                        Code = ErrorCodes.DatabaseError,
+                        UserMessage = "Something went wrong when getting latest deals. Please try again later.",
+                        TechnicalMessage = $"The following exception was thrown: {exception.Message}"
+                    });
+                }
+            }
+            return response;
         }
     }
 }

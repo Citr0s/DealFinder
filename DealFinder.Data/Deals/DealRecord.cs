@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DealFinder.Data.Deals
 {
@@ -9,7 +10,8 @@ namespace DealFinder.Data.Deals
         public Guid Identifier { get; set; }
         public string Title { get; set; }
         public string Summary { get; set; }
+        [NotMapped]
         public double DistanceInMeters { get; set; }
-        public LocationRecord LocationRecord { get; set; }
+        public LocationRecord Location { get; set; }
     }
 }

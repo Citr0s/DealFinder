@@ -22,6 +22,7 @@ namespace DealFinder.Api
         {
             const string connectionString = "server=localhost;database=deal_finder;username=postgres;password=password";
             services.AddEntityFrameworkNpgsql().AddDbContext<DealContext>(options => options.UseNpgsql(connectionString));
+            services.AddScoped<IDealsService, DealsService>();
 
             // Add Cors
             services.AddCors();

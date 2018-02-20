@@ -8,9 +8,9 @@ namespace DealFinder.Api.Controllers
     {
         private readonly IDealsService _dealsService;
         
-        public DealsController()
+        public DealsController(IDealsService dealsService)
         {
-            _dealsService = new DealsService(new DealsRepository());
+            _dealsService = dealsService;
         }
         
         [HttpGet("{latitude}/{longitude}")]

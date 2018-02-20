@@ -25,7 +25,7 @@ namespace DealFinder.Data.Tests.Deals.GivenARequestToGetAllDealsFromService
                             Title = "Awesome Deal Title",
                             Summary = "Awesome Deal Summary",
                             DistanceInMeters = 1200,
-                            LocationRecord = new LocationRecord
+                            Location = new LocationRecord
                             {
                                 Latitude = 3,
                                 Longitude = 5
