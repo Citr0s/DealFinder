@@ -1,7 +1,7 @@
-import {Component, Input} from '@angular/core';
-import {DealsService} from '../../shared/deals/deals.service';
-import {Deal} from '../../shared/deals/deal';
-import {DealsModel} from './deals.model';
+import { Component, Input } from '@angular/core';
+import { DealsService } from '../../shared/deals/deals.service';
+import { Deal } from '../../shared/deals/deal';
+import { DealsModel } from './deals.model';
 
 @Component({
     selector: 'home-page',
@@ -15,6 +15,8 @@ export class HomePageComponent {
     constructor(dealsService: DealsService) {
         this._dealsService = dealsService;
         this.dealsModel = new DealsModel();
+
+        this.findLocation();
     }
 
     findLocation() {
@@ -23,12 +25,12 @@ export class HomePageComponent {
 
         navigator.geolocation.getCurrentPosition((position) => {
             this._dealsService.getDealsByLocation(position.coords.latitude, position.coords.longitude)
-                .then((payload: Deal[]) => {
-                    this.dealsModel.deals = payload;
-                })
-                .catch((error) => {
-                    this.dealsModel.addError(error.message);
-                });
+            .then((payload: Deal[]) => {
+                this.dealsModel.deals = payload;
+            })
+            .catch((error) => {
+                this.dealsModel.addError(error.message);
+            });
         });
     }
 }

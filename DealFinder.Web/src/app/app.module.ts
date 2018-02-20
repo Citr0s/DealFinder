@@ -14,12 +14,14 @@ import {
     MatToolbarModule
 } from "@angular/material";
 import { NewDealPageComponent } from "../pages/new-deal-page/new-deal-page.component";
+import { SignUpPageComponent } from "../pages/sign-up-page/sign-up-page.component";
 
 @NgModule({
     declarations: [
         AppComponent,
         HomePageComponent,
-        NewDealPageComponent
+        NewDealPageComponent,
+        SignUpPageComponent
     ],
     imports: [
         BrowserModule,
