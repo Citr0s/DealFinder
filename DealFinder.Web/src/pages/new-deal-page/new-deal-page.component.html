@@ -1,13 +1,18 @@
 <mat-card>
     <div class="new-deal-form">
         <mat-form-field>
-            <input matInput placeholder="Title">
+            <input matInput placeholder="Title" (change)="updateTitleValue($event)">
         </mat-form-field>
         <br>
         <mat-form-field>
-            <textarea matInput placeholder="Summary"></textarea>
+            <textarea matInput placeholder="Summary" (change)="updateSummaryValue($event)"></textarea>
         </mat-form-field>
         <br>
-        <button mat-raised-button class="button" color="primary">Submit</button>
+        <div class="coordinates" *ngIf="coordinates">Current location: {{ coordinates.latitude }}, {{
+            coordinates.longitude }}
+        </div>
+        <button mat-raised-button class="button" (click)="getCurrentLocation()">Use current location</button>
+        <br>
+        <button mat-raised-button class="button" color="primary" (click)="submit()">Submit</button>
     </div>
 </mat-card>

@@ -1,0 +1,8 @@
+export class SaveDealRequest {
+    title: string;
+    summary: string;
+    location: {
+        latitude: number;
+        longitude: number;
+    }
+}

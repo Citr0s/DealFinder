@@ -1,7 +1,8 @@
-import {Injectable} from '@angular/core';
-import {DealsRepository} from './deals.repository';
-import {DealsMapper} from './deals.mapper';
-import {GetDealsByLocationResponse} from './getDealsByLocationResponse';
+import { Injectable } from '@angular/core';
+import { DealsRepository } from './deals.repository';
+import { DealsMapper } from './deals.mapper';
+import { GetDealsByLocationResponse } from './getDealsByLocationResponse';
+import { Location } from "./location";
 
 @Injectable()
 export class DealsService {
@@ -14,14 +15,36 @@ export class DealsService {
     getDealsByLocation(latitude: number, longitude: number) {
         return new Promise((resolve, reject) => {
             this._dealsRepository.getDealsByLocation(latitude, longitude)
-                .subscribe(
-                    (payload: GetDealsByLocationResponse) => {
-                        resolve(DealsMapper.map(payload));
-                    },
-                    (error) => {
-                        reject(error);
-                    }
-                );
+            .subscribe(
+                (payload: GetDealsByLocationResponse) => {
+                    resolve(DealsMapper.map(payload));
+                },
+                (error) => {
+                    reject(error);
+                }
+            );
+        });
+    }
+
+    saveDeal(title: string, summary: string, coordinates: Location) {
+        return new Promise((resolve, reject) => {
+            let request = {
+                title: title,
+                summary: summary,
+                location: {
+                    latitude: coordinates.latitude,
+                    longitude: coordinates.longitude
+                }
+            };
+            this._dealsRepository.saveDeal(request)
+            .subscribe(
+                (payload) => {
+                    resolve(payload);
+                },
+                (error) => {
+                    reject(error);
+                }
+            );
         });
     }
 }
