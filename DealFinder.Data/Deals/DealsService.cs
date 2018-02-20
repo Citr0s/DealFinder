@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using DealFinder.Core.Distance;
-using DealFinder.Core.Location;
 
 namespace DealFinder.Data.Deals
 {

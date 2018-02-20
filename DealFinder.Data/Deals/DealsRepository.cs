@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using DealFinder.Core.Distance;
-using DealFinder.Core.Location;
 
 namespace DealFinder.Data.Deals
 {
@@ -17,7 +16,7 @@ namespace DealFinder.Data.Deals
             {
                 new DealRecord
                 {
-                    Location = new Location
+                    LocationRecord = new LocationRecord
                     {
                         Latitude = 50,
                         Longitude = -2
@@ -28,7 +27,7 @@ namespace DealFinder.Data.Deals
                 },
                 new DealRecord
                 {
-                    Location = new Location
+                    LocationRecord = new LocationRecord
                     {
                         Latitude = 56,
                         Longitude = -2.5
@@ -39,7 +38,7 @@ namespace DealFinder.Data.Deals
                 },
                 new DealRecord
                 {
-                    Location = new Location
+                    LocationRecord = new LocationRecord
                     {
                         Latitude = 53.0027,
                         Longitude = -2.1794
@@ -50,7 +49,7 @@ namespace DealFinder.Data.Deals
                 },
                 new DealRecord
                 {
-                    Location = new Location
+                    LocationRecord = new LocationRecord
                     {
                         Latitude = 52.8094,
                         Longitude = -1.6428

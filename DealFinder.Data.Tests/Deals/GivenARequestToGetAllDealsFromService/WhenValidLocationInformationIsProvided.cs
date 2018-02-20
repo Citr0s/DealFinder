@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using DealFinder.Core.Location;
 using DealFinder.Data.Deals;
 using Moq;
 using NUnit.Framework;
@@ -26,7 +25,7 @@ namespace DealFinder.Data.Tests.Deals.GivenARequestToGetAllDealsFromService
                             Title = "Awesome Deal Title",
                             Summary = "Awesome Deal Summary",
                             DistanceInMeters = 1200,
-                            Location = new Location
+                            LocationRecord = new LocationRecord
                             {
                                 Latitude = 3,
                                 Longitude = 5
@@ -72,13 +71,13 @@ namespace DealFinder.Data.Tests.Deals.GivenARequestToGetAllDealsFromService
         [Test]
         public void ThenTheLocationLatitudeIsMappedCorrectly()
         {
-            Assert.That(_result.Deals[0].Location.Latitude, Is.EqualTo(3));
+            Assert.That(_result.Deals[0].LocationRecord.Latitude, Is.EqualTo(3));
         }
 
         [Test]
         public void ThenTheLocationLongitudeIsMappedCorrectly()
         {
-            Assert.That(_result.Deals[0].Location.Longitude, Is.EqualTo(5));
+            Assert.That(_result.Deals[0].LocationRecord.Longitude, Is.EqualTo(5));
         }
     }
 }
