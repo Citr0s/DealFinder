@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { DealsModel } from './deals.model';
 
 @Component({
     selector: 'new-deal-page',

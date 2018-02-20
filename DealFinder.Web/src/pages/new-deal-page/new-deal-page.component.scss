@@ -1,14 +1,10 @@
 @import "../../styles";
 
-.deals-wrapper {
-  padding: 15px;
-}
+.new-deal-form {
+  display: flex;
+  flex-direction: column;
 
-.get-location-button {
-  padding: 10px 15px;
-  margin-bottom: 15px;
-}
-
-.deal-card {
-  margin-bottom: 15px;
+  * {
+    width: 100%;
+  }
 }

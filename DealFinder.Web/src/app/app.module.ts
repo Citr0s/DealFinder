@@ -9,7 +9,8 @@ import { DealsService } from "../shared/deals/deals.service";
 import { DealsRepository } from "../shared/deals/deals.repository";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {
-    MatButtonModule, MatCardModule, MatDividerModule, MatIconModule, MatSidenavModule,
+    MatButtonModule, MatCardModule, MatDividerModule, MatFormFieldModule, MatIconModule, MatInputModule,
+    MatSidenavModule,
     MatToolbarModule
 } from "@angular/material";
 import { NewDealPageComponent } from "../pages/new-deal-page/new-deal-page.component";
@@ -30,8 +31,9 @@ import { NewDealPageComponent } from "../pages/new-deal-page/new-deal-page.compo
         MatButtonModule,
         MatIconModule,
         MatCardModule,
-        MatDividerModule
-
+        MatDividerModule,
+        MatInputModule,
+        MatFormFieldModule
     ],
     providers: [
         DealsService,
