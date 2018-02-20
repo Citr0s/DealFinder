@@ -11,9 +11,10 @@ using System;
 namespace DealFinder.Data.Migrations
 {
     [DbContext(typeof(DealContext))]
-    partial class DealContextModelSnapshot : ModelSnapshot
+    [Migration("20180220131230_RemovingLocationsTable")]
+    partial class RemovingLocationsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

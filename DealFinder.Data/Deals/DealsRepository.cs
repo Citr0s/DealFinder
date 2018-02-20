@@ -29,7 +29,7 @@ namespace DealFinder.Data.Deals
 
                     foreach (var dealRecord in dealRecords)
                     {
-                        dealRecord.DistanceInMeters = Haversine.Calculate(latitude, longitude, dealRecord.Location.Latitude, dealRecord.Location.Longitude);
+                        dealRecord.DistanceInMeters = Haversine.Calculate(latitude, longitude, dealRecord.Latitude, dealRecord.Longitude);
                         response.Deals.Add(dealRecord);
                     }
                 }

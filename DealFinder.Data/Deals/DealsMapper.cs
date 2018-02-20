@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DealFinder.Core.Distance;
 
 namespace DealFinder.Data.Deals
 {
@@ -15,7 +16,11 @@ namespace DealFinder.Data.Deals
                     Title = dealRecord.Title,
                     Summary = dealRecord.Summary,
                     DistanceInMeters = dealRecord.DistanceInMeters,
-                    LocationRecord = dealRecord.Location
+                    Location = new Location
+                    {
+                        Longitude = dealRecord.Longitude,
+                        Latitude = dealRecord.Latitude
+                    }
                 });   
             }
 

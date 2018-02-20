@@ -11,9 +11,10 @@ using System;
 namespace DealFinder.Data.Migrations
 {
     [DbContext(typeof(DealContext))]
-    partial class DealContextModelSnapshot : ModelSnapshot
+    [Migration("20180220125851_RemovingUnnecessaryFieldsFromDealsTable")]
+    partial class RemovingUnnecessaryFieldsFromDealsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,10 +26,6 @@ namespace DealFinder.Data.Migrations
                     b.Property<Guid>("Identifier")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<double>("Latitude");
-
-                    b.Property<double>("Longitude");
-
                     b.Property<string>("Summary");
 
                     b.Property<string>("Title");
@@ -36,6 +33,27 @@ namespace DealFinder.Data.Migrations
                     b.HasKey("Identifier");
 
                     b.ToTable("Deals");
+                });
+
+            modelBuilder.Entity("DealFinder.Data.Deals.LocationRecord", b =>
+                {
+                    b.Property<Guid>("Identifier");
+
+                    b.Property<double>("Latitude");
+
+                    b.Property<double>("Longitude");
+
+                    b.HasKey("Identifier");
+
+                    b.ToTable("LocationRecord");
+                });
+
+            modelBuilder.Entity("DealFinder.Data.Deals.LocationRecord", b =>
+                {
+                    b.HasOne("DealFinder.Data.Deals.DealRecord")
+                        .WithOne("Location")
+                        .HasForeignKey("DealFinder.Data.Deals.LocationRecord", "Identifier")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

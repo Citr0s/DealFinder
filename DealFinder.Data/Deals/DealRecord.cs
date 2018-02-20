@@ -10,8 +10,9 @@ namespace DealFinder.Data.Deals
         public Guid Identifier { get; set; }
         public string Title { get; set; }
         public string Summary { get; set; }
+        public double Longitude { get; set; }
+        public double Latitude { get; set; }
         [NotMapped]
         public double DistanceInMeters { get; set; }
-        public LocationRecord Location { get; set; }
     }
 }
