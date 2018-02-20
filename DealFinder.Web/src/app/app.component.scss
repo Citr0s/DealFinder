@@ -1,2 +1,24 @@
 .wrapper {
 }
+
+.sidenav-container {
+  z-index: -1 !important;
+  position: absolute;
+  top: 64px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  .sidenav {
+    min-width: 250px;
+
+    button {
+      width: 100%;
+    }
+  }
+}
+
+.menu-icon {
+  cursor: pointer;
+  margin-right: 10px;
+}

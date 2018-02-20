@@ -1,10 +1,7 @@
-@import "styles/normalize";
+@import 'styles/normalize';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 $success-dark: #27ae60;
 $success-light: #2ecc71;
 $failure-dark: #c0392b;
 $failure-light: #e74c3c;
-
-body {
-  font-family: 'Ubuntu', sans-serif;
-}

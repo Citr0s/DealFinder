@@ -1,10 +1,9 @@
 <div class="deals-wrapper">
-    <h1>Deal Finder</h1>
-    <button (click)="findLocation()">Get my location</button>
-    <div class="deal" *ngFor="let deal of dealsModel.deals">
+    <button mat-raised-button (click)="findLocation()" class="get-location-button">Get my location</button>
+    <mat-card class="deal-card" *ngFor="let deal of dealsModel.deals">
         <div class="title">{{ deal.title }}</div>
         <div class="distance">{{ deal.distanceDescription }}</div>
         <div class="summary">{{ deal.summary }}</div>
-    </div>
+    </mat-card>
     <div class="alert" *ngIf="dealsModel.hasError">{{ dealsModel.error }}</div>
 </div>
