@@ -6,7 +6,7 @@ import { DealsModel } from './deals.model';
     templateUrl: './new-deal-page.component.html',
     styleUrls: ['./new-deal-page.component.scss']
 })
-export class HomePageComponent {
+export class NewDealPageComponent {
 
     constructor() {
     }

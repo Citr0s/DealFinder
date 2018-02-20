@@ -8,13 +8,17 @@ import { HomePageComponent } from "../pages/home-page/home-page.component";
 import { DealsService } from "../shared/deals/deals.service";
 import { DealsRepository } from "../shared/deals/deals.repository";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { MatButtonModule, MatCardModule, MatIconModule, MatSidenavModule, MatToolbarModule } from "@angular/material";
+import {
+    MatButtonModule, MatCardModule, MatDividerModule, MatIconModule, MatSidenavModule,
+    MatToolbarModule
+} from "@angular/material";
+import { NewDealPageComponent } from "../pages/new-deal-page/new-deal-page.component";
 
 @NgModule({
     declarations: [
         AppComponent,
         HomePageComponent,
-
+        NewDealPageComponent
     ],
     imports: [
         BrowserModule,
@@ -25,7 +29,9 @@ import { MatButtonModule, MatCardModule, MatIconModule, MatSidenavModule, MatToo
         MatToolbarModule,
         MatButtonModule,
         MatIconModule,
-        MatCardModule
+        MatCardModule,
+        MatDividerModule
+
     ],
     providers: [
         DealsService,
