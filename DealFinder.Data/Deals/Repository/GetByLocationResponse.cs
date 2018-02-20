@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using DealFinder.Core.Communication;
 
-namespace DealFinder.Data.Deals
+namespace DealFinder.Data.Deals.Repository
 {
     public class GetByLocationResponse : CommunicationResponse
     {

@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DealFinder.Data.Deals
+namespace DealFinder.Data.Deals.Repository
 {
     public class DealRecord
     {

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DealFinder.Data.Deals.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace DealFinder.Data.Deals
 {

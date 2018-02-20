@@ -2,11 +2,12 @@
 using DealFinder.Core.Communication;
 using DealFinder.Core.Distance;
 
-namespace DealFinder.Data.Deals
+namespace DealFinder.Data.Deals.Repository
 {
     public interface IDealsRepository
     {
         GetByLocationResponse GetByLocation(double latitude, double longitude);
+        SaveDealResponse SaveDeal(SaveDealRequest request);
     }
 
     public class DealsRepository : IDealsRepository
@@ -43,6 +44,40 @@ namespace DealFinder.Data.Deals
                     });
                 }
             }
+            return response;
+        }
+
+        public SaveDealResponse SaveDeal(SaveDealRequest request)
+        {
+            var response = new SaveDealResponse();
+
+            using (_context)
+            using (var transaction = _context.Database.BeginTransaction())
+            {
+                try
+                {
+                    _context.Add(new DealRecord
+                    {
+                        Title = request.Deal.Title,
+                        Summary = request.Deal.Summary,
+                        Latitude = request.Deal.Location.Latitude,
+                        Longitude = request.Deal.Location.Longitude
+                    });
+                    _context.SaveChanges();
+                    transaction.Commit();
+                }
+                catch (Exception exception)
+                {
+                    transaction.Rollback();
+                    response.AddError(new Error
+                    {
+                        Code = ErrorCodes.DatabaseError,
+                        UserMessage = "Something went wrong when getting latest deals. Please try again later.",
+                        TechnicalMessage = $"The following exception was thrown: {exception.Message}"
+                    });
+                }
+            }
+
             return response;
         }
     }

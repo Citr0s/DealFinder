@@ -1,4 +1,5 @@
 ﻿using DealFinder.Data.Deals;
+using DealFinder.Data.Deals.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;

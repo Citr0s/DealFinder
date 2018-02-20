@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using DealFinder.Data.Deals;
+using DealFinder.Data.Deals.Repository;
+using DealFinder.Data.Deals.Service;
 using Moq;
 using NUnit.Framework;
 

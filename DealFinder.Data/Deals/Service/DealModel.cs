@@ -1,6 +1,6 @@
 ﻿using DealFinder.Core.Distance;
 
-namespace DealFinder.Data.Deals
+namespace DealFinder.Data.Deals.Service
 {
     public class DealModel
     {

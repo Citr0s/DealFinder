@@ -1,10 +1,12 @@
 ﻿using System.Linq;
+using DealFinder.Data.Deals.Repository;
 
-namespace DealFinder.Data.Deals
+namespace DealFinder.Data.Deals.Service
 {
     public interface IDealsService
     {
         GetDealsByLocationResponse GetByLocation(double latitude, double longitude);
+        SaveDealDetailsResponse SaveDealDetails(DealModel deal);
     }
 
     public class DealsService : IDealsService
@@ -31,6 +33,21 @@ namespace DealFinder.Data.Deals
             }
 
             response.Deals = DealsMapper.Map(getDealsByLocationResponse.Deals).OrderBy(x => x.DistanceInMeters).ToList();
+            return response;
+        }
+
+        public SaveDealDetailsResponse SaveDealDetails(DealModel deal)
+        {
+            var response = new SaveDealDetailsResponse();
+
+            var saveDealDetailsResponse = _dealsRepository.SaveDeal(new SaveDealRequest
+            {
+                Deal = deal
+            });
+
+            if (saveDealDetailsResponse.HasError)
+                response.AddError(saveDealDetailsResponse.Error);
+
             return response;
         }
     }

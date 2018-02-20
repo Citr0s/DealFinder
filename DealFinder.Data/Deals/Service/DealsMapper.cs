@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using DealFinder.Core.Distance;
+using DealFinder.Data.Deals.Repository;
 
-namespace DealFinder.Data.Deals
+namespace DealFinder.Data.Deals.Service
 {
     public class DealsMapper
     {
