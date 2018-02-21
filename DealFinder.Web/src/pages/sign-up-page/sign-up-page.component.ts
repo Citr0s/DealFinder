@@ -17,6 +17,11 @@ export class SignUpPageComponent {
         this._authService = authService;
         this._userService = userService;
         this._router = router;
+
+        let isUserLoggedIn = this._userService.isLoggedIn();
+
+        if (isUserLoggedIn)
+            this._router.navigate(['']);
     }
 
     public socialSignIn(socialPlatform: string) {
@@ -28,7 +33,6 @@ export class SignUpPageComponent {
         }
 
         this._authService.signIn(socialPlatformProvider).then((userData) => {
-                console.log(userData);
                 this._userService.registerUser(userData.idToken, socialPlatform)
                 .then(() => {
                     this._router.navigate(['']);

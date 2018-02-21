@@ -1,5 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatSidenav } from "@angular/material";
+import { UserService } from "../shared/user/user.service";
+import { User } from "../shared/user/user";
+import { Router } from "@angular/router";
 
 @Component({
     selector: 'app-root',
@@ -8,11 +11,37 @@ import { MatSidenav } from "@angular/material";
 })
 export class AppComponent {
     @ViewChild('sidenav') sidenav: MatSidenav;
+    private _userService: UserService;
+    isUserLoggedIn: boolean;
+    user: User;
+    private _router: Router;
 
-    reason = '';
+    constructor(userService: UserService, router: Router) {
+        this._userService = userService;
+        this._router = router;
 
-    close(reason: string) {
-        this.reason = reason;
+        this.checkUserStatus();
+
+        this._userService.onChange
+        .subscribe(() => {
+            this.checkUserStatus();
+        });
+    }
+
+    close() {
         this.sidenav.close();
+    }
+
+    logout() {
+        this._userService.logOut();
+        this._router.navigate(['']);
+        this.close();
+    }
+
+    private checkUserStatus() {
+        this.isUserLoggedIn = this._userService.isLoggedIn();
+
+        if (this.isUserLoggedIn)
+            this.user = this._userService.getPersistedUser();
     }
 }

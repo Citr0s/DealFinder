@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { DealsService } from "../../shared/deals/deals.service";
 import { Location } from "../../shared/deals/location";
+import { UserService } from "../../shared/user/user.service";
+import { Router } from "@angular/router";
 
 @Component({
     selector: 'new-deal-page',
@@ -12,9 +14,18 @@ export class NewDealPageComponent {
     @Input() summary: string;
     coordinates: Location;
     private _dealsService: DealsService;
+    private _userService: UserService;
+    private _router: Router;
 
-    constructor(dealsService: DealsService) {
+    constructor(dealsService: DealsService, userService: UserService, router: Router) {
         this._dealsService = dealsService;
+        this._userService = userService;
+        this._router = router;
+
+        let isUserLoggedIn = this._userService.isLoggedIn();
+
+        if (!isUserLoggedIn)
+            this._router.navigate(['']);
     }
 
     getCurrentLocation() {

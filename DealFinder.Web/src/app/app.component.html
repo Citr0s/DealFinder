@@ -6,13 +6,15 @@
         <h1>Deal Finder</h1>
     </mat-toolbar>
     <mat-sidenav-container
-            class="sidenav-container" (backdropClick)="close('backdrop')">
-        <mat-sidenav #sidenav (keydown.escape)="close('escape')" class="sidenav">
+            class="sidenav-container" (backdropClick)="close()">
+        <mat-sidenav #sidenav (keydown.escape)="close()" class="sidenav">
             <button mat-button routerLink="/" (click)="sidenav.toggle()">Home</button>
-            <mat-divider></mat-divider>
-            <button mat-button routerLink="/new-deal" (click)="sidenav.toggle()">Add Deal</button>
             <mat-divider class="divider-highlight"></mat-divider>
-            <button mat-button routerLink="/sign-up" (click)="sidenav.toggle()">Sign Up</button>
+            <button mat-button routerLink="/new-deal" (click)="sidenav.toggle()" *ngIf="isUserLoggedIn">Add Deal
+            </button>
+            <mat-divider></mat-divider>
+            <button mat-button routerLink="/sign-up" (click)="sidenav.toggle()" *ngIf="!isUserLoggedIn">Sign Up</button>
+            <button mat-button (click)="logout()" *ngIf="isUserLoggedIn">Log out</button>
         </mat-sidenav>
 
         <mat-sidenav-content>

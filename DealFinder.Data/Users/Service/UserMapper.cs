@@ -9,6 +9,7 @@ namespace DealFinder.Data.Users.Service
         {
             return new UserModel
             {
+                Identifier = user.Identifier, 
                 Username = AesEncryptor.Decrypt(user.Username, KeyReader.Instance().GetKey()),
                 Picture = AesEncryptor.Decrypt(user.Picture, KeyReader.Instance().GetKey())
             };
