@@ -27,8 +27,8 @@ export class SignUpPageComponent {
             socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
         }
 
-        this._authService.signIn(socialPlatformProvider).then(
-            (userData) => {
+        this._authService.signIn(socialPlatformProvider).then((userData) => {
+                console.log(userData);
                 this._userService.registerUser(userData.idToken, socialPlatform)
                 .then(() => {
                     this._router.navigate(['']);

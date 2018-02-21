@@ -1,4 +1,5 @@
-﻿using DealFinder.Data.Users.Service;
+﻿using DealFinder.Data.ThirdPartyAuthenticator.Google;
+using DealFinder.Data.Users.Service;
 
 namespace DealFinder.Data.ThirdPartyAuthenticator
 {

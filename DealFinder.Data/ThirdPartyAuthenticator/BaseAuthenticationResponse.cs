@@ -8,5 +8,6 @@ namespace DealFinder.Data.ThirdPartyAuthenticator
 
     public class BaseAuthenticationResponse : CommunicationResponse, IAuthenticationResponse
     {
+        public string UserId { get; set; }
     }
 }

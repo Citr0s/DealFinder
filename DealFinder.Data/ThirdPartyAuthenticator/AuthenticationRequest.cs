@@ -2,6 +2,7 @@
 {
     public interface IAuthenticationRequest
     {
+        string Token { get; set; }
     }
 
     public class AuthenticationRequest : IAuthenticationRequest
