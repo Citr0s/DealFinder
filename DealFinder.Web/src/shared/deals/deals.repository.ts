@@ -13,10 +13,10 @@ export class DealsRepository {
     }
 
     getDealsByLocation(latitude: number, longitude: number) {
-        return this._httpClient.get(`${environment.backendUrl}deals/${latitude}/${longitude}`);
+        return this._httpClient.get(`${environment.backendUrl}deal/${latitude}/${longitude}`);
     }
 
     saveDeal(request: SaveDealRequest) {
-        return this._httpClient.post(`${environment.backendUrl}deals`, request);
+        return this._httpClient.post(`${environment.backendUrl}deal`, request);
     }
 }

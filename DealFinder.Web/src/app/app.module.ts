@@ -15,6 +15,30 @@ import {
 } from "@angular/material";
 import { NewDealPageComponent } from "../pages/new-deal-page/new-deal-page.component";
 import { SignUpPageComponent } from "../pages/sign-up-page/sign-up-page.component";
+import {
+    SocialLoginModule,
+    AuthServiceConfig,
+    GoogleLoginProvider,
+    FacebookLoginProvider,
+} from "angular5-social-login";
+import { UserService } from "../shared/user/user.service";
+import { UserRepository } from "../shared/user/user.repository";
+
+export function getAuthServiceConfigs() {
+    let config = new AuthServiceConfig(
+        [
+            {
+                id: FacebookLoginProvider.PROVIDER_ID,
+                provider: new FacebookLoginProvider("Your-Facebook-app-id")
+            },
+            {
+                id: GoogleLoginProvider.PROVIDER_ID,
+                provider: new GoogleLoginProvider("335909346629-qaf57344qo332figcf662t3c7hgndtk2")
+            },
+        ]
+    );
+    return config;
+}
 
 @NgModule({
     declarations: [
@@ -35,11 +59,18 @@ import { SignUpPageComponent } from "../pages/sign-up-page/sign-up-page.componen
         MatCardModule,
         MatDividerModule,
         MatInputModule,
-        MatFormFieldModule
+        MatFormFieldModule,
+        SocialLoginModule
     ],
     providers: [
         DealsService,
-        DealsRepository
+        DealsRepository,
+        {
+            provide: AuthServiceConfig,
+            useFactory: getAuthServiceConfigs
+        },
+        UserService,
+        UserRepository
     ],
     bootstrap: [AppComponent]
 })

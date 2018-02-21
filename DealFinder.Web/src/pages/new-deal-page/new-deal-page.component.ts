@@ -30,7 +30,6 @@ export class NewDealPageComponent {
     }
 
     submit() {
-        console.log(this.title, this.summary, this.coordinates);
         this._dealsService.saveDeal(this.title, this.summary, this.coordinates)
         .then(() => {
             // TODO: finalise form submission

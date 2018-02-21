@@ -1,5 +1,4 @@
-﻿using DealFinder.Data.Deals;
-using DealFinder.Data.Deals.Repository;
+﻿using DealFinder.Data.Deals.Repository;
 using NUnit.Framework;
 
 namespace DealFinder.Data.Tests.Deals.GivenARequestToGetAllDealsFromRepository

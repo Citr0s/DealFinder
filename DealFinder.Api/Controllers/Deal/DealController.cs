@@ -1,14 +1,14 @@
 ﻿using DealFinder.Data.Deals.Service;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DealFinder.Api.Controllers
+namespace DealFinder.Api.Controllers.Deal
 {
     [Route("api/[controller]")]
-    public class DealsController : Controller
+    public class DealController : Controller
     {
         private readonly IDealsService _dealsService;
 
-        public DealsController(IDealsService dealsService)
+        public DealController(IDealsService dealsService)
         {
             _dealsService = dealsService;
         }
