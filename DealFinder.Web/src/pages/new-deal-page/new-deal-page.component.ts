@@ -1,8 +1,8 @@
-import { Component, Input } from '@angular/core';
-import { DealsService } from "../../shared/deals/deals.service";
-import { Location } from "../../shared/deals/location";
-import { UserService } from "../../shared/user/user.service";
-import { Router } from "@angular/router";
+import {Component, Input} from '@angular/core';
+import {DealsService} from '../../shared/deals/deals.service';
+import {Location} from '../../shared/deals/location';
+import {UserService} from '../../shared/user/user.service';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'new-deal-page',
@@ -42,12 +42,12 @@ export class NewDealPageComponent {
 
     submit() {
         this._dealsService.saveDeal(this.title, this.summary, this.coordinates, this._userService.getPersistedUser().identifier)
-        .then(() => {
-            // TODO: finalise form submission
-        })
-        .catch((error) => {
-            // TODO: display error message
-        });
+            .then(() => {
+                this._router.navigate(['']);
+            })
+            .catch((error) => {
+                // TODO: display error message
+            });
     }
 
     updateTitleValue(event) {
