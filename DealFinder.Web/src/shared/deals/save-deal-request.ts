@@ -4,5 +4,6 @@ export class SaveDealRequest {
     location: {
         latitude: number;
         longitude: number;
-    }
+    };
+    userIdentifier: string;
 }

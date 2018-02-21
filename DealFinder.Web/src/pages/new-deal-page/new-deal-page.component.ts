@@ -41,7 +41,7 @@ export class NewDealPageComponent {
     }
 
     submit() {
-        this._dealsService.saveDeal(this.title, this.summary, this.coordinates)
+        this._dealsService.saveDeal(this.title, this.summary, this.coordinates, this._userService.getPersistedUser().identifier)
         .then(() => {
             // TODO: finalise form submission
         })

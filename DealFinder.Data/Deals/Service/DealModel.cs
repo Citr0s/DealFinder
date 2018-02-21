@@ -8,5 +8,6 @@ namespace DealFinder.Data.Deals.Service
         public string Summary { get; set; }
         public Location Location { get; set; }
         public double DistanceInMeters { get; set; }
+        public string UserIdentifier { get; set; }
     }
 }
