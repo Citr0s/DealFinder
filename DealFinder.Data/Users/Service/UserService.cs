@@ -1,4 +1,5 @@
-﻿using DealFinder.Data.ThirdPartyAuthenticator;
+﻿using DealFinder.Core.Communication;
+using DealFinder.Data.ThirdPartyAuthenticator;
 using DealFinder.Data.Users.Repository;
 
 namespace DealFinder.Data.Users.Service
@@ -44,7 +45,7 @@ namespace DealFinder.Data.Users.Service
                 }
             });
 
-            if (createUserResponse.HasError)
+            if (createUserResponse.HasError && createUserResponse.Error.Code != ErrorCodes.UserAlreadyExists)
             {
                 response.AddError(createUserResponse.Error);
                 return response;

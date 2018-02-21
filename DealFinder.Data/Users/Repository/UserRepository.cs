@@ -25,7 +25,7 @@ namespace DealFinder.Data.Users.Repository
                     var user = context.Users.FirstOrDefault(x => AesEncryptor.Decrypt(x.UserToken, KeyReader.Instance().GetKey()) == request.User.UserToken);
 
                     if(user != null)
-                        throw new Exception("User has already been registered");
+                        throw new UserAlreadyExistsException("User has already been registered");
 
                     context.Add(new UserRecord
                     {
@@ -35,6 +35,16 @@ namespace DealFinder.Data.Users.Repository
                     });
                     context.SaveChanges();
                     transaction.Commit();
+                }
+                catch (UserAlreadyExistsException exception)
+                {
+                    transaction.Rollback();
+                    response.AddError(new Error
+                    {
+                        Code = ErrorCodes.UserAlreadyExists,
+                        UserMessage = "User with that UserToken already exists.",
+                        TechnicalMessage = $"The following exception was thrown: {exception.Message}"
+                    });
                 }
                 catch (Exception exception)
                 {
