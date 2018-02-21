@@ -2,6 +2,7 @@
 using System.Linq;
 using DealFinder.Core.Communication;
 using DealFinder.Core.Distance;
+using Microsoft.EntityFrameworkCore;
 
 namespace DealFinder.Data.Deals.Repository
 {
@@ -20,7 +21,7 @@ namespace DealFinder.Data.Deals.Repository
             {
                 try
                 {
-                    var dealRecords = context.Deals;
+                    var dealRecords = context.Deals.Include(x => x.User).ToList();
 
                     foreach (var dealRecord in dealRecords)
                     {

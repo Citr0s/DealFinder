@@ -19,6 +19,11 @@ export class DealsMapper {
                 location: {
                     latitude: item.location.latitude,
                     longitude: item.location.longitude
+                },
+                user: {
+                    identifier: item.user.identifier,
+                    picture: item.user.picture,
+                    username: item.user.username
                 }
             });
         });

@@ -1,4 +1,5 @@
 ﻿using DealFinder.Core.Distance;
+using DealFinder.Data.Users.Service;
 
 namespace DealFinder.Data.Deals.Service
 {
@@ -9,5 +10,6 @@ namespace DealFinder.Data.Deals.Service
         public Location Location { get; set; }
         public double DistanceInMeters { get; set; }
         public string UserIdentifier { get; set; }
+        public UserModel User { get; set; }
     }
 }

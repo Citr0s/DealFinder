@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using DealFinder.Core.Distance;
 using DealFinder.Data.Deals.Repository;
+using DealFinder.Data.Users.Service;
 
 namespace DealFinder.Data.Deals.Service
 {
@@ -21,7 +22,8 @@ namespace DealFinder.Data.Deals.Service
                     {
                         Longitude = dealRecord.Longitude,
                         Latitude = dealRecord.Latitude
-                    }
+                    },
+                    User = UserMapper.Map(dealRecord.User)
                 });   
             }
 

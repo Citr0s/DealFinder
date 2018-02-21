@@ -17,6 +17,6 @@ namespace DealFinder.Data.Users.Repository
         public string UserToken { get; set; }
         public string Username { get; set; }
         public string Picture { get; set; }
-        public List<DealRecord> Deals { get; set; }
+        public virtual List<DealRecord> Deals { get; set; }
     }
 }

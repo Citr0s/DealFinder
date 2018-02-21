@@ -13,7 +13,7 @@ namespace DealFinder.Data.Deals.Repository
         public string Summary { get; set; }
         public double Longitude { get; set; }
         public double Latitude { get; set; }
-        public UserRecord User { get; set; }
+        public virtual UserRecord User { get; set; }
         [NotMapped]
         public double DistanceInMeters { get; set; }
     }
