@@ -12,21 +12,14 @@ namespace DealFinder.Data.Deals.Repository
 
     public class DealsRepository : IDealsRepository
     {
-        private readonly DealContext _context;
-
-        public DealsRepository(DealContext context)
-        {
-            _context = context;
-        }
-
         public GetByLocationResponse GetByLocation(double latitude, double longitude)
         {
             var response = new GetByLocationResponse();
-            using (_context)
+            using (var context = new DatabaseContext())
             {
                 try
                 {
-                    var dealRecords = _context.Deals;
+                    var dealRecords = context.Deals;
 
                     foreach (var dealRecord in dealRecords)
                     {
@@ -51,19 +44,19 @@ namespace DealFinder.Data.Deals.Repository
         {
             var response = new SaveDealResponse();
 
-            using (_context)
-            using (var transaction = _context.Database.BeginTransaction())
+            using (var context = new DatabaseContext())
+            using (var transaction = context.Database.BeginTransaction())
             {
                 try
                 {
-                    _context.Add(new DealRecord
+                    context.Add(new DealRecord
                     {
                         Title = request.Deal.Title,
                         Summary = request.Deal.Summary,
                         Latitude = request.Deal.Location.Latitude,
                         Longitude = request.Deal.Location.Longitude
                     });
-                    _context.SaveChanges();
+                    context.SaveChanges();
                     transaction.Commit();
                 }
                 catch (Exception exception)
@@ -72,7 +65,7 @@ namespace DealFinder.Data.Deals.Repository
                     response.AddError(new Error
                     {
                         Code = ErrorCodes.DatabaseError,
-                        UserMessage = "Something went wrong when getting latest deals. Please try again later.",
+                        UserMessage = "Something went wrong when saving your deal. Please try again later.",
                         TechnicalMessage = $"The following exception was thrown: {exception.Message}"
                     });
                 }

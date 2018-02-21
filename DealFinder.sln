@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DealFinder.Api", "DealFinder.Api\DealFinder.Api.csproj", "{98532A4A-FE00-4F89-8EDF-A7396CD259E3}"
 EndProject
@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DealFinder.Core", "DealFind
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D28C4B6B-B756-4C0E-9958-B7C0ED857B06}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DealFinder.Data.Tests", "DealFinder.Data.Tests\DealFinder.Data.Tests.csproj", "{7120B055-5C94-49DE-BC9B-BEDBBF9348F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DealFinder.Data.Tests", "DealFinder.Data.Tests\DealFinder.Data.Tests.csproj", "{7120B055-5C94-49DE-BC9B-BEDBBF9348F0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,4 +1,6 @@
-﻿using DealFinder.Data.Users.Service;
+﻿using DealFinder.Data.ThirdPartyAuthenticator;
+using DealFinder.Data.Users.Repository;
+using DealFinder.Data.Users.Service;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DealFinder.Api.Controllers.Users
@@ -8,9 +10,9 @@ namespace DealFinder.Api.Controllers.Users
     {
         private readonly IUserService _userService;
 
-        public UserController(IUserService userService)
+        public UserController()
         {
-            _userService = userService;
+            _userService = new UserService(new UserRepository(), new AuthenticatorFactory());
         }
 
         [HttpPost("register")]

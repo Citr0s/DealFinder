@@ -13,8 +13,6 @@ namespace DealFinder.Data.Users.Service
         private readonly IUserRepository _userRepository;
         private readonly IAuthenticatorFactory _authenticator;
 
-        public UserService(UserContext context) : this(new UserRepository(context), new AuthenticatorFactory()) { }
-
         public UserService(IUserRepository userRepository, IAuthenticatorFactory authenticator)
         {
             _userRepository = userRepository;
@@ -35,9 +33,32 @@ namespace DealFinder.Data.Users.Service
                 response.AddError(authenticationResponse.Error);
                 return response;
             }
-            
-            // add user to db
 
+            var createUserResponse =_userRepository.CreateUser(new CreateUserRequest
+            {
+                User = new UserModel
+                {
+                    UserToken = authenticationResponse.UserId,
+                    Username = authenticationResponse.Username,
+                    Picture = authenticationResponse.Picture
+                }
+            });
+
+            if (createUserResponse.HasError)
+            {
+                response.AddError(createUserResponse.Error);
+                return response;
+            }
+
+            var getUserResponse = _userRepository.GetUser(authenticationResponse.UserId);
+
+            if (getUserResponse.HasError)
+            {
+                response.AddError(getUserResponse.Error);
+                return response;
+            }
+
+            response.User = UserMapper.Map(getUserResponse.User);
             return response;
         }
     }

@@ -11,7 +11,7 @@ namespace DealFinder.Data.Tests.Deals.GivenARequestToGetAllDealsFromRepository
         [OneTimeSetUp]
         public void SetUp()
         {
-            var subject = new DealsRepository(null);
+            var subject = new DealsRepository();
             _result = subject.GetByLocation(50, 5);
         }
 

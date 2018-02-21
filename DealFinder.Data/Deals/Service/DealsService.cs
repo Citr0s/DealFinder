@@ -13,8 +13,6 @@ namespace DealFinder.Data.Deals.Service
     {
         private readonly IDealsRepository _dealsRepository;
 
-        public DealsService(DealContext context) : this(new DealsRepository(context)) { }
-
         public DealsService(IDealsRepository dealsRepository)
         {
             _dealsRepository = dealsRepository;

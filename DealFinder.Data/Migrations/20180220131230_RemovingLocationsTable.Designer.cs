@@ -10,7 +10,7 @@ using System;
 
 namespace DealFinder.Data.Migrations
 {
-    [DbContext(typeof(DealContext))]
+    [DbContext(typeof(DatabaseContext))]
     [Migration("20180220131230_RemovingLocationsTable")]
     partial class RemovingLocationsTable
     {

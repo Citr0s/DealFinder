@@ -1,9 +1,8 @@
-﻿using DealFinder.Data.Deals;
+﻿using DealFinder.Data.Deals.Repository;
 using DealFinder.Data.Deals.Service;
 using DealFinder.Data.Users.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -22,12 +21,6 @@ namespace DealFinder.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            const string connectionString = "server=localhost;database=deal_finder;username=postgres;password=password";
-            services.AddEntityFrameworkNpgsql().AddDbContext<DealContext>(options => options.UseNpgsql(connectionString));
-            services.AddEntityFrameworkNpgsql().AddDbContext<Data.Users.UserContext>(options => options.UseNpgsql(connectionString));
-            services.AddScoped<IDealsService, DealsService>();
-            services.AddScoped<IUserService, UserService>();
-
             // Add Cors
             services.AddCors();
             services.AddMvc();

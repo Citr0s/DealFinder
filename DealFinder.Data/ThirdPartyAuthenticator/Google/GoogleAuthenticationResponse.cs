@@ -19,5 +19,6 @@
         public string Locale { get; set; }
         public string Alg { get; set; }
         public string Kid { get; set; }
+        public string ErrorDescription { get; set; }
     }
 }
