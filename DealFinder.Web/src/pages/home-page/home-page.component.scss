@@ -7,5 +7,33 @@
 .spinner-wrapper {
   margin: 0 auto;
   width: 100px;
+}
 
+.title {
+  margin: 0;
+}
+
+.distance {
+  margin-top: 0;
+  text-transform: uppercase;
+  font-style: italic;
+  color: #343434;
+}
+
+.user {
+  text-align: right;
+
+  h5 {
+    margin: 0;
+    display: inline-block;
+    position: absolute;
+    right: 60px;
+    top: 35%;
+  }
+
+  img {
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+  }
 }

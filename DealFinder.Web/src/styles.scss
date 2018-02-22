@@ -1,4 +1,6 @@
 @import 'styles/normalize';
+@import 'styles/common';
+@import 'styles/grid';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 $success-dark: #27ae60;
