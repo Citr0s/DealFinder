@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {DealsRepository} from './deals.repository';
-import {DealsMapper} from './deals.mapper';
-import {GetDealsByLocationResponse} from './getDealsByLocationResponse';
-import {Location} from './location';
-import {User} from '../user/user';
-import {Deal} from './deal';
+import { Injectable } from '@angular/core';
+import { DealsRepository } from './deals.repository';
+import { DealsMapper } from './deals.mapper';
+import { GetDealsByLocationResponse } from './getDealsByLocationResponse';
+import { Location } from './location';
+import { User } from '../user/user';
+import { Deal } from './deal';
 
 @Injectable()
 export class DealsService {
@@ -14,19 +14,19 @@ export class DealsService {
         this._dealsRepository = dealsRepository;
     }
 
-    getDealsByLocation(latitude: number, longitude: number) {
+    getDealsByLocation(location: Location) {
         return new Promise((resolve, reject) => {
-            this._dealsRepository.getDealsByLocation(latitude, longitude)
-                .subscribe(
-                    (payload: GetDealsByLocationResponse) => {
-                        let mappedDeals = DealsMapper.map(payload);
-                        this.persistDeals(mappedDeals);
-                        resolve(mappedDeals);
-                    },
-                    (error) => {
-                        reject(error);
-                    }
-                );
+            this._dealsRepository.getDealsByLocation(location.latitude, location.longitude)
+            .subscribe(
+                (payload: GetDealsByLocationResponse) => {
+                    let mappedDeals = DealsMapper.map(payload);
+                    this.persistDeals(mappedDeals);
+                    resolve(mappedDeals);
+                },
+                (error) => {
+                    reject(error);
+                }
+            );
         });
     }
 
@@ -42,14 +42,14 @@ export class DealsService {
                 userIdentifier: userIdentifier
             };
             this._dealsRepository.saveDeal(request)
-                .subscribe(
-                    (payload) => {
-                        resolve(payload);
-                    },
-                    (error) => {
-                        reject(error);
-                    }
-                );
+            .subscribe(
+                (payload) => {
+                    resolve(payload);
+                },
+                (error) => {
+                    reject(error);
+                }
+            );
         });
     }
 

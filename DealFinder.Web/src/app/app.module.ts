@@ -10,7 +10,7 @@ import { DealsRepository } from '../shared/deals/deals.repository';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
     MatButtonModule,
-    MatCardModule,
+    MatCardModule, MatDialogModule,
     MatDividerModule,
     MatFormFieldModule,
     MatIconModule,
@@ -30,6 +30,8 @@ import {
 import { UserService } from '../shared/user/user.service';
 import { UserRepository } from '../shared/user/user.repository';
 import { AgmCoreModule } from "@agm/core";
+import { LocationService } from "../shared/location/location.service";
+import { DealDetailsModal } from "../pages/home-page/deal-details/deal-details.modal";
 
 export function getAuthServiceConfigs() {
     let config = new AuthServiceConfig(
@@ -52,7 +54,8 @@ export function getAuthServiceConfigs() {
         AppComponent,
         HomePageComponent,
         NewDealPageComponent,
-        SignUpPageComponent
+        SignUpPageComponent,
+        DealDetailsModal
     ],
     imports: [
         BrowserModule,
@@ -69,6 +72,7 @@ export function getAuthServiceConfigs() {
         MatFormFieldModule,
         MatProgressSpinnerModule,
         MatTabsModule,
+        MatDialogModule,
         SocialLoginModule,
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyAHYBwqaOLSFxAQvK439xrVHIL7Tp_fobk'
@@ -82,9 +86,13 @@ export function getAuthServiceConfigs() {
             useFactory: getAuthServiceConfigs
         },
         UserService,
-        UserRepository
+        UserRepository,
+        LocationService
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    entryComponents: [
+        DealDetailsModal
+    ]
 })
 export class AppModule {
 }

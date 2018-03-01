@@ -3,6 +3,7 @@ import { DealsService } from '../../shared/deals/deals.service';
 import { Location } from '../../shared/deals/location';
 import { UserService } from '../../shared/user/user.service';
 import { Router } from '@angular/router';
+import { LocationService } from "../../shared/location/location.service";
 
 @Component({
     selector: 'new-deal-page',
@@ -17,32 +18,24 @@ export class NewDealPageComponent {
     private _dealsService: DealsService;
     private _userService: UserService;
     private _router: Router;
+    private _locationService: LocationService;
 
-    constructor(dealsService: DealsService, userService: UserService, router: Router) {
+    constructor(dealsService: DealsService, userService: UserService, router: Router, locationService: LocationService) {
         this._dealsService = dealsService;
         this._userService = userService;
         this._router = router;
+        this._locationService = locationService;
+        this.coordinates = new Location();
+        this.initialCoordinates = new Location();
 
         let isUserLoggedIn = this._userService.isLoggedIn();
-
         if (!isUserLoggedIn)
             this._router.navigate(['']);
 
-
-        this.getCurrentLocation();
-    }
-
-    getCurrentLocation() {
-        if (!navigator.geolocation)
-            return;
-
-        navigator.geolocation.getCurrentPosition((position) => {
-            this.coordinates = {
-                latitude: position.coords.latitude,
-                longitude: position.coords.longitude
-            };
-
-            this.initialCoordinates = this.coordinates;
+        this._locationService.getCurrentLocation()
+        .then((coordinates) => {
+            this.initialCoordinates = coordinates;
+            this.coordinates = coordinates;
         });
     }
 

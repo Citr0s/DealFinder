@@ -1,12 +1,15 @@
-@import "../../styles";
+@import "../../../styles";
+
+* {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+p.message {
+  text-align: center;
+}
 
 .deal-card {
   margin-bottom: 15px;
-}
-
-.spinner-wrapper {
-  margin: 0 auto;
-  width: 100px;
 }
 
 .title {

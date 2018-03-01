@@ -1,7 +1,8 @@
 <mat-card>
     <h1>Nearby Deals</h1>
-    <mat-tab-group>
+    <mat-tab-group (selectedTabChange)="resizeMap($event)">
         <mat-tab label="List View">
+            <div class="spacer"></div>
             <div class="spinner-wrapper">
                 <mat-spinner *ngIf="dealsModel.deals.length === 0 && dealsModel.feedback.length === 0"></mat-spinner>
             </div>
@@ -23,9 +24,20 @@
             </mat-card>
         </mat-tab>
         <mat-tab label="Map View">
-
+            <div class="spacer"></div>
+            <agm-map #map class="map" [latitude]="currentCoordinates.latitude"
+                     [longitude]="currentCoordinates.longitude"
+                     [zoom]="15"
+                     [streetViewControl]="false"
+                     [mapTypeControl]="true" [fullscreenControl]="false">
+                <agm-marker *ngFor="let deal of dealsModel.deals" [latitude]="deal.location.latitude"
+                            [longitude]="deal.location.longitude"
+                            [iconUrl]="'assets/deal-pin.png'" (markerClick)="viewDealDetails(deal)"></agm-marker>
+                <agm-marker [latitude]="currentCoordinates.latitude"
+                            [longitude]="currentCoordinates.longitude"
+                            [iconUrl]="'assets/pin.png'" (markerClick)="viewYouAreHere()"></agm-marker>
+            </agm-map>
         </mat-tab>
     </mat-tab-group>
-
     <div class="alert" *ngIf="dealsModel.hasError">{{ dealsModel.error }}</div>
 </mat-card>

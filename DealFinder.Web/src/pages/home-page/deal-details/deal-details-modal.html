@@ -1,0 +1,16 @@
+<p class="message" *ngIf="data && data.message">{{ data.message }}</p>
+<div *ngIf="data.deal" class="deal-card">
+    <div class="row">
+        <div class="col-sm-6">
+            <h2 class="title">{{ data.deal.title }}</h2>
+            <h6 class="distance">{{ data.deal.distanceDescription }}</h6>
+        </div>
+        <div class="col-sm-6">
+            <div class="user">
+                <h5>{{ data.deal.user.username }}</h5>
+                <img src="{{ data.deal.user.picture }}"/>
+            </div>
+        </div>
+    </div>
+    <div class="summary">{{ data.deal.summary }}</div>
+</div>
