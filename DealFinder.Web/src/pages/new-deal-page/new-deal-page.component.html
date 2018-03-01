@@ -9,10 +9,14 @@
             <textarea matInput placeholder="Summary" (change)="updateSummaryValue($event)"></textarea>
         </mat-form-field>
         <br>
-        <div class="coordinates" *ngIf="coordinates">Current location: {{ coordinates.latitude }}, {{
-            coordinates.longitude }}
-        </div>
-        <button mat-raised-button class="button" (click)="getCurrentLocation()">Use current location</button>
+        <agm-map class="map" *ngIf="coordinates" [latitude]="initialCoordinates.latitude"
+                 [longitude]="initialCoordinates.longitude"
+                 [zoom]="15"
+                 [streetViewControl]="false"
+                 [mapTypeControl]="true" [fullscreenControl]="false" (mapClick)="placeMarker($event)">
+            <agm-marker [latitude]="coordinates.latitude" [longitude]="coordinates.longitude"
+                        [iconUrl]="'assets/pin.png'"></agm-marker>
+        </agm-map>
         <br>
         <button mat-raised-button class="button" color="primary" (click)="submit()">Submit</button>
     </div>

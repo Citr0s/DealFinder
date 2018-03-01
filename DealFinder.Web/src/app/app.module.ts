@@ -1,28 +1,35 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-import {AppComponent} from './app.component';
-import {HttpClientModule} from '@angular/common/http';
-import {appRoutes} from './app.routes';
-import {RouterModule} from '@angular/router';
-import {HomePageComponent} from '../pages/home-page/home-page.component';
-import {DealsService} from '../shared/deals/deals.service';
-import {DealsRepository} from '../shared/deals/deals.repository';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
+import { appRoutes } from './app.routes';
+import { RouterModule } from '@angular/router';
+import { HomePageComponent } from '../pages/home-page/home-page.component';
+import { DealsService } from '../shared/deals/deals.service';
+import { DealsRepository } from '../shared/deals/deals.repository';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
-    MatButtonModule, MatCardModule, MatDividerModule, MatFormFieldModule, MatIconModule, MatInputModule, MatProgressSpinnerModule,
+    MatButtonModule,
+    MatCardModule,
+    MatDividerModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatProgressSpinnerModule,
     MatSidenavModule,
     MatToolbarModule
 } from '@angular/material';
-import {NewDealPageComponent} from '../pages/new-deal-page/new-deal-page.component';
-import {SignUpPageComponent} from '../pages/sign-up-page/sign-up-page.component';
+import { NewDealPageComponent } from '../pages/new-deal-page/new-deal-page.component';
+import { SignUpPageComponent } from '../pages/sign-up-page/sign-up-page.component';
 import {
     SocialLoginModule,
     AuthServiceConfig,
     GoogleLoginProvider,
     FacebookLoginProvider,
 } from 'angular5-social-login';
-import {UserService} from '../shared/user/user.service';
-import {UserRepository} from '../shared/user/user.repository';
+import { UserService } from '../shared/user/user.service';
+import { UserRepository } from '../shared/user/user.repository';
+import { AgmCoreModule } from "@agm/core";
 
 export function getAuthServiceConfigs() {
     let config = new AuthServiceConfig(
@@ -61,7 +68,10 @@ export function getAuthServiceConfigs() {
         MatInputModule,
         MatFormFieldModule,
         MatProgressSpinnerModule,
-        SocialLoginModule
+        SocialLoginModule,
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyAHYBwqaOLSFxAQvK439xrVHIL7Tp_fobk'
+        })
     ],
     providers: [
         DealsService,

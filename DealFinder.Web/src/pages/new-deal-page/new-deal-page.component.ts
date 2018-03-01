@@ -1,8 +1,8 @@
-import {Component, Input} from '@angular/core';
-import {DealsService} from '../../shared/deals/deals.service';
-import {Location} from '../../shared/deals/location';
-import {UserService} from '../../shared/user/user.service';
-import {Router} from '@angular/router';
+import { Component, Input } from '@angular/core';
+import { DealsService } from '../../shared/deals/deals.service';
+import { Location } from '../../shared/deals/location';
+import { UserService } from '../../shared/user/user.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'new-deal-page',
@@ -13,6 +13,7 @@ export class NewDealPageComponent {
     @Input() title: string;
     @Input() summary: string;
     coordinates: Location;
+    initialCoordinates: Location;
     private _dealsService: DealsService;
     private _userService: UserService;
     private _router: Router;
@@ -26,6 +27,9 @@ export class NewDealPageComponent {
 
         if (!isUserLoggedIn)
             this._router.navigate(['']);
+
+
+        this.getCurrentLocation();
     }
 
     getCurrentLocation() {
@@ -37,17 +41,19 @@ export class NewDealPageComponent {
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude
             };
+
+            this.initialCoordinates = this.coordinates;
         });
     }
 
     submit() {
         this._dealsService.saveDeal(this.title, this.summary, this.coordinates, this._userService.getPersistedUser().identifier)
-            .then(() => {
-                this._router.navigate(['']);
-            })
-            .catch((error) => {
-                // TODO: display error message
-            });
+        .then(() => {
+            this._router.navigate(['']);
+        })
+        .catch((error) => {
+            // TODO: display error message
+        });
     }
 
     updateTitleValue(event) {
@@ -56,5 +62,12 @@ export class NewDealPageComponent {
 
     updateSummaryValue(event) {
         this.summary = event.srcElement.value;
+    }
+
+    placeMarker($event: any) {
+        this.coordinates = {
+            latitude: $event.coords.lat,
+            longitude: $event.coords.lng
+        };
     }
 }
