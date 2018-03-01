@@ -16,7 +16,7 @@ import {
     MatIconModule,
     MatInputModule,
     MatProgressSpinnerModule,
-    MatSidenavModule,
+    MatSidenavModule, MatTabsModule,
     MatToolbarModule
 } from '@angular/material';
 import { NewDealPageComponent } from '../pages/new-deal-page/new-deal-page.component';
@@ -68,6 +68,7 @@ export function getAuthServiceConfigs() {
         MatInputModule,
         MatFormFieldModule,
         MatProgressSpinnerModule,
+        MatTabsModule,
         SocialLoginModule,
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyAHYBwqaOLSFxAQvK439xrVHIL7Tp_fobk'
