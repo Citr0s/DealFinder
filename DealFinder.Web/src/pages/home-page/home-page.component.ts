@@ -27,6 +27,9 @@ export class HomePageComponent {
             this._dealsService.getDealsByLocation(position.coords.latitude, position.coords.longitude)
             .then((payload: Deal[]) => {
                 this.dealsModel.deals = payload;
+
+                if (this.dealsModel.deals.length === 0)
+                    this.dealsModel.feedback = 'No deals found!';
             })
             .catch((error) => {
                 this.dealsModel.addError(error.message);

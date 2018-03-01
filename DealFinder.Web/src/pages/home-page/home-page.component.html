@@ -1,8 +1,9 @@
 <mat-card>
     <h1>Nearby Deals</h1>
     <div class="spinner-wrapper">
-        <mat-spinner *ngIf="dealsModel.deals.length === 0"></mat-spinner>
+        <mat-spinner *ngIf="dealsModel.deals.length === 0 && dealsModel.feedback.length === 0"></mat-spinner>
     </div>
+    {{ dealsModel.feedback }}
     <mat-card class="deal-card" *ngFor="let deal of dealsModel.deals">
         <div class="row">
             <div class="col-sm-6">
