@@ -26,6 +26,7 @@ namespace DealFinder.Data.Deals.Repository
                     foreach (var dealRecord in dealRecords)
                     {
                         dealRecord.DistanceInMeters = Haversine.Calculate(latitude, longitude, dealRecord.Latitude, dealRecord.Longitude);
+                        dealRecord.Votes = context.Votes.Where(x => x.Deal.Identifier == dealRecord.Identifier).ToList();
                         response.Deals.Add(dealRecord);
                     }
                 }

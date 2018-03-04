@@ -14,9 +14,9 @@ export class DealsService {
         this._dealsRepository = dealsRepository;
     }
 
-    getDealsByLocation(location: Location) {
+    getDealsByLocation(location: Location, userIdentifier: string) {
         return new Promise((resolve, reject) => {
-            this._dealsRepository.getDealsByLocation(location.latitude, location.longitude)
+            this._dealsRepository.getDealsByLocation(location.latitude, location.longitude, userIdentifier)
             .subscribe(
                 (payload: GetDealsByLocationResponse) => {
                     let mappedDeals = DealsMapper.map(payload);

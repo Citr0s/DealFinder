@@ -46,7 +46,7 @@ export class HomePageComponent {
     }
 
     findLocation(coordinates: Location) {
-        this._dealsService.getDealsByLocation(coordinates)
+        this._dealsService.getDealsByLocation(coordinates, this.user.identifier)
         .then((payload: Deal[]) => {
             this.dealsModel.deals = payload;
 
@@ -77,21 +77,29 @@ export class HomePageComponent {
             this.map.triggerResize();
     }
 
-    voteUp(dealId) {
+    voteUp(deal) {
         if (!this.user)
             return;
 
-        this._voteService.castVote(this.user.identifier, dealId, true)
+        deal.votes.hasAlreadyVoted = true;
+        deal.votes.totalVotes++;
+        deal.votes.finalScore++;
+
+        this._voteService.castVote(this.user.identifier, deal.id, true)
         .then((payload) => {
             // TODO: display result on deal
         });
     }
 
-    voteDown(dealId) {
+    voteDown(deal) {
         if (!this.user)
             return;
 
-        this._voteService.castVote(this.user.identifier, dealId, false)
+        deal.votes.hasAlreadyVoted = true;
+        deal.votes.totalVotes++;
+        deal.votes.finalScore--;
+
+        this._voteService.castVote(this.user.identifier, deal.id, false)
         .then((payload) => {
             // TODO: display result on deal
         });

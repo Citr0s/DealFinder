@@ -12,8 +12,8 @@ export class DealsRepository {
 
     }
 
-    getDealsByLocation(latitude: number, longitude: number) {
-        return this._httpClient.get(`${environment.backendUrl}deal/${latitude}/${longitude}`);
+    getDealsByLocation(latitude: number, longitude: number, userIdentifier: string) {
+        return this._httpClient.get(`${environment.backendUrl}deal/${latitude}/${longitude}/${userIdentifier}`);
     }
 
     saveDeal(request: SaveDealRequest) {

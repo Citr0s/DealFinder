@@ -11,12 +11,17 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <h2 class="title">{{ deal.title }}</h2>
-                        <h6 class="distance"><span class="grey">{{ deal.distanceDescription }}</span>
-                            <span *ngIf="user">
-                                <span class="clickable" (click)="voteUp(deal.id)">/\</span>
+                        <h6 class="distance">
+                            <span class="grey">{{ deal.distanceDescription }}</span>
+                            <div style="font-weight:normal;">
+                                Score: <span style="font-weight:bold;">{{ deal.votes.finalScore }}</span> out of
+                                <span style="font-weight:bold;">{{ deal.votes.totalVotes }}</span> votes.
+                            </div>
+                            <div *ngIf="user && !deal.votes.hasAlreadyVoted">
+                                <span class="clickable plus" (click)="voteUp(deal)">+</span>
                                 vote
-                                <span class="clickable" (click)="voteDown(deal.id)">\/</span>
-                            </span>
+                                <span class="clickable minus" (click)="voteDown(deal)">-</span>
+                            </div>
                         </h6>
 
                     </div>

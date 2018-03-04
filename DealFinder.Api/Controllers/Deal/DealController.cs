@@ -14,10 +14,10 @@ namespace DealFinder.Api.Controllers.Deal
             _dealsService = new DealsService(new DealsRepository());
         }
 
-        [HttpGet("{latitude}/{longitude}")]
-        public ActionResult Get(double latitude, double longitude)
+        [HttpGet("{latitude}/{longitude}/{userIdentifier}")]
+        public ActionResult Get(double latitude, double longitude, string userIdentifier)
         {
-            return Ok(_dealsService.GetByLocation(latitude, longitude));
+            return Ok(_dealsService.GetByLocation(latitude, longitude, userIdentifier));
         }
 
         [HttpPost("")]

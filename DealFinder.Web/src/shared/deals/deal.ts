@@ -1,4 +1,5 @@
 import { Location } from './location';
+import { VoteDetails } from "../vote/vote-details";
 
 export class Deal {
     id: string;
@@ -6,4 +7,5 @@ export class Deal {
     summary: string;
     distanceDescription: string;
     location: Location;
+    votes: VoteDetails;
 }

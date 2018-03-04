@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using DealFinder.Core.Communication;
-using DealFinder.Data.Deals.Repository;
 
 namespace DealFinder.Data.Votes.Repository
 {

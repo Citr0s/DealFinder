@@ -1,6 +1,7 @@
 ﻿using System;
 using DealFinder.Core.Distance;
 using DealFinder.Data.Users.Service;
+using DealFinder.Data.Votes.Service;
 
 namespace DealFinder.Data.Deals.Service
 {
@@ -13,5 +14,6 @@ namespace DealFinder.Data.Deals.Service
         public double DistanceInMeters { get; set; }
         public string UserIdentifier { get; set; }
         public UserModel User { get; set; }
+        public VoteDetailsModel Votes { get; set; }
     }
 }

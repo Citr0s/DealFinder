@@ -1,6 +1,6 @@
-import {GetDealsByLocationResponse} from './getDealsByLocationResponse';
-import {Deal} from './deal';
-import {DealRecord} from './deal.record';
+import { GetDealsByLocationResponse } from './getDealsByLocationResponse';
+import { Deal } from './deal';
+import { DealRecord } from './deal.record';
 
 export class DealsMapper {
     private static ONE_MILE_IN_METERS: number = 1609;
@@ -25,6 +25,13 @@ export class DealsMapper {
                     identifier: item.user.identifier,
                     picture: item.user.picture,
                     username: item.user.username
+                },
+                votes: {
+                    totalVotes: item.votes.totalVotes,
+                    positiveVotes: item.votes.positiveVotes,
+                    negativeVotes: item.votes.negativeVotes,
+                    finalScore: item.votes.finalScore,
+                    hasAlreadyVoted: item.votes.hasAlreadyVoted
                 }
             });
         });

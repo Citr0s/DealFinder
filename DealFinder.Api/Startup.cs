@@ -1,7 +1,4 @@
-﻿using DealFinder.Data.Deals.Repository;
-using DealFinder.Data.Deals.Service;
-using DealFinder.Data.Users.Service;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

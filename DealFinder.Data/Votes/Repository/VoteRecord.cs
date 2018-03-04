@@ -9,8 +9,8 @@ namespace DealFinder.Data.Votes.Repository
     {
         [Key]
         public Guid Identifier { get; set; }
-        public UserRecord User { get; set; }
-        public DealRecord Deal { get; set; }
+        public virtual UserRecord User { get; set; }
+        public virtual DealRecord Deal { get; set; }
         public bool Positive { get; set; }
     }
 }
