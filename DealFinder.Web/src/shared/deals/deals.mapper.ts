@@ -12,6 +12,7 @@ export class DealsMapper {
             return response;
 
         payload.deals.forEach((item: DealRecord) => {
+
             response.push({
                 id: item.id,
                 title: item.title,

@@ -46,7 +46,12 @@ export class HomePageComponent {
     }
 
     findLocation(coordinates: Location) {
-        this._dealsService.getDealsByLocation(coordinates, this.user.identifier)
+        let userIdentifier = "";
+
+        if (this.user)
+            userIdentifier = this.user.identifier;
+
+        this._dealsService.getDealsByLocation(coordinates, userIdentifier)
         .then((payload: Deal[]) => {
             this.dealsModel.deals = payload;
 
