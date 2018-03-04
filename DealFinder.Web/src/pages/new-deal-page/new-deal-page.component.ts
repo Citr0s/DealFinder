@@ -15,6 +15,7 @@ export class NewDealPageComponent {
     @Input() summary: string;
     coordinates: Location;
     initialCoordinates: Location;
+    errorMessage: string;
     private _dealsService: DealsService;
     private _userService: UserService;
     private _router: Router;
@@ -41,7 +42,12 @@ export class NewDealPageComponent {
 
     submit() {
         this._dealsService.saveDeal(this.title, this.summary, this.coordinates, this._userService.getPersistedUser().identifier)
-        .then(() => {
+        .then((payload: any) => {
+            if (payload.hasError) {
+                this.errorMessage = payload.error.userMessage;
+                return;
+            }
+
             this._router.navigate(['']);
         })
         .catch((error) => {

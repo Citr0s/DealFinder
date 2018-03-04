@@ -27,7 +27,7 @@ namespace DealFinder.Data.Votes.Repository
                         {
                             Code = ErrorCodes.DatabaseError,
                             UserMessage = "You have already cast your vote on this deal.",
-                            TechnicalMessage = $"The following user has already cast their vote for that deal UserId: ${request.UserId}, DealId: ${request.DealId}"
+                            TechnicalMessage = $"The following user has already cast their vote for that deal UserId: {request.UserId}, DealId: ${request.DealId}"
                         });
                         return response;
                     }

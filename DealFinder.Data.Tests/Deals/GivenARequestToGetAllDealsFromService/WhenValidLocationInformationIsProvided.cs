@@ -33,7 +33,7 @@ namespace DealFinder.Data.Tests.Deals.GivenARequestToGetAllDealsFromService
                 });
 
             var subject = new DealsService(dealsRepository.Object);
-            _result = subject.GetByLocation(1, 2);
+            _result = subject.GetByLocation(1, 2, null);
         }
 
         [Test]

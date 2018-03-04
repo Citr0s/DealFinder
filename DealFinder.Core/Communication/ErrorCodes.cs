@@ -7,5 +7,6 @@
         public static int AuthenticatorError = 3;
         public static int UserAlreadyExists = 4;
         public static int InvalidGuidProvided = 5;
+        public static int DealCreationCooldownActive = 6;
     }
 }

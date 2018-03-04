@@ -24,3 +24,11 @@ $failure-light: #e74c3c;
 .grey {
   color: #999;
 }
+
+.error-message {
+  background-color: $failure-light;
+  border: 1px solid $failure-dark;
+  padding: 15px;
+  margin: 15px 0;
+  color: #fff;
+}

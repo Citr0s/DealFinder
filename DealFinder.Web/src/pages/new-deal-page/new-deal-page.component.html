@@ -1,5 +1,6 @@
 <mat-card>
     <h1>New Deal</h1>
+    <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
     <div class="new-deal-form">
         <mat-form-field>
             <input matInput placeholder="Title" (change)="updateTitleValue($event)">

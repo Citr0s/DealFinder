@@ -14,6 +14,8 @@ namespace DealFinder.Data.Deals.Repository
 
     public class DealsRepository : IDealsRepository
     {
+        private const int COOLDOWN_AMOUNT_IN_MINUTES = 15;
+
         public GetByLocationResponse GetByLocation(double latitude, double longitude)
         {
             var response = new GetByLocationResponse();
@@ -52,13 +54,27 @@ namespace DealFinder.Data.Deals.Repository
             {
                 try
                 {
+                    var previousUserDeals = context.Deals.Where(x => x.User.Identifier.ToString() == request.Deal.UserIdentifier).OrderByDescending(x => x.CreatedAt).FirstOrDefault();
+
+                    if (previousUserDeals != null && previousUserDeals.CreatedAt.AddMinutes(COOLDOWN_AMOUNT_IN_MINUTES) > DateTime.Today)
+                    {
+                        response.AddError(new Error
+                        {
+                            Code = ErrorCodes.DealCreationCooldownActive,
+                            UserMessage = $"You can only add one deal every {COOLDOWN_AMOUNT_IN_MINUTES} minutes. Please try again at {previousUserDeals.CreatedAt.AddMinutes(COOLDOWN_AMOUNT_IN_MINUTES).ToShortTimeString()}.",
+                            TechnicalMessage = $"User attempted to create a deal within their cooldown period. UserId: {request.Deal.UserIdentifier}"
+                        });
+                        return response;
+                    }
+
                     context.Add(new DealRecord
                     {
                         Title = request.Deal.Title,
                         Summary = request.Deal.Summary,
                         Latitude = request.Deal.Location.Latitude,
                         Longitude = request.Deal.Location.Longitude,
-                        User = context.Users.First(x => x.Identifier.ToString() == request.Deal.UserIdentifier)
+                        User = context.Users.First(x => x.Identifier.ToString() == request.Deal.UserIdentifier),
+                        CreatedAt = DateTime.Now
                     });
                     context.SaveChanges();
                     transaction.Commit();

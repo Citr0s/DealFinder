@@ -22,6 +22,7 @@ namespace DealFinder.Data.Deals.Repository
         public double Latitude { get; set; }
         public virtual UserRecord User { get; set; }
         public virtual List<VoteRecord> Votes { get; set; }
+        public DateTime CreatedAt { get; set; }
 
         [NotMapped]
         public double DistanceInMeters { get; set; }
