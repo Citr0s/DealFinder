@@ -1,7 +1,7 @@
 ﻿using DealFinder.Core.Distance;
 using NUnit.Framework;
 
-namespace DealFinder.Core.Tests.Distance.GivenARequest
+namespace DealFinder.Core.Tests.Distance.GivenARequestToCalculate
 {
     [TestFixture]
     public class WhenCalculatingDistanceBetweenTwoPoints

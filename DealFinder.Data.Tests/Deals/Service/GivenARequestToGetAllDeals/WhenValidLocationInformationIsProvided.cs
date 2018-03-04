@@ -8,7 +8,7 @@ using DealFinder.Data.Users.Service;
 using Moq;
 using NUnit.Framework;
 
-namespace DealFinder.Data.Tests.Deals.GivenARequestToGetAllDealsFromService
+namespace DealFinder.Data.Tests.Deals.Service.GivenARequestToGetAllDeals
 {
     [TestFixture]
     public class WhenCorrectLocationInformationIsProvided
