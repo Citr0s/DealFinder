@@ -20,6 +20,18 @@ namespace DealFinder.Data.Votes.Repository
             {
                 try
                 {
+                    if (context.Votes.Any(x =>
+                        x.Deal.Identifier == request.DealId && x.User.Identifier == request.UserId))
+                    {
+                        response.AddError(new Error
+                        {
+                            Code = ErrorCodes.DatabaseError,
+                            UserMessage = "You have already cast your vote on this deal.",
+                            TechnicalMessage = $"The following user has already cast their vote for that deal UserId: ${request.UserId}, DealId: ${request.DealId}"
+                        });
+                        return response;
+                    }
+
                     context.Add(new VoteRecord
                     {
                         User = context.Users.First(x => x.Identifier == request.UserId),
