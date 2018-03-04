@@ -13,7 +13,7 @@ namespace DealFinder.Api.Controllers.Users
 
         public UserController()
         {
-            _userService = new UserService(new UserRepository(new AesEncryptor()), new AuthenticatorFactory(), new UserMapper(new AesEncryptor(), KeyReader.Instance()));
+            _userService = new UserService(new UserRepository(new AesEncryptor(), KeyReader.Instance()), new AuthenticatorFactory(), new UserMapper(new AesEncryptor(), KeyReader.Instance()));
         }
 
         [HttpPost("register")]
