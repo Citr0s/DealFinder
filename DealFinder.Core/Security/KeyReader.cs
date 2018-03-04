@@ -2,7 +2,12 @@
 
 namespace DealFinder.Core.Security
 {
-    public class KeyReader
+    public interface IKeyReader
+    {
+        string GetKey();
+    }
+
+    public class KeyReader : IKeyReader
     {
         private static KeyReader _instance;
         private readonly string _key;

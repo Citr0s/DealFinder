@@ -13,11 +13,13 @@ namespace DealFinder.Data.Users.Service
     {
         private readonly IUserRepository _userRepository;
         private readonly IAuthenticatorFactory _authenticator;
+        private readonly IUserMapper _userMapper;
 
-        public UserService(IUserRepository userRepository, IAuthenticatorFactory authenticator)
+        public UserService(IUserRepository userRepository, IAuthenticatorFactory authenticator, IUserMapper userMapper)
         {
             _userRepository = userRepository;
             _authenticator = authenticator;
+            _userMapper = userMapper;
         }
 
         public RegisterResponse Register(RegisterRequest request)
@@ -59,7 +61,7 @@ namespace DealFinder.Data.Users.Service
                 return response;
             }
 
-            response.User = UserMapper.Map(getUserResponse.User);
+            response.User = _userMapper.Map(getUserResponse.User);
             return response;
         }
     }

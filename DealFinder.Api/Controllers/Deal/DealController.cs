@@ -1,5 +1,4 @@
-﻿using DealFinder.Data.Deals.Repository;
-using DealFinder.Data.Deals.Service;
+﻿using DealFinder.Data.Deals.Service;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DealFinder.Api.Controllers.Deal
@@ -8,10 +7,10 @@ namespace DealFinder.Api.Controllers.Deal
     public class DealController : Controller
     {
         private readonly IDealsService _dealsService;
-
-        public DealController()
+        
+        public DealController(IDealsService dealsService)
         {
-            _dealsService = new DealsService(new DealsRepository());
+            _dealsService = dealsService;
         }
 
         [HttpGet("{latitude}/{longitude}/{userIdentifier?}")]

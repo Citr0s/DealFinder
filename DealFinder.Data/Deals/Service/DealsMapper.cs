@@ -7,9 +7,21 @@ using DealFinder.Data.Votes.Service;
 
 namespace DealFinder.Data.Deals.Service
 {
-    public class DealsMapper
+    public interface IDealsMapper
     {
-        public static List<DealModel> Map(List<DealRecord> dealRecords, string userIdentifier)
+        List<DealModel> Map(List<DealRecord> dealRecords, string userIdentifier);
+    }
+
+    public class DealsMapper : IDealsMapper
+    {
+        private readonly IUserMapper _userMapper;
+
+        public DealsMapper(IUserMapper userMapper)
+        {
+            _userMapper = userMapper;
+        }
+
+        public List<DealModel> Map(List<DealRecord> dealRecords, string userIdentifier)
         {
             var response = new List<DealModel>();
 
@@ -29,7 +41,7 @@ namespace DealFinder.Data.Deals.Service
                         Longitude = dealRecord.Longitude,
                         Latitude = dealRecord.Latitude
                     },
-                    User = UserMapper.Map(dealRecord.User),
+                    User = _userMapper.Map(dealRecord.User),
                     Votes = new VoteDetailsModel
                     {
                         TotalVotes = dealRecord.Votes.Count,

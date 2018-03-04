@@ -4,9 +4,15 @@ using System.Text;
 
 namespace DealFinder.Core.Security
 {
-    public static class AesEncryptor
+    public interface IAesEncryptor
     {
-        public static string Encrypt(string data, string key)
+        string Encrypt(string data, string key);
+        string Decrypt(string data, string key);
+    }
+
+    public class AesEncryptor : IAesEncryptor
+    {
+        public string Encrypt(string data, string key)
         {
             var cipher = Aes.Create();
             cipher.Mode = CipherMode.CBC;
@@ -30,7 +36,7 @@ namespace DealFinder.Core.Security
             return Convert.ToBase64String(objtransform.TransformFinalBlock(textDataByte, 0, textDataByte.Length));
         }
 
-        public static string Decrypt(string data, string key)
+        public string Decrypt(string data, string key)
         {
             var cipher = Aes.Create();
             cipher.Mode = CipherMode.CBC;

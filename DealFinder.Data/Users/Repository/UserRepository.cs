@@ -13,6 +13,15 @@ namespace DealFinder.Data.Users.Repository
 
     public class UserRepository : IUserRepository
     {
+        private readonly IAesEncryptor _encryptor;
+        private readonly IKeyReader _keyReader;
+
+        public UserRepository(IAesEncryptor encryptor, IKeyReader keyReader)
+        {
+            _encryptor = encryptor;
+            _keyReader = keyReader;
+        }
+
         public CreateUserResponse CreateUser(CreateUserRequest request)
         {
             var response = new CreateUserResponse();
@@ -22,16 +31,16 @@ namespace DealFinder.Data.Users.Repository
             {
                 try
                 {
-                    var user = context.Users.FirstOrDefault(x => AesEncryptor.Decrypt(x.UserToken, KeyReader.Instance().GetKey()) == request.User.UserToken);
+                    var user = context.Users.FirstOrDefault(x => _encryptor.Decrypt(x.UserToken, _keyReader.GetKey()) == request.User.UserToken);
 
                     if(user != null)
                         throw new UserAlreadyExistsException("User has already been registered");
 
                     context.Add(new UserRecord
                     {
-                        UserToken = AesEncryptor.Encrypt(request.User.UserToken, KeyReader.Instance().GetKey()),
-                        Username = AesEncryptor.Encrypt(request.User.Username, KeyReader.Instance().GetKey()),
-                        Picture = AesEncryptor.Encrypt(request.User.Picture, KeyReader.Instance().GetKey())
+                        UserToken = _encryptor.Encrypt(request.User.UserToken, _keyReader.GetKey()),
+                        Username = _encryptor.Encrypt(request.User.Username, _keyReader.GetKey()),
+                        Picture = _encryptor.Encrypt(request.User.Picture, _keyReader.GetKey())
                     });
                     context.SaveChanges();
                     transaction.Commit();
@@ -69,7 +78,7 @@ namespace DealFinder.Data.Users.Repository
             {
                 try
                 {
-                    response.User = context.Users.First(x => AesEncryptor.Decrypt(x.UserToken, KeyReader.Instance().GetKey()) == userToken);
+                    response.User = context.Users.First(x => _encryptor.Decrypt(x.UserToken, _keyReader.GetKey()) == userToken);
                 }
                 catch (Exception exception)
                 {

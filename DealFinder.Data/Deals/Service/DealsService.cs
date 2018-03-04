@@ -12,10 +12,12 @@ namespace DealFinder.Data.Deals.Service
     public class DealsService : IDealsService
     {
         private readonly IDealsRepository _dealsRepository;
+        private readonly IDealsMapper _dealsMapper;
 
-        public DealsService(IDealsRepository dealsRepository)
+        public DealsService(IDealsRepository dealsRepository, IDealsMapper dealsMapper)
         {
             _dealsRepository = dealsRepository;
+            _dealsMapper = dealsMapper;
         }
 
         public GetDealsByLocationResponse GetByLocation(double latitude, double longitude, string userIdentifier)
@@ -30,7 +32,7 @@ namespace DealFinder.Data.Deals.Service
                 return response;
             }
 
-            response.Deals = DealsMapper.Map(getDealsByLocationResponse.Deals, userIdentifier).OrderBy(x => x.DistanceInMeters).ToList();
+            response.Deals = _dealsMapper.Map(getDealsByLocationResponse.Deals, userIdentifier).OrderBy(x => x.DistanceInMeters).ToList();
             return response;
         }
 
