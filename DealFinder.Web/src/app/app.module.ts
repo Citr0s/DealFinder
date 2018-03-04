@@ -32,9 +32,11 @@ import { UserRepository } from '../shared/user/user.repository';
 import { AgmCoreModule } from "@agm/core";
 import { LocationService } from "../shared/location/location.service";
 import { DealDetailsModal } from "../pages/home-page/deal-details/deal-details.modal";
+import { VoteService } from "../shared/vote/vote.service";
+import { VoteRepository } from "../shared/vote/vote.repository";
 
 export function getAuthServiceConfigs() {
-    let config = new AuthServiceConfig(
+    return new AuthServiceConfig(
         [
             {
                 id: FacebookLoginProvider.PROVIDER_ID,
@@ -46,7 +48,6 @@ export function getAuthServiceConfigs() {
             },
         ]
     );
-    return config;
 }
 
 @NgModule({
@@ -87,7 +88,9 @@ export function getAuthServiceConfigs() {
         },
         UserService,
         UserRepository,
-        LocationService
+        LocationService,
+        VoteService,
+        VoteRepository
     ],
     bootstrap: [AppComponent],
     entryComponents: [
