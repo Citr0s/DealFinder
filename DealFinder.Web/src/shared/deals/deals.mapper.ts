@@ -13,6 +13,7 @@ export class DealsMapper {
 
         payload.deals.forEach((item: DealRecord) => {
             response.push({
+                id: item.id,
                 title: item.title,
                 summary: item.summary,
                 distanceDescription: this.generateAppropriateDistanceUnit(item.distanceInMeters),

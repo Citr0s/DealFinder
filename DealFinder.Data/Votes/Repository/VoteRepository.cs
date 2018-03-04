@@ -25,6 +25,7 @@ namespace DealFinder.Data.Votes.Repository
                     {
                         User = context.Users.First(x => x.Identifier == request.UserId),
                         Deal = context.Deals.First(x => x.Identifier == request.DealId),
+                        Positive = request.Positive
                     });
                     context.SaveChanges();
                     transaction.Commit();

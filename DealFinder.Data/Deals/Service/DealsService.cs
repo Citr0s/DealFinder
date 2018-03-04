@@ -1,5 +1,7 @@
 ﻿using System.Linq;
 using DealFinder.Data.Deals.Repository;
+using DealFinder.Data.Votes.Repository;
+using DealFinder.Data.Votes.Service;
 
 namespace DealFinder.Data.Deals.Service
 {

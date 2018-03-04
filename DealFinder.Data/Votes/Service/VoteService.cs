@@ -6,7 +6,7 @@ namespace DealFinder.Data.Votes.Service
 {
     public interface IVoteService
     {
-        CastVoteDetailsResponse CastVote(CastVoteDetailsRequest voteModel);
+        CastVoteDetailsResponse CastVote(CastVoteDetailsRequest request);
     }
 
     public class VoteService : IVoteService
@@ -18,12 +18,12 @@ namespace DealFinder.Data.Votes.Service
             _voteRepository = voteRepository;
         }
 
-        public CastVoteDetailsResponse CastVote(CastVoteDetailsRequest voteModel)
+        public CastVoteDetailsResponse CastVote(CastVoteDetailsRequest request)
         {
             var response = new CastVoteDetailsResponse();
 
             Guid userId;
-            if (Guid.TryParse(voteModel.Vote.UserId, out userId))
+            if (!Guid.TryParse(request.Vote.UserId, out userId))
             {
                 response.AddError(new Error
                 {
@@ -35,7 +35,7 @@ namespace DealFinder.Data.Votes.Service
             }
 
             Guid dealId;
-            if (Guid.TryParse(voteModel.Vote.DealId, out userId))
+            if (!Guid.TryParse(request.Vote.DealId, out dealId))
             {
                 response.AddError(new Error
                 {
@@ -49,7 +49,8 @@ namespace DealFinder.Data.Votes.Service
             var castVoteResponse = _voteRepository.CastVote(new CastVoteRequest
             {
                 UserId = userId,
-                DealId = dealId
+                DealId = dealId,
+                Positive = request.Positive
             });
 
             if (castVoteResponse.HasError)

@@ -11,5 +11,6 @@ namespace DealFinder.Data.Votes.Repository
         public Guid Identifier { get; set; }
         public UserRecord User { get; set; }
         public DealRecord Deal { get; set; }
+        public bool Positive { get; set; }
     }
 }

@@ -15,6 +15,7 @@ namespace DealFinder.Data.Deals.Service
             {
                 response.Add(new DealModel
                 {
+                    Id = dealRecord.Identifier,
                     Title = dealRecord.Title,
                     Summary = dealRecord.Summary,
                     DistanceInMeters = dealRecord.DistanceInMeters,

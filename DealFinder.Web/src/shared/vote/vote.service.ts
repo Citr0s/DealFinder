@@ -10,13 +10,14 @@ export class VoteService {
         this._voteRepository = voteRepository;
     }
 
-    castVote(userIdentifier: string, dealIdentifier: string): Promise<CastVoteResponse> {
+    castVote(userIdentifier: string, dealIdentifier: string, positive: boolean): Promise<CastVoteResponse> {
         return new Promise((resolve, reject) => {
             let request = {
                 vote: {
                     userId: userIdentifier,
                     dealId: dealIdentifier
-                }
+                },
+                positive: positive
             };
             this._voteRepository.castVote(request)
             .subscribe((payload: CastVoteResponse) => {
