@@ -56,7 +56,7 @@ namespace DealFinder.Data.Deals.Repository
                 {
                     var previousUserDeals = context.Deals.Where(x => x.User.Identifier.ToString() == request.Deal.UserIdentifier).OrderByDescending(x => x.CreatedAt).FirstOrDefault();
 
-                    if (previousUserDeals != null && previousUserDeals.CreatedAt.AddMinutes(COOLDOWN_AMOUNT_IN_MINUTES) > DateTime.Today)
+                    if (previousUserDeals != null && previousUserDeals.CreatedAt.AddMinutes(COOLDOWN_AMOUNT_IN_MINUTES) > DateTime.Now)
                     {
                         response.AddError(new Error
                         {
