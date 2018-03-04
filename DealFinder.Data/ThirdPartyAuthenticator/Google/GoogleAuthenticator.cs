@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using DealFinder.Core.Communication;
 using RestSharp;
 
 namespace DealFinder.Data.ThirdPartyAuthenticator.Google
 {
+    [ExcludeFromCodeCoverage]
     public class GoogleAuthenticator : IAuthenticator
     {
         private readonly IRestClient _httpClient;

@@ -13,7 +13,7 @@
             <button mat-button routerLink="/new-deal" (click)="sidenav.toggle()" *ngIf="isUserLoggedIn">Add Deal
             </button>
             <mat-divider></mat-divider>
-            <button mat-button routerLink="/sign-up" (click)="sidenav.toggle()" *ngIf="!isUserLoggedIn">Sign Up</button>
+            <button mat-button routerLink="/sign-up" (click)="sidenav.toggle()" *ngIf="!isUserLoggedIn">Log in</button>
             <button mat-button (click)="logout()" *ngIf="isUserLoggedIn">Log out</button>
         </mat-sidenav>
 
