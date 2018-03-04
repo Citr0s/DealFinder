@@ -1,5 +1,8 @@
-﻿namespace DealFinder.Core.Communication
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace DealFinder.Core.Communication
 {
+    [ExcludeFromCodeCoverage]
     public class ErrorCodes
     {
         public static int DatabaseError = 1;

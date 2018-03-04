@@ -1,7 +1,7 @@
 ﻿using DealFinder.Core.Communication;
 using NUnit.Framework;
 
-namespace DealFinder.Core.Tests.Communication.GivenARequest
+namespace DealFinder.Core.Tests.Communication.GivenARequestToRespond
 {
     public class WhenCommunicationResponseIsCreate
     {

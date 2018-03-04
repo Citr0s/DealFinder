@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.IO;
 
 namespace DealFinder.Core.Security
 {
@@ -7,6 +8,7 @@ namespace DealFinder.Core.Security
         string GetKey();
     }
 
+    [ExcludeFromCodeCoverage]
     public class KeyReader : IKeyReader
     {
         private static KeyReader _instance;
