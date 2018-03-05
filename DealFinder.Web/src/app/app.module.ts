@@ -34,6 +34,8 @@ import { LocationService } from "../shared/location/location.service";
 import { DealDetailsModal } from "../pages/home-page/deal-details/deal-details.modal";
 import { VoteService } from "../shared/vote/vote.service";
 import { VoteRepository } from "../shared/vote/vote.repository";
+import { ServiceWorkerModule } from "@angular/service-worker";
+import { environment } from "../environments/environment";
 
 export function getAuthServiceConfigs() {
     return new AuthServiceConfig(
@@ -77,6 +79,9 @@ export function getAuthServiceConfigs() {
         SocialLoginModule,
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyAHYBwqaOLSFxAQvK439xrVHIL7Tp_fobk'
+        }),
+        ServiceWorkerModule.register('/ngsw-worker.js', {
+            enabled: environment.production
         })
     ],
     providers: [
