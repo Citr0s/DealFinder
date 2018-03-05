@@ -12,9 +12,6 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.1" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\DealFinder.Data\DealFinder.Data.csproj">
       <Project>{68BDAC52-0C1E-4E29-81E8-B63344D6D656}</Project>
       <Name>DealFinder.Data</Name>
