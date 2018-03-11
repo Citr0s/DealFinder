@@ -16,7 +16,7 @@ import {
     MatIconModule,
     MatInputModule,
     MatProgressSpinnerModule,
-    MatSidenavModule, MatTabsModule,
+    MatSidenavModule, MatSliderModule, MatTabsModule,
     MatToolbarModule
 } from '@angular/material';
 import { NewDealPageComponent } from '../pages/new-deal-page/new-deal-page.component';
@@ -37,6 +37,7 @@ import { VoteRepository } from "../shared/vote/vote.repository";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { environment } from "../environments/environment";
 import { MomentModule } from "angular2-moment";
+import { OnlyVisibleFilter } from "../pages/home-page/deals.filter";
 
 export function getAuthServiceConfigs() {
     return new AuthServiceConfig(
@@ -59,7 +60,8 @@ export function getAuthServiceConfigs() {
         HomePageComponent,
         NewDealPageComponent,
         SignUpPageComponent,
-        DealDetailsModal
+        DealDetailsModal,
+        OnlyVisibleFilter
     ],
     imports: [
         BrowserModule,
@@ -77,6 +79,7 @@ export function getAuthServiceConfigs() {
         MatProgressSpinnerModule,
         MatTabsModule,
         MatDialogModule,
+        MatSliderModule,
         SocialLoginModule,
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyAHYBwqaOLSFxAQvK439xrVHIL7Tp_fobk'

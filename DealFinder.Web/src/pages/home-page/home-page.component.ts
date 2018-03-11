@@ -20,6 +20,8 @@ export class HomePageComponent {
     @Input() dealsModel: DealsModel;
     @ViewChild('map') map: AgmMap;
     currentCoordinates: Location;
+    highestDistance: number;
+    distanceStep: number;
     private _dealsService: DealsService;
     private _locationService: LocationService;
     private _dialog: MatDialog;
@@ -35,8 +37,16 @@ export class HomePageComponent {
         this._userService = userService;
         this.dealsModel = new DealsModel();
         this.currentCoordinates = new Location();
+        this.highestDistance = 0;
+        this.distanceStep = 1;
 
         this.dealsModel.deals = this._dealsService.getLastSavedDeals();
+        this.dealsModel.deals.forEach((deal) => {
+            if (deal.distanceInMiles > this.highestDistance) {
+                this.highestDistance = Math.ceil(deal.distanceInMiles);
+                this.distanceStep = Math.floor(this.highestDistance / 5);
+            }
+        });
 
         this._locationService.getCurrentLocation()
         .then((coordinates) => {
@@ -68,8 +78,18 @@ export class HomePageComponent {
         .then((payload: Deal[]) => {
             this.dealsModel.deals = payload;
 
-            if (this.dealsModel.deals.length === 0)
+            if (this.dealsModel.deals.length === 0) {
                 this.dealsModel.feedback = 'No deals found!';
+                return;
+            }
+
+            this.highestDistance = 0;
+            this.dealsModel.deals.forEach((deal) => {
+                if (deal.distanceInMiles > this.highestDistance) {
+                    this.highestDistance = Math.ceil(deal.distanceInMiles);
+                    this.distanceStep = Math.floor(this.highestDistance / 5);
+                }
+            });
         })
         .catch((error) => {
             this.dealsModel.addError(error.message);
@@ -102,11 +122,7 @@ export class HomePageComponent {
         deal.votes.hasAlreadyVoted = true;
         deal.votes.totalVotes++;
         deal.votes.finalScore++;
-
-        this._voteService.castVote(this.user.identifier, deal.id, true)
-        .then((payload) => {
-            // TODO: display result on deal
-        });
+        this._voteService.castVote(this.user.identifier, deal.id, true);
     }
 
     voteDown(deal) {
@@ -116,10 +132,14 @@ export class HomePageComponent {
         deal.votes.hasAlreadyVoted = true;
         deal.votes.totalVotes++;
         deal.votes.finalScore--;
+        this._voteService.castVote(this.user.identifier, deal.id, false);
+    }
 
-        this._voteService.castVote(this.user.identifier, deal.id, false)
-        .then((payload) => {
-            // TODO: display result on deal
-        });
+    updateResultsRadius(rangeSelected) {
+        this.dealsModel.resultsRadius = rangeSelected.value;
+
+        for (let i = this.dealsModel.deals.length - 1; i > 0; i--) {
+            this.dealsModel.deals[i].visible = this.dealsModel.deals[i].distanceInMiles <= this.dealsModel.resultsRadius;
+        }
     }
 }

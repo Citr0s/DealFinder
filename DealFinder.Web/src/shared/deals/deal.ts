@@ -6,6 +6,8 @@ export class Deal {
     title: string;
     summary: string;
     distanceDescription: string;
+    distanceInMiles: number;
+    visible: boolean;
     location: Location;
     votes: VoteDetails;
 }

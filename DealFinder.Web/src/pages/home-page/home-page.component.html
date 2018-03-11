@@ -1,5 +1,20 @@
 <mat-card>
-    <h1>Nearby Deals</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <h1>Nearby Deals</h1>
+        </div>
+        <div class="col-md-6">
+            <div class="slider">
+                Results Radius ({{ dealsModel.resultsRadius ? dealsModel.resultsRadius + ' miles' : 'showing all' }})
+                <mat-slider min="1"
+                            max="{{highestDistance}}"
+                            value="{{highestDistance}}"
+                            thumbLabel
+                            step="{{distanceStep}}"
+                            (change)="updateResultsRadius($event)"></mat-slider>
+            </div>
+        </div>
+    </div>
     <mat-tab-group (selectedTabChange)="resizeMap($event)">
         <mat-tab label="List View">
             <div class="spacer"></div>
@@ -9,7 +24,7 @@
             <mat-card class="deal-card feedback-card" *ngIf="this.dealsModel.feedback" (click)="reloadDeals()">
                 <p>{{ dealsModel.feedback }}</p>
             </mat-card>
-            <mat-card class="deal-card" *ngFor="let deal of dealsModel.deals">
+            <mat-card class="deal-card" *ngFor="let deal of dealsModel.deals | onlyVisibleFilter">
                 <div class="row">
                     <div class="col-sm-6">
                         <h2 class="title">{{ deal.title }}</h2>

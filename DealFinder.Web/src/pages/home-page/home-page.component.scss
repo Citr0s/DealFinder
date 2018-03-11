@@ -64,3 +64,16 @@
     color: $failure;
   }
 }
+
+.slider {
+  text-align: right;
+  margin: 1em 0;
+
+  @media(max-width: $medium-size) {
+    text-align: center;
+
+    .mat-slider {
+      width: 100%;
+    }
+  }
+}

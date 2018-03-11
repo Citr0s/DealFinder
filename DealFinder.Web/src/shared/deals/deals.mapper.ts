@@ -17,7 +17,9 @@ export class DealsMapper {
                 title: item.title,
                 summary: item.summary,
                 distanceDescription: this.generateAppropriateDistanceUnit(item.distanceInMeters),
+                distanceInMiles: item.distanceInMeters / this.ONE_MILE_IN_METERS,
                 createdAt: new Date(item.createdAt),
+                visible: true,
                 location: {
                     latitude: item.location.latitude,
                     longitude: item.location.longitude
