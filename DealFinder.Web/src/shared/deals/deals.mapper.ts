@@ -12,12 +12,12 @@ export class DealsMapper {
             return response;
 
         payload.deals.forEach((item: DealRecord) => {
-
             response.push({
                 id: item.id,
                 title: item.title,
                 summary: item.summary,
                 distanceDescription: this.generateAppropriateDistanceUnit(item.distanceInMeters),
+                createdAt: new Date(item.createdAt),
                 location: {
                     latitude: item.location.latitude,
                     longitude: item.location.longitude

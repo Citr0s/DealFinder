@@ -36,6 +36,7 @@ import { VoteService } from "../shared/vote/vote.service";
 import { VoteRepository } from "../shared/vote/vote.repository";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { environment } from "../environments/environment";
+import { MomentModule } from "angular2-moment";
 
 export function getAuthServiceConfigs() {
     return new AuthServiceConfig(
@@ -82,7 +83,8 @@ export function getAuthServiceConfigs() {
         }),
         ServiceWorkerModule.register('/ngsw-worker.js', {
             enabled: environment.production
-        })
+        }),
+        MomentModule
     ],
     providers: [
         DealsService,

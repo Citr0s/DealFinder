@@ -7,6 +7,7 @@ export class DealRecord {
     title: string;
     summary: any;
     distanceInMeters: number;
+    createdAt: Date;
     location: Location;
     user: User;
     votes: VoteDetails;

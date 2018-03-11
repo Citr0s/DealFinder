@@ -36,6 +36,7 @@ namespace DealFinder.Data.Deals.Service
                     Title = dealRecord.Title,
                     Summary = dealRecord.Summary,
                     DistanceInMeters = dealRecord.DistanceInMeters,
+                    CreatedAt = dealRecord.CreatedAt,
                     Location = new Location
                     {
                         Longitude = dealRecord.Longitude,

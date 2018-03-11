@@ -24,10 +24,17 @@ export class DealsService {
             .subscribe(
                 (payload: GetDealsByLocationResponse) => {
                     let mappedDeals = DealsMapper.map(payload);
+                    let shouldEmit = true;
+
+                    if (this.getPersistedDeals() === null)
+                        shouldEmit = false;
+
                     if (!DealsComparer.areEqual(mappedDeals, this.getPersistedDeals())) {
                         this.persistDeals(mappedDeals);
-                        this.onChange.emit();
                         resolve(this.getPersistedDeals());
+
+                        if (shouldEmit)
+                            this.onChange.emit();
                     }
                 },
                 (error) => {

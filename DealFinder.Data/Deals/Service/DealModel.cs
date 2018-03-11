@@ -13,6 +13,7 @@ namespace DealFinder.Data.Deals.Service
         public Location Location { get; set; }
         public double DistanceInMeters { get; set; }
         public string UserIdentifier { get; set; }
+        public DateTime CreatedAt { get; set; }
         public UserModel User { get; set; }
         public VoteDetailsModel Votes { get; set; }
     }

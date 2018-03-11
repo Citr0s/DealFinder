@@ -18,6 +18,7 @@
                             <div style="font-weight:normal;">
                                 Score: <span style="font-weight:bold;">{{ deal.votes.finalScore }}</span> out of
                                 <span style="font-weight:bold;">{{ deal.votes.totalVotes }}</span> votes.
+                                | {{ deal.createdAt | amTimeAgo }}
                             </div>
                             <div *ngIf="user && !deal.votes.hasAlreadyVoted">
                                 <span class="clickable plus" (click)="voteUp(deal)">+</span>
