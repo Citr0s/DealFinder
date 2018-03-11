@@ -25,6 +25,9 @@ export class DealsComparer {
             if (newDeals[i].votes.totalVotes !== persistedDeals[i].votes.totalVotes)
                 return false;
 
+            if (newDeals[i].votes.hasAlreadyVoted !== persistedDeals[i].votes.hasAlreadyVoted)
+                return false;
+
             if (newDeals[i].distanceDescription !== persistedDeals[i].distanceDescription)
                 return false;
         }

@@ -56,6 +56,11 @@ export class HomePageComponent {
 
         this.user = this._userService.getPersistedUser();
 
+        this._userService.onChange
+        .subscribe((user) => {
+            this.user = user;
+        });
+
         this._dealsService.onChange
         .subscribe(() => {
             this.dealsModel.feedback = 'New deals are available! Click here to load them.';

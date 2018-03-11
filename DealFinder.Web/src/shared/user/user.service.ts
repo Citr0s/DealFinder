@@ -31,7 +31,7 @@ export class UserService {
 
     persistUser(payload: User) {
         localStorage.setItem('user', JSON.stringify(payload));
-        this.onChange.emit();
+        this.onChange.emit(payload);
     }
 
     getPersistedUser() {

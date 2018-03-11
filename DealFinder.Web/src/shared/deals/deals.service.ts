@@ -5,14 +5,32 @@ import { GetDealsByLocationResponse } from './getDealsByLocationResponse';
 import { Location } from './location';
 import { Deal } from './deal';
 import { DealsComparer } from "./deals.comparer";
+import { UserService } from "../user/user.service";
+import { LocationService } from "../location/location.service";
+import { User } from "../user/user";
 
 @Injectable()
 export class DealsService {
     @Output() onChange: EventEmitter<any> = new EventEmitter();
     private _dealsRepository: DealsRepository;
+    private _userService: UserService;
+    private _locationService: LocationService;
 
-    constructor(dealsRepository: DealsRepository) {
+    constructor(dealsRepository: DealsRepository, userService: UserService, locationService: LocationService) {
         this._dealsRepository = dealsRepository;
+        this._userService = userService;
+        this._locationService = locationService;
+
+        this._userService.onChange
+        .subscribe((user: User) => {
+            if (user === undefined)
+                return;
+
+            this._locationService.getCurrentLocation()
+            .then((location: Location) => {
+                this.getDealsByLocation(location, user.identifier);
+            });
+        });
     }
 
     getDealsByLocation(location: Location, userIdentifier: string) {
