@@ -44,7 +44,7 @@ export class DealsService {
         });
     }
 
-    saveDeal(title: string, summary: string, coordinates: Location, userIdentifier: string) {
+    saveDeal(title: string, summary: string, coordinates: Location, userIdentifier: string, tags: string[]) {
         return new Promise((resolve, reject) => {
             let request = {
                 title: title,
@@ -53,7 +53,8 @@ export class DealsService {
                     latitude: coordinates.latitude,
                     longitude: coordinates.longitude
                 },
-                userIdentifier: userIdentifier
+                userIdentifier: userIdentifier,
+                tags: tags
             };
             this._dealsRepository.saveDeal(request)
             .subscribe(

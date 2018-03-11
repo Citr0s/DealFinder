@@ -6,4 +6,5 @@ export class SaveDealRequest {
         longitude: number;
     };
     userIdentifier: string;
+    tags: string[];
 }

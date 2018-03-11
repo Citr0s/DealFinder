@@ -41,12 +41,12 @@ namespace DealFinder.Data.Deals.Service
         {
             var response = new SaveDealDetailsResponse();
 
-            if (deal.Title == null || deal.Summary == null || deal.Location == null)
+            if (deal.Title == null || deal.Summary == null || deal.Location == null || deal.Tags.Count == 0)
             {
                 response.AddError(new Error
                 {
                     Code = ErrorCodes.ValidationError,
-                    UserMessage = "Title, Summary and Location fields are required.",
+                    UserMessage = "Title, Summary, Tags and Location fields are required.",
                     TechnicalMessage = "User has not specified required fields."
                 });
                 return response;

@@ -50,7 +50,8 @@ namespace DealFinder.Data.Deals.Service
                         NegativeVotes = negativeVotes,
                         FinalScore = positiveVotes - negativeVotes,
                         HasAlreadyVoted = dealRecord.Votes.Any(x => x.User.Identifier.ToString() == userIdentifier)
-                    }
+                    },
+                    Tags = dealRecord.Tags.ConvertAll(x => x.Name)
                 });
             }
 

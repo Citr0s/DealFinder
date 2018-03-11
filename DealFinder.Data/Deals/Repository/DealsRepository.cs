@@ -2,6 +2,7 @@
 using System.Linq;
 using DealFinder.Core.Communication;
 using DealFinder.Core.Distance;
+using DealFinder.Data.Tags.Repository;
 using Microsoft.EntityFrameworkCore;
 
 namespace DealFinder.Data.Deals.Repository
@@ -74,6 +75,7 @@ namespace DealFinder.Data.Deals.Repository
                         Latitude = request.Deal.Location.Latitude,
                         Longitude = request.Deal.Location.Longitude,
                         User = context.Users.First(x => x.Identifier.ToString() == request.Deal.UserIdentifier),
+                        Tags = request.Deal.Tags.ConvertAll(x => new TagRecord { Name = x }),
                         CreatedAt = DateTime.Now
                     });
                     context.SaveChanges();

@@ -9,6 +9,21 @@
             <textarea matInput placeholder="Summary" (change)="updateSummaryValue($event)"></textarea>
         </mat-form-field>
         <br>
+        <mat-form-field class="demo-chip-list">
+            <mat-chip-list #tagList>
+                <mat-chip *ngFor="let tag of tags" [selectable]="selectable"
+                          [removable]="removable" (remove)="remove(tag)">
+                    {{tag.name}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input placeholder="Tags"
+                       [matChipInputFor]="tagList"
+                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                       [matChipInputAddOnBlur]="addOnBlur"
+                       (matChipInputTokenEnd)="add($event)"/>
+            </mat-chip-list>
+        </mat-form-field>
+        <br>
         <agm-map class="map" *ngIf="coordinates" [latitude]="initialCoordinates.latitude"
                  [longitude]="initialCoordinates.longitude"
                  [zoom]="15"

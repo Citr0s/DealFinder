@@ -1,4 +1,5 @@
 ﻿using DealFinder.Data.Deals.Repository;
+using DealFinder.Data.Tags.Repository;
 using DealFinder.Data.Users.Repository;
 using DealFinder.Data.Votes.Repository;
 using Microsoft.EntityFrameworkCore;
@@ -16,5 +17,6 @@ namespace DealFinder.Data
         public DbSet<DealRecord> Deals { get; set; }
         public DbSet<UserRecord> Users { get; set; }
         public DbSet<VoteRecord> Votes { get; set; }
+        public DbSet<TagRecord> Tags { get; set; }
     }
 }

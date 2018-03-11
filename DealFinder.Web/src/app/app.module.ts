@@ -10,7 +10,7 @@ import { DealsRepository } from '../shared/deals/deals.repository';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
     MatButtonModule,
-    MatCardModule, MatDialogModule,
+    MatCardModule, MatChipsModule, MatDialogModule,
     MatDividerModule,
     MatFormFieldModule,
     MatIconModule,
@@ -80,6 +80,7 @@ export function getAuthServiceConfigs() {
         MatTabsModule,
         MatDialogModule,
         MatSliderModule,
+        MatChipsModule,
         SocialLoginModule,
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyAHYBwqaOLSFxAQvK439xrVHIL7Tp_fobk'
