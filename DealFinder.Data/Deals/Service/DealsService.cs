@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using DealFinder.Core.Communication;
 using DealFinder.Data.Deals.Repository;
 
 namespace DealFinder.Data.Deals.Service
@@ -39,6 +40,17 @@ namespace DealFinder.Data.Deals.Service
         public SaveDealDetailsResponse SaveDealDetails(DealModel deal)
         {
             var response = new SaveDealDetailsResponse();
+
+            if (deal.Title == null || deal.Summary == null || deal.Location == null)
+            {
+                response.AddError(new Error
+                {
+                    Code = ErrorCodes.ValidationError,
+                    UserMessage = "Title, Summary and Location fields are required.",
+                    TechnicalMessage = "User has not specified required fields."
+                });
+                return response;
+            }
 
             var saveDealDetailsResponse = _dealsRepository.SaveDeal(new SaveDealRequest
             {

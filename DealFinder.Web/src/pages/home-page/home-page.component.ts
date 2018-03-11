@@ -1,15 +1,15 @@
-import {Component, Input, ViewChild} from '@angular/core';
-import {DealsService} from '../../shared/deals/deals.service';
-import {Deal} from '../../shared/deals/deal';
-import {DealsModel} from './deals.model';
-import {LocationService} from '../../shared/location/location.service';
-import {Location} from '../../shared/deals/location';
-import {MatDialog} from '@angular/material';
-import {DealDetailsModal} from './deal-details/deal-details.modal';
-import {AgmMap} from '@agm/core';
-import {VoteService} from '../../shared/vote/vote.service';
-import {UserService} from '../../shared/user/user.service';
-import {User} from '../../shared/user/user';
+import { Component, Input, ViewChild } from '@angular/core';
+import { DealsService } from '../../shared/deals/deals.service';
+import { Deal } from '../../shared/deals/deal';
+import { DealsModel } from './deals.model';
+import { LocationService } from '../../shared/location/location.service';
+import { Location } from '../../shared/deals/location';
+import { MatDialog } from '@angular/material';
+import { DealDetailsModal } from './deal-details/deal-details.modal';
+import { AgmMap } from '@agm/core';
+import { VoteService } from '../../shared/vote/vote.service';
+import { UserService } from '../../shared/user/user.service';
+import { User } from '../../shared/user/user';
 
 @Component({
     selector: 'home-page',
@@ -36,13 +36,26 @@ export class HomePageComponent {
         this.dealsModel = new DealsModel();
         this.currentCoordinates = new Location();
 
+        this.dealsModel.deals = this._dealsService.getLastSavedDeals();
+
         this._locationService.getCurrentLocation()
-            .then((coordinates) => {
-                this.findLocation(coordinates);
-                this.currentCoordinates = coordinates;
-            });
+        .then((coordinates) => {
+            this.findLocation(coordinates);
+            this.currentCoordinates = coordinates;
+        });
 
         this.user = this._userService.getPersistedUser();
+
+        this._dealsService.onChange
+        .subscribe(() => {
+            this.dealsModel.feedback = 'New deals are available! Click here to load them.';
+        });
+    }
+
+    reloadDeals() {
+        console.log('here');
+        this.dealsModel.feedback = "";
+        this.dealsModel.deals = this._dealsService.getLastSavedDeals();
     }
 
     findLocation(coordinates: Location) {
@@ -52,15 +65,15 @@ export class HomePageComponent {
             userIdentifier = this.user.identifier;
 
         this._dealsService.getDealsByLocation(coordinates, userIdentifier)
-            .then((payload: Deal[]) => {
-                this.dealsModel.deals = payload;
+        .then((payload: Deal[]) => {
+            this.dealsModel.deals = payload;
 
-                if (this.dealsModel.deals.length === 0)
-                    this.dealsModel.feedback = 'No deals found!';
-            })
-            .catch((error) => {
-                this.dealsModel.addError(error.message);
-            });
+            if (this.dealsModel.deals.length === 0)
+                this.dealsModel.feedback = 'No deals found!';
+        })
+        .catch((error) => {
+            this.dealsModel.addError(error.message);
+        });
     }
 
     viewDealDetails(deal: Deal) {
@@ -91,9 +104,9 @@ export class HomePageComponent {
         deal.votes.finalScore++;
 
         this._voteService.castVote(this.user.identifier, deal.id, true)
-            .then((payload) => {
-                // TODO: display result on deal
-            });
+        .then((payload) => {
+            // TODO: display result on deal
+        });
     }
 
     voteDown(deal) {
@@ -105,8 +118,8 @@ export class HomePageComponent {
         deal.votes.finalScore--;
 
         this._voteService.castVote(this.user.identifier, deal.id, false)
-            .then((payload) => {
-                // TODO: display result on deal
-            });
+        .then((payload) => {
+            // TODO: display result on deal
+        });
     }
 }

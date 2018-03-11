@@ -2,6 +2,13 @@
 
 .deal-card {
   margin-bottom: 15px;
+
+  &.feedback-card {
+    background-color: $success-light;
+    border: 1px solid $success-dark;
+    color: #333;
+    font-weight: bold;
+  }
 }
 
 .spinner-wrapper {

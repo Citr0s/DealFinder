@@ -17,3 +17,15 @@
     height: 300px;
   }
 }
+
+.deal-card {
+  margin-bottom: 15px;
+  width: auto !important;
+
+  &.feedback-card {
+    background-color: $failure-light;
+    border: 1px solid $failure-dark;
+    color: #333;
+    font-weight: bold;
+  }
+}

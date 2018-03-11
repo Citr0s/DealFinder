@@ -1,13 +1,14 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { DealsRepository } from './deals.repository';
 import { DealsMapper } from './deals.mapper';
 import { GetDealsByLocationResponse } from './getDealsByLocationResponse';
 import { Location } from './location';
-import { User } from '../user/user';
 import { Deal } from './deal';
+import { DealsComparer } from "./deals.comparer";
 
 @Injectable()
 export class DealsService {
+    @Output() onChange: EventEmitter<any> = new EventEmitter();
     private _dealsRepository: DealsRepository;
 
     constructor(dealsRepository: DealsRepository) {
@@ -16,12 +17,18 @@ export class DealsService {
 
     getDealsByLocation(location: Location, userIdentifier: string) {
         return new Promise((resolve, reject) => {
+            if (this.hasPersistedDeals())
+                resolve(this.getPersistedDeals());
+
             this._dealsRepository.getDealsByLocation(location.latitude, location.longitude, userIdentifier)
             .subscribe(
                 (payload: GetDealsByLocationResponse) => {
                     let mappedDeals = DealsMapper.map(payload);
-                    this.persistDeals(mappedDeals);
-                    resolve(mappedDeals);
+                    if (!DealsComparer.areEqual(mappedDeals, this.getPersistedDeals())) {
+                        this.persistDeals(mappedDeals);
+                        this.onChange.emit();
+                        resolve(this.getPersistedDeals());
+                    }
                 },
                 (error) => {
                     reject(error);
@@ -53,19 +60,26 @@ export class DealsService {
         });
     }
 
+    getLastSavedDeals(): Deal[] {
+        if (this.hasPersistedDeals())
+            return this.getPersistedDeals();
+
+        return [];
+    }
+
     persistDeals(payload: Deal[]) {
         localStorage.setItem('deals', JSON.stringify(payload));
     }
 
-    getPersistedDeals() {
+    getPersistedDeals(): Deal[] {
         return JSON.parse(localStorage.getItem('deals'));
     }
 
-    hasPersistedDeals() {
+    hasPersistedDeals(): boolean {
         return localStorage.getItem('deals') !== null;
     }
 
-    removePersistedDeals() {
+    removePersistedDeals(): void {
         localStorage.removeItem('deals');
     }
 }

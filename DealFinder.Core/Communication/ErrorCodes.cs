@@ -11,5 +11,6 @@ namespace DealFinder.Core.Communication
         public static int UserAlreadyExists = 4;
         public static int InvalidGuidProvided = 5;
         public static int DealCreationCooldownActive = 6;
+        public static int ValidationError = 7;
     }
 }
