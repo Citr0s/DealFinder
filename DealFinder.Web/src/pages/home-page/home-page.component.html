@@ -60,7 +60,8 @@
                      [zoom]="15"
                      [streetViewControl]="false"
                      [mapTypeControl]="true" [fullscreenControl]="false">
-                <agm-marker *ngFor="let deal of dealsModel.deals" [latitude]="deal.location.latitude"
+                <agm-marker *ngFor="let deal of dealsModel.deals | onlyVisibleFilter"
+                            [latitude]="deal.location.latitude"
                             [longitude]="deal.location.longitude"
                             [iconUrl]="'assets/deal-pin.png'" (markerClick)="viewDealDetails(deal)"></agm-marker>
                 <agm-marker [latitude]="currentCoordinates.latitude"
