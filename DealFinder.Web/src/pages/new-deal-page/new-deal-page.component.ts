@@ -20,15 +20,15 @@ export class NewDealPageComponent {
     coordinates: Location;
     initialCoordinates: Location;
     errorMessage: string;
+    tags: { name: string }[];
+    selectable: boolean = true;
+    removable: boolean = true;
+    addOnBlur: boolean = true;
+    separatorKeysCodes: number[];
     private _dealsService: DealsService;
     private _userService: UserService;
     private _router: Router;
     private _locationService: LocationService;
-    private separatorKeysCodes: number[];
-    private tags: { name: string }[];
-    selectable: boolean = true;
-    removable: boolean = true;
-    addOnBlur: boolean = true;
 
     constructor(dealsService: DealsService, userService: UserService, router: Router, locationService: LocationService) {
         this._dealsService = dealsService;
