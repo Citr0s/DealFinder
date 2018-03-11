@@ -51,6 +51,11 @@
                     </div>
                 </div>
                 <div class="summary">{{ deal.summary }}</div>
+                <div class="tags" *ngIf="deal.tags">
+                    <mat-chip-list selectable="false">
+                        <mat-chip color="primary" *ngFor="let tag of deal.tags">{{ tag }}</mat-chip>
+                    </mat-chip-list>
+                </div>
             </mat-card>
         </mat-tab>
         <mat-tab label="Map View">

@@ -14,9 +14,20 @@ namespace DealFinder.Data
             optionsBuilder.UseNpgsql(connectionString);
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<DealTagRecord>()
+                .HasKey(t => new { t.DealIdentifier, t.TagIdentifier });
+
+            modelBuilder.Entity<TagRecord>()
+                .HasIndex(u => u.Name)
+                .IsUnique();
+        }
+
         public DbSet<DealRecord> Deals { get; set; }
         public DbSet<UserRecord> Users { get; set; }
         public DbSet<VoteRecord> Votes { get; set; }
         public DbSet<TagRecord> Tags { get; set; }
+        public DbSet<DealTagRecord> DealTags { get; set; }
     }
 }

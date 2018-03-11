@@ -64,7 +64,7 @@ export class NewDealPageComponent {
 
             this._router.navigate(['']);
         })
-        .catch((error) => {
+        .catch(() => {
             this.errorMessage = "Something went wrong. Please try again later.";
         });
     }

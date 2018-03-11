@@ -13,7 +13,7 @@ namespace DealFinder.Data.Deals.Repository
         public DealRecord()
         {
             Votes = new List<VoteRecord>();
-            Tags = new List<TagRecord>();
+            DealTags = new List<DealTagRecord>();
         }
 
         [Key]
@@ -24,7 +24,7 @@ namespace DealFinder.Data.Deals.Repository
         public double Latitude { get; set; }
         public virtual UserRecord User { get; set; }
         public virtual List<VoteRecord> Votes { get; set; }
-        public virtual List<TagRecord> Tags { get; set; }
+        public virtual List<DealTagRecord> DealTags { get; set; }
         public DateTime CreatedAt { get; set; }
 
         [NotMapped]

@@ -30,6 +30,11 @@ namespace DealFinder.Data.Deals.Repository
                     {
                         dealRecord.DistanceInMeters = Haversine.Calculate(latitude, longitude, dealRecord.Latitude, dealRecord.Longitude);
                         dealRecord.Votes = context.Votes.Where(x => x.Deal.Identifier == dealRecord.Identifier).ToList();
+                        dealRecord.DealTags = context.DealTags.Where(x => x.Deal.Identifier == dealRecord.Identifier).ToList();
+
+                        foreach (var dealTag in dealRecord.DealTags)
+                            dealTag.Tag = context.Tags.First(x => x.Identifier == dealTag.TagIdentifier);
+
                         response.Deals.Add(dealRecord);
                     }
                 }
@@ -75,7 +80,7 @@ namespace DealFinder.Data.Deals.Repository
                         Latitude = request.Deal.Location.Latitude,
                         Longitude = request.Deal.Location.Longitude,
                         User = context.Users.First(x => x.Identifier.ToString() == request.Deal.UserIdentifier),
-                        Tags = request.Deal.Tags.ConvertAll(x => new TagRecord { Name = x }),
+                        DealTags = request.Deal.Tags.ConvertAll(x => new DealTagRecord { Tag = new TagRecord { Name = x } }),
                         CreatedAt = DateTime.Now
                     });
                     context.SaveChanges();

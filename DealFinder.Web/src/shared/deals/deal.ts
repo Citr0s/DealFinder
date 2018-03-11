@@ -2,6 +2,10 @@ import { Location } from './location';
 import { VoteDetails } from "../vote/vote-details";
 
 export class Deal {
+    constructor() {
+        this.tags = [];
+    }
+
     id: string;
     title: string;
     summary: string;
@@ -10,4 +14,5 @@ export class Deal {
     visible: boolean;
     location: Location;
     votes: VoteDetails;
+    tags: string[];
 }
