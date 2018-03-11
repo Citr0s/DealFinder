@@ -1,7 +1,15 @@
 <mat-card>
     <h1>Log in</h1>
-    <img src="../../assets/btn_google_signin_light_normal_web.png"
-         (mouseover)="replaceSrc('../../assets/btn_google_signin_light_pressed_web.png')"
-         (mouseout)="replaceSrc('../../assets/btn_google_signin_light_normal_web.png')"
-         (click)="socialSignIn('google')"/>
+    <div class="row">
+        <div class="col-md-6 center">
+            <img src="../../assets/btn_google_signin_light_normal_web.png" class="login-button"
+                 (mouseover)="replaceSrc('../../assets/btn_google_signin_light_pressed_web.png')"
+                 (mouseout)="replaceSrc('../../assets/btn_google_signin_light_normal_web.png')"
+                 (click)="socialSignIn('google')"/>
+        </div>
+        <div class="col-md-6 center">
+            <img src="../../assets/btn_facebook_signin_light_normal_web.png" class="login-button hover"
+                 (click)="socialSignIn('facebook')"/>
+        </div>
+    </div>
 </mat-card>

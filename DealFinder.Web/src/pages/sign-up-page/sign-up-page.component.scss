@@ -3,3 +3,22 @@
 img {
   cursor: pointer;
 }
+
+.login-button {
+  height: 45px;
+
+  @media(max-width: $small-size) {
+    height: auto;
+    width: 100%;
+  }
+
+  &.hover {
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+.center {
+  text-align: center;
+}
