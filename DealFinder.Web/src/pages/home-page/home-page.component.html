@@ -56,6 +56,13 @@
                         <mat-chip color="primary" *ngFor="let tag of deal.tags">{{ tag }}</mat-chip>
                     </mat-chip-list>
                 </div>
+                <div class="mark-as-expired" [ngClass]="{ 'enable': deal.expired }"
+                     *ngIf="user && deal.user.identifier === user.identifier">
+                    <button mat-mini-fab (click)="markAsExpired(deal)"
+                            title="{{ !deal.expired ? 'Mark as Expired' : 'Mark as Active' }}">
+                        {{ !deal.expired ? '&times;' : '&#10003;' }}
+                    </button>
+                </div>
             </mat-card>
         </mat-tab>
         <mat-tab label="Map View">

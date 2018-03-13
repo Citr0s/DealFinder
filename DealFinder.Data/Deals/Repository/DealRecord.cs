@@ -26,6 +26,7 @@ namespace DealFinder.Data.Deals.Repository
         public virtual List<VoteRecord> Votes { get; set; }
         public virtual List<DealTagRecord> DealTags { get; set; }
         public DateTime CreatedAt { get; set; }
+        public bool Expired { get; set; }
 
         [NotMapped]
         public double DistanceInMeters { get; set; }

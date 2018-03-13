@@ -16,4 +16,5 @@ export class DealRecord {
     user: User;
     votes: VoteDetails;
     tags: string[];
+    expired: boolean;
 }

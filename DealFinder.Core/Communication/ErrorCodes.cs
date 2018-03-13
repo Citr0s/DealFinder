@@ -12,5 +12,6 @@ namespace DealFinder.Core.Communication
         public static int InvalidGuidProvided = 5;
         public static int DealCreationCooldownActive = 6;
         public static int ValidationError = 7;
+        public static int DealNotFound = 8;
     }
 }

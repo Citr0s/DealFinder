@@ -140,4 +140,10 @@ export class HomePageComponent {
             this.dealsModel.deals[i].visible = this.dealsModel.deals[i].distanceInMiles <= this.dealsModel.resultsRadius;
         }
     }
+
+    markAsExpired(deal: Deal) {
+        deal.expired = !deal.expired;
+
+        this._dealsService.markAsExpired(deal.id, deal.expired);
+    }
 }

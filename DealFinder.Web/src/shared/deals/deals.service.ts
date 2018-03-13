@@ -106,4 +106,18 @@ export class DealsService {
     removePersistedDeals(): void {
         localStorage.removeItem('deals');
     }
+
+    markAsExpired(id: string, expire: boolean) {
+        return new Promise((resolve, reject) => {
+            this._dealsRepository.markDealAsExpired(id, expire)
+            .subscribe(
+                (payload) => {
+                    resolve(payload);
+                },
+                (error) => {
+                    reject(error);
+                }
+            );
+        });
+    }
 }
