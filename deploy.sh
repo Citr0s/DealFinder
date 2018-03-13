@@ -6,13 +6,19 @@ pkill -HUP dotnet
 echo 'Getting latest changes from git...';
 git pull
 
-echo 'Updating packages...';
+echo 'Changing directory to Web';
 cd DealFinder.Web/
+
+echo 'Updating packages...';
 yarn
+
+echo 'Compiling angular files...';
 ng build --prod
 
-echo 'Compiling files...';
+echo 'Changing directory to Api';
 cd ../DealFinder.Api/
+
+echo 'Compiling dotnet files...';
 dotnet restore
 
 echo 'Starting dotnet process...';
