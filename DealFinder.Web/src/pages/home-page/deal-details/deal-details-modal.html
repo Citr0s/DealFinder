@@ -20,7 +20,7 @@
     </button>
     <br>
 </div>
-<a target="_blank"
+<a target="_blank" *ngIf="data.deal"
    href="https://www.google.co.uk/maps/dir/{{ data.currentCoordinates.latitude }},{{ data.currentCoordinates.longitude }}/{{ data.deal.location.latitude }},{{ data.deal.location.longitude }}/data=!3m1!4b1!4m2!4m1!3e0">
     <button mat-raised-button class="button" color="primary" style="width:100%;">Open in Google Maps</button>
 </a>
