@@ -45,6 +45,9 @@ export class HomePageComponent {
             if (deal.distanceInMiles > this.highestDistance) {
                 this.highestDistance = Math.ceil(deal.distanceInMiles);
                 this.distanceStep = Math.floor(this.highestDistance / 5);
+
+                if (this.distanceStep === 0)
+                    this.distanceStep = 1;
             }
         });
 
@@ -142,7 +145,7 @@ export class HomePageComponent {
     updateResultsRadius(rangeSelected) {
         this.dealsModel.resultsRadius = rangeSelected.value;
 
-        for (let i = this.dealsModel.deals.length - 1; i > 0; i--) {
+        for (let i = this.dealsModel.deals.length - 1; i >= 0; i--) {
             this.dealsModel.deals[i].visible = this.dealsModel.deals[i].distanceInMiles <= this.dealsModel.resultsRadius;
         }
     }
