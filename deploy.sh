@@ -18,6 +18,12 @@ yarn
 echo -e "${GREEN}*** Compiling angular files... ***${NC}";
 ng build --prod
 
+echo -e "${GREEN}*** Changing directory to Data ***${NC}";
+cd ../DealFinder.Data/
+
+echo -e "${GREEN}*** Running migrations... ***${NC}";
+dotnet ef database update
+
 echo -e "${GREEN}*** Changing directory to Api ***${NC}";
 cd ../DealFinder.Api/
 
