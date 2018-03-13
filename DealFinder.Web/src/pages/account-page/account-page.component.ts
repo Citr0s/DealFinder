@@ -13,9 +13,9 @@ import { DeleteUserResponse } from "../../shared/user/delete-user-response";
 })
 export class AccountPageComponent {
     user: User;
+    errorMessage: string;
+    successMessage: string;
     private _userService: UserService;
-    private errorMessage: string;
-    private successMessage: string;
     private _router: Router;
     private _dealsService: DealsService;
 
