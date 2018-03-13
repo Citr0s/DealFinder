@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
-import {AuthService, FacebookLoginProvider, GoogleLoginProvider} from 'angular5-social-login';
-import {UserService} from '../../shared/user/user.service';
-import {Router} from '@angular/router';
+import { Component } from '@angular/core';
+import { AuthService, FacebookLoginProvider, GoogleLoginProvider } from 'angular5-social-login';
+import { UserService } from '../../shared/user/user.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'sign-up-page',
@@ -26,23 +26,21 @@ export class SignUpPageComponent {
 
     public socialSignIn(socialPlatform: string) {
         let socialPlatformProvider;
-        if (socialPlatform == 'facebook') {
-            socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
-        } else if (socialPlatform == 'google') {
+        if (socialPlatform == 'google') {
             socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
         }
 
         this._authService.signIn(socialPlatformProvider)
-            .then((userData) => {
-                    this._userService.registerUser(userData.idToken, socialPlatform)
-                        .then(() => {
-                            this._router.navigate(['']);
-                        })
-                        .catch(() => {
-                            // TODO: display error
-                        });
-                }
-            );
+        .then((userData) => {
+                this._userService.registerUser(userData.idToken, socialPlatform)
+                .then(() => {
+                    this._router.navigate(['']);
+                })
+                .catch(() => {
+                    // TODO: display error
+                });
+            }
+        );
     }
 
     replaceSrc(source: string) {

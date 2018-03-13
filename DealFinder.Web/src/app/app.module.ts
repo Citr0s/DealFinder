@@ -25,7 +25,6 @@ import {
     SocialLoginModule,
     AuthServiceConfig,
     GoogleLoginProvider,
-    FacebookLoginProvider,
 } from 'angular5-social-login';
 import { UserService } from '../shared/user/user.service';
 import { UserRepository } from '../shared/user/user.repository';
@@ -43,10 +42,6 @@ import { AccountPageComponent } from "../pages/account-page/account-page.compone
 export function getAuthServiceConfigs() {
     return new AuthServiceConfig(
         [
-            {
-                id: FacebookLoginProvider.PROVIDER_ID,
-                provider: new FacebookLoginProvider('1533170493462619')
-            },
             {
                 id: GoogleLoginProvider.PROVIDER_ID,
                 provider: new GoogleLoginProvider('335909346629-qaf57344qo332figcf662t3c7hgndtk2')
