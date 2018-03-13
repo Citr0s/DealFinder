@@ -40,8 +40,6 @@ export class AppComponent {
 
     private checkUserStatus() {
         this.isUserLoggedIn = this._userService.isLoggedIn();
-
-        if (this.isUserLoggedIn)
-            this.user = this._userService.getPersistedUser();
+        this.user = this._userService.getPersistedUser();
     }
 }

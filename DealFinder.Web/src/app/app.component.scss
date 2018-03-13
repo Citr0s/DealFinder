@@ -34,3 +34,38 @@
 .divider-highlight {
   border-top-color: #3f51b5;
 }
+
+.user-info {
+  text-align: right;
+  position: relative;
+
+  h5 {
+    margin: 0;
+    display: inline-block;
+    position: absolute;
+    right: 75px;
+    top: 35%;
+    font-size: 1rem;
+
+    @media(max-width: 600px) {
+      display: none;
+    }
+  }
+
+  img {
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    padding: 15px;
+    margin-top: 10px;
+
+    @media(max-width: 600px) {
+      height: 40px;
+      width: 40px;
+    }
+  }
+}
+
+.row {
+  width: 100%;
+}

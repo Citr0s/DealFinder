@@ -4,6 +4,14 @@
             <mat-icon>menu</mat-icon>
         </button>
         <h1>Deal Finder</h1>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="user-info" *ngIf="user">
+                    <h5>{{ user.username }}</h5>
+                    <img src="{{ user.picture }}"/>
+                </div>
+            </div>
+        </div>
     </mat-toolbar>
     <mat-sidenav-container
             class="sidenav-container" (backdropClick)="close()">
