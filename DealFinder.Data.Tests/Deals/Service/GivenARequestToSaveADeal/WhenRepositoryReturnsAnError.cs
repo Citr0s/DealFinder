@@ -1,4 +1,5 @@
-﻿using DealFinder.Core.Communication;
+﻿using System.Collections.Generic;
+using DealFinder.Core.Communication;
 using DealFinder.Core.Distance;
 using DealFinder.Core.Security;
 using DealFinder.Data.Deals.Repository;
@@ -33,7 +34,10 @@ namespace DealFinder.Data.Tests.Deals.Service.GivenARequestToSaveADeal
             var keyReader = new Mock<IKeyReader>();
             keyReader.Setup(x => x.GetKey()).Returns("KEY");
 
-            var subject = new DealsService(_dealsRepository.Object, new DealsMapper(new UserMapper(new AesEncryptor(keyReader.Object.GetKey()))), null);
+            var userService = new Mock<IUserService>();
+            userService.Setup(x => x.SaveLastKnownLocation(It.IsAny<double>(), It.IsAny<double>(), It.IsAny<string>())).Returns(new SaveLocationResponse());
+
+            var subject = new DealsService(_dealsRepository.Object, new DealsMapper(new UserMapper(new AesEncryptor(keyReader.Object.GetKey()))), userService.Object);
             _result = subject.SaveDealDetails(new DealModel
             {
                 Location = new Location
@@ -43,7 +47,11 @@ namespace DealFinder.Data.Tests.Deals.Service.GivenARequestToSaveADeal
                 },
                 Summary = "Some Summary",
                 Title = "Some Title",
-                UserIdentifier = "Some User Identifier"
+                UserIdentifier = "Some User Identifier",
+                Tags = new List<string>
+                {
+                    "General"
+                }
             });
         }
 

@@ -8,7 +8,7 @@ namespace DealFinder.Data.Users.Service
         UserModel Map(UserRecord user);
     }
 
-    public class UserMapper: IUserMapper
+    public class UserMapper : IUserMapper
     {
         private readonly IAesEncryptor _encryptor;
 
@@ -19,17 +19,22 @@ namespace DealFinder.Data.Users.Service
 
         public UserModel Map(UserRecord user)
         {
-            double.TryParse(_encryptor.Decrypt(user.Latitude), out var latitude);
-            double.TryParse(_encryptor.Decrypt(user.Longitude), out var longitude);
-
-            return new UserModel
+            var userModel = new UserModel
             {
-                Identifier = user.Identifier, 
+                Identifier = user.Identifier,
                 Username = _encryptor.Decrypt(user.Username),
-                Picture = _encryptor.Decrypt(user.Picture),
-                Latitude = latitude,
-                Longitude = longitude
+                Picture = _encryptor.Decrypt(user.Picture)
             };
+
+            if (user.Latitude != null && user.Longitude != null)
+            {
+                double.TryParse(_encryptor.Decrypt(user.Latitude), out var latitude);
+                double.TryParse(_encryptor.Decrypt(user.Longitude), out var longitude);
+                userModel.Latitude = latitude;
+                userModel.Longitude = longitude;
+            }
+
+            return userModel;
         }
     }
 }
