@@ -10,6 +10,7 @@ import { AgmMap } from '@agm/core';
 import { VoteService } from '../../shared/vote/vote.service';
 import { UserService } from '../../shared/user/user.service';
 import { User } from '../../shared/user/user';
+import { DealDetailsService } from "../../shared/deal-details/deal-details.service";
 
 @Component({
     selector: 'home-page',
@@ -21,19 +22,23 @@ export class HomePageComponent {
     @ViewChild('map') map: AgmMap;
     currentCoordinates: Location;
     highestDistance: number;
+    originCoordinates: { lat: number; lng: number; };
+    destinationCoordinates: { lat: number; lng: number; };
+    private user: User;
     private _dealsService: DealsService;
     private _locationService: LocationService;
     private _dialog: MatDialog;
     private _voteService: VoteService;
     private _userService: UserService;
-    private user: User;
+    private _dealDetailsService: DealDetailsService;
 
-    constructor(dealsService: DealsService, locationService: LocationService, dialog: MatDialog, voteService: VoteService, userService: UserService) {
+    constructor(dealsService: DealsService, locationService: LocationService, dialog: MatDialog, voteService: VoteService, userService: UserService, dealDetailsService: DealDetailsService) {
         this._dealsService = dealsService;
         this._locationService = locationService;
         this._dialog = dialog;
         this._voteService = voteService;
         this._userService = userService;
+        this._dealDetailsService = dealDetailsService;
         this.dealsModel = new DealsModel();
         this.currentCoordinates = new Location();
         this.highestDistance = 0;
@@ -48,6 +53,7 @@ export class HomePageComponent {
         .then((coordinates) => {
             this.findLocation(coordinates);
             this.currentCoordinates = coordinates;
+            this.originCoordinates = {lat: coordinates.latitude, lng: coordinates.longitude};
         });
 
         this.user = this._userService.getPersistedUser();
@@ -60,6 +66,11 @@ export class HomePageComponent {
         this._dealsService.onChange
         .subscribe(() => {
             this.dealsModel.feedback = 'New deals are available! Click here to load them.';
+        });
+
+        this._dealDetailsService.directionsRequired
+        .subscribe((destinationCoordinates: any) => {
+            this.destinationCoordinates = destinationCoordinates;
         });
     }
 
@@ -97,7 +108,11 @@ export class HomePageComponent {
     viewDealDetails(deal: Deal) {
         this._dialog.open(DealDetailsModal, {
             width: '80vw',
-            data: {deal: deal}
+            data: {
+                deal: deal,
+                currentCoordinates: this.currentCoordinates,
+                destinationCoordinates: {lat: deal.location.latitude, lng: deal.location.longitude}
+            }
         });
     }
 

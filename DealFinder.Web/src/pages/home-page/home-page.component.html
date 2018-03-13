@@ -79,6 +79,8 @@
                 <agm-marker [latitude]="currentCoordinates.latitude"
                             [longitude]="currentCoordinates.longitude"
                             [iconUrl]="'assets/pin.png'" (markerClick)="viewYouAreHere()"></agm-marker>
+                <agm-direction *ngIf="destinationCoordinates" [origin]="originCoordinates"
+                               [destination]="destinationCoordinates"></agm-direction>
             </agm-map>
         </mat-tab>
     </mat-tab-group>

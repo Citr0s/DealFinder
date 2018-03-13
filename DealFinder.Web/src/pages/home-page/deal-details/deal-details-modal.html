@@ -13,4 +13,14 @@
         </div>
     </div>
     <div class="summary">{{ data.deal.summary }}</div>
+    <br>
+    <button mat-raised-button class="button" color="primary" style="width:100%;"
+            (click)="displayRoute(data.destinationCoordinates)">
+        View Route
+    </button>
+    <br>
+    <a target="_blank"
+       href="https://www.google.co.uk/maps/dir/{{ data.currentCoordinates.latitude }},{{ data.currentCoordinates.longitude }}/{{ data.deal.location.latitude }},{{ data.deal.location.longitude }}/data=!3m1!4b1!4m2!4m1!3e0">
+        <button mat-raised-button class="button" color="primary" style="width:100%;">Open in Google Maps</button>
+    </a>
 </div>
