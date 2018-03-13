@@ -7,6 +7,7 @@ namespace DealFinder.Data.Users.Service
     public interface IUserService
     {
         RegisterResponse Register(RegisterRequest request);
+        UpdateResponse Update(UpdateRequest request);
     }
 
     public class UserService : IUserService
@@ -62,6 +63,34 @@ namespace DealFinder.Data.Users.Service
             }
 
             response.User = _userMapper.Map(getUserResponse.User);
+            return response;
+        }
+
+        public UpdateResponse Update(UpdateRequest request)
+        {
+            var response = new UpdateResponse();
+
+            var createUserResponse = _userRepository.UpdateUser(new UpdateUserRequest
+            {
+                User = request.User
+            });
+
+            if (createUserResponse.HasError)
+            {
+                response.AddError(createUserResponse.Error);
+                return response;
+            }
+
+            var getUserResponse = _userRepository.GetUser(createUserResponse.User.UserToken);
+
+            if (getUserResponse.HasError)
+            {
+                response.AddError(getUserResponse.Error);
+                return response;
+            }
+
+            response.User = _userMapper.Map(getUserResponse.User);
+
             return response;
         }
     }

@@ -9,6 +9,7 @@ namespace DealFinder.Data.Users.Repository
     {
         CreateUserResponse CreateUser(CreateUserRequest request);
         GetUserResponse GetUser(string userToken);
+        UpdateUserResponse UpdateUser(UpdateUserRequest updateUserRequest);
     }
 
     public class UserRepository : IUserRepository
@@ -33,7 +34,7 @@ namespace DealFinder.Data.Users.Repository
                 {
                     var user = context.Users.FirstOrDefault(x => _encryptor.Decrypt(x.UserToken, _keyReader.GetKey()) == request.User.UserToken);
 
-                    if(user != null)
+                    if (user != null)
                         throw new UserAlreadyExistsException("User has already been registered");
 
                     context.Add(new UserRecord
@@ -78,7 +79,7 @@ namespace DealFinder.Data.Users.Repository
             {
                 try
                 {
-                    response.User = context.Users.First(x => _encryptor.Decrypt(x.UserToken, _keyReader.GetKey()) == userToken);
+                    response.User = context.Users.First(x => x.UserToken == userToken);
                 }
                 catch (Exception exception)
                 {
@@ -86,6 +87,37 @@ namespace DealFinder.Data.Users.Repository
                     {
                         Code = ErrorCodes.DatabaseError,
                         UserMessage = "Something went wrong when retrieving your account. Please try again later.",
+                        TechnicalMessage = $"The following exception was thrown: {exception.Message}"
+                    });
+                }
+            }
+
+            return response;
+        }
+
+        public UpdateUserResponse UpdateUser(UpdateUserRequest request)
+        {
+            var response = new UpdateUserResponse();
+
+            using (var context = new DatabaseContext())
+            using (var transaction = context.Database.BeginTransaction())
+            {
+                try
+                {
+                    var user = context.Users.First(x => x.Identifier == request.User.Identifier);
+                    user.Username = _encryptor.Encrypt(request.User.Username, _keyReader.GetKey());
+                    response.User = user;
+
+                    context.SaveChanges();
+                    transaction.Commit();
+                }
+                catch (Exception exception)
+                {
+                    transaction.Rollback();
+                    response.AddError(new Error
+                    {
+                        Code = ErrorCodes.DatabaseError,
+                        UserMessage = "Something went wrong when updating your account. Please try again later.",
                         TechnicalMessage = $"The following exception was thrown: {exception.Message}"
                     });
                 }

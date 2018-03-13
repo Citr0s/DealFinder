@@ -38,6 +38,7 @@ import { ServiceWorkerModule } from "@angular/service-worker";
 import { environment } from "../environments/environment";
 import { MomentModule } from "angular2-moment";
 import { OnlyVisibleFilter } from "../pages/home-page/deals.filter";
+import { AccountPageComponent } from "../pages/account-page/account-page.component";
 
 export function getAuthServiceConfigs() {
     return new AuthServiceConfig(
@@ -61,7 +62,8 @@ export function getAuthServiceConfigs() {
         NewDealPageComponent,
         SignUpPageComponent,
         DealDetailsModal,
-        OnlyVisibleFilter
+        OnlyVisibleFilter,
+        AccountPageComponent
     ],
     imports: [
         BrowserModule,

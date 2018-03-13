@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { RegisterRequest } from "./register-request";
+import { UpdateUserRequest } from "./update-user-request";
 
 @Injectable()
 export class UserRepository {
@@ -14,5 +15,9 @@ export class UserRepository {
 
     registerUser(request: RegisterRequest) {
         return this._httpClient.post(`${environment.backendUrl}user/register`, request);
+    }
+
+    updateUser(request: UpdateUserRequest) {
+        return this._httpClient.put(`${environment.backendUrl}user/update`, request);
     }
 }

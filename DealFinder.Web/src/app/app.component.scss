@@ -56,8 +56,14 @@
     border-radius: 50%;
     height: 50px;
     width: 50px;
-    padding: 15px;
     margin-top: 10px;
+    margin-right: 15px;
+    cursor: pointer;
+    border: 2px solid transparent;
+
+    &:hover {
+      border: 2px solid #ff4081;
+    }
 
     @media(max-width: 600px) {
       height: 40px;

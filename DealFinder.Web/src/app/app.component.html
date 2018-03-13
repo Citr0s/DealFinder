@@ -8,7 +8,7 @@
             <div class="col-md-12">
                 <div class="user-info" *ngIf="user">
                     <h5>{{ user.username }}</h5>
-                    <img src="{{ user.picture }}"/>
+                    <img routerLink="account" src="{{ user.picture }}"/>
                 </div>
             </div>
         </div>
@@ -22,6 +22,9 @@
             </button>
             <mat-divider></mat-divider>
             <button mat-button routerLink="/sign-up" (click)="sidenav.toggle()" *ngIf="!isUserLoggedIn">Log in</button>
+            <button mat-button routerLink="account" (click)="sidenav.toggle()" *ngIf="isUserLoggedIn">Account Settings
+            </button>
+            <mat-divider></mat-divider>
             <button mat-button (click)="logout()" *ngIf="isUserLoggedIn">Log out</button>
         </mat-sidenav>
 

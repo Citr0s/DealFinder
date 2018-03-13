@@ -1,0 +1,16 @@
+<mat-card>
+    <h1>Account Settings</h1>
+    <mat-card class="deal-card error-message" *ngIf="errorMessage">
+        <p>{{ errorMessage }}</p>
+    </mat-card>
+    <mat-card class="deal-card success-message" *ngIf="successMessage">
+        <p>{{ successMessage }}</p>
+    </mat-card>
+    <div class="account-form">
+        <mat-form-field>
+            <input matInput placeholder="Username" (change)="updateUsernameValue($event)" value="{{username}}">
+        </mat-form-field>
+        <br>
+        <button mat-raised-button class="button" color="primary" (click)="submit()">Save</button>
+    </div>
+</mat-card>

@@ -32,3 +32,11 @@ $failure-light: #e74c3c;
   margin: 15px 0;
   color: #fff;
 }
+
+.success-message {
+  background-color: $success-light;
+  border: 1px solid $success-dark;
+  padding: 15px;
+  margin: 15px 0;
+  color: #fff;
+}

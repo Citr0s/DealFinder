@@ -21,5 +21,11 @@ namespace DealFinder.Api.Controllers.Users
         {
             return Ok(_userService.Register(request));
         }
+
+        [HttpPut("update")]
+        public ActionResult Put([FromBody]UpdateRequest request)
+        {
+            return Ok(_userService.Update(request));
+        }
     }
 }

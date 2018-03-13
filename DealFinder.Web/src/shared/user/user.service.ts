@@ -2,6 +2,7 @@ import { EventEmitter, Injectable, Output } from "@angular/core";
 import { UserRepository } from "./user.repository";
 import { RegisterUserResponse } from "./register-user-response";
 import { User } from "./user";
+import { UpdateUserResponse } from "./update-user-response";
 
 @Injectable()
 export class UserService {
@@ -45,5 +46,20 @@ export class UserService {
     logOut() {
         localStorage.removeItem('user');
         this.onChange.emit();
+    }
+
+    updateUser(user: User) {
+        return new Promise((resolve, reject) => {
+            let request = {
+                user: user
+            };
+            this._userRepository.updateUser(request)
+            .subscribe((payload: UpdateUserResponse) => {
+                this.persistUser(payload.user);
+                resolve(payload);
+            }, (error) => {
+                reject(error);
+            });
+        });
     }
 }
