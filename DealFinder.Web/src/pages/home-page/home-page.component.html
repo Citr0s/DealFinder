@@ -60,7 +60,13 @@
                      *ngIf="user && deal.user.identifier === user.identifier">
                     <button mat-mini-fab (click)="markAsExpired(deal)"
                             title="{{ !deal.expired ? 'Mark as Expired' : 'Mark as Active' }}">
-                        {{ !deal.expired ? '&times;' : '&#10003;' }}
+                        <i class="material-icons" *ngIf="!deal.expired">clear</i>
+                        <i class="material-icons" *ngIf="deal.expired">done</i>
+                    </button>
+                </div>
+                <div class="get-directions">
+                    <button mat-mini-fab (click)="viewDealDetails(deal, {onlyMap:true})">
+                        <i class="material-icons">&#xe52e;</i>
                     </button>
                 </div>
             </mat-card>

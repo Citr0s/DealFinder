@@ -90,7 +90,7 @@
 .mark-as-expired {
   position: absolute;
   bottom: 15px;
-  right: 15px;
+  right: 60px;
 
   .mat-mini-fab.mat-accent {
     background-color: $failure-dark;
@@ -113,4 +113,10 @@
       }
     }
   }
+}
+
+.get-directions {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
 }

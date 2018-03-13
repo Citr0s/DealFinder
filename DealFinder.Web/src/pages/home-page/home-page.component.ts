@@ -105,13 +105,15 @@ export class HomePageComponent {
         });
     }
 
-    viewDealDetails(deal: Deal) {
+    viewDealDetails(deal: Deal, options: { onlyMap: boolean }) {
         this._dialog.open(DealDetailsModal, {
             width: '80vw',
             data: {
                 deal: deal,
                 currentCoordinates: this.currentCoordinates,
-                destinationCoordinates: {lat: deal.location.latitude, lng: deal.location.longitude}
+                originCoordinates: this.originCoordinates,
+                destinationCoordinates: {lat: deal.location.latitude, lng: deal.location.longitude},
+                onlyMap: options ? options.onlyMap : false
             }
         });
     }
