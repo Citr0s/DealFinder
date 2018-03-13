@@ -1,13 +1,11 @@
 language: csharp
 solution: DealFinder.sln
-install:
-  - nuget restore DealFinder.sln
-  - nuget install NUnit.Runners -Version 2.6.4 -OutputDirectory testrunner
+language: csharp
+mono: none
+dotnet: 2.1.4
 script:
-  - xbuild /p:Configuration=Release DealFinder.sln
-  - mono ./testrunner/NUnit.Runners.2.6.4/tools/nunit-console.exe ./DealFinder.Core.Tests/bin/Release/DealFinder.Core..Tests.dll
-  - mono ./testrunner/NUnit.Runners.2.6.4/tools/nunit-console.exe ./DealFinder.Data.Tests/bin/Release/DealFinder.Data.Tests.dll
-# - mono ./testrunner/NUnit.Runners.2.6.4/tools/nunit-console.exe ./DealFinder.Api.Tests/bin/Release/DealFinder.Api.Tests.dll
+ - dotnet restore
+ - dotnet test
 
 notifications:
   email: false
