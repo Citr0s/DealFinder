@@ -21,7 +21,6 @@ export class HomePageComponent {
     @ViewChild('map') map: AgmMap;
     currentCoordinates: Location;
     highestDistance: number;
-    distanceStep: number;
     private _dealsService: DealsService;
     private _locationService: LocationService;
     private _dialog: MatDialog;
@@ -38,17 +37,11 @@ export class HomePageComponent {
         this.dealsModel = new DealsModel();
         this.currentCoordinates = new Location();
         this.highestDistance = 0;
-        this.distanceStep = 1;
 
         this.dealsModel.deals = this._dealsService.getLastSavedDeals();
         this.dealsModel.deals.forEach((deal) => {
-            if (deal.distanceInMiles > this.highestDistance) {
+            if (deal.distanceInMiles > this.highestDistance)
                 this.highestDistance = Math.ceil(deal.distanceInMiles);
-                this.distanceStep = Math.floor(this.highestDistance / 5);
-
-                if (this.distanceStep === 0)
-                    this.distanceStep = 1;
-            }
         });
 
         this._locationService.getCurrentLocation()
@@ -92,10 +85,8 @@ export class HomePageComponent {
 
             this.highestDistance = 0;
             this.dealsModel.deals.forEach((deal) => {
-                if (deal.distanceInMiles > this.highestDistance) {
+                if (deal.distanceInMiles > this.highestDistance)
                     this.highestDistance = Math.ceil(deal.distanceInMiles);
-                    this.distanceStep = Math.floor(this.highestDistance / 5);
-                }
             });
         })
         .catch((error) => {
