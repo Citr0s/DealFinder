@@ -28,6 +28,9 @@ namespace DealFinder.Data.Deals.Service
         {
             var response = new GetDealsByLocationResponse();
 
+            if (userIdentifier != null)
+                _userService.SaveLastKnownLocation(latitude, longitude, userIdentifier);
+
             var getDealsByLocationResponse = _dealsRepository.GetByLocation(latitude, longitude);
 
             if (getDealsByLocationResponse.HasError)
@@ -35,9 +38,6 @@ namespace DealFinder.Data.Deals.Service
                 response.AddError(getDealsByLocationResponse.Error);
                 return response;
             }
-
-            if(userIdentifier != null)
-                _userService.SaveLastKnownLocation(latitude, longitude, userIdentifier);
 
             response.Deals = _dealsMapper.Map(getDealsByLocationResponse.Deals, userIdentifier).OrderBy(x => x.DistanceInMeters).ToList();
             return response;
