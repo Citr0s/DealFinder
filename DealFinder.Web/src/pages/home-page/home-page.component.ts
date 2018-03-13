@@ -144,6 +144,9 @@ export class HomePageComponent {
     markAsExpired(deal: Deal) {
         deal.expired = !deal.expired;
 
-        this._dealsService.markAsExpired(deal.id, deal.expired);
+        this._dealsService.markAsExpired(deal.id, deal.expired)
+        .then(() => {
+            this._dealsService.updatePersistedDeal(deal);
+        });
     }
 }

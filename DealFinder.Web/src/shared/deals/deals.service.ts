@@ -107,6 +107,20 @@ export class DealsService {
         localStorage.removeItem('deals');
     }
 
+    updatePersistedDeal(deal: Deal) {
+        if (!this.hasPersistedDeals())
+            return;
+
+        let savedDeals = this.getPersistedDeals();
+        for (let i = savedDeals.length - 1; i >= 0; i--) {
+            if (savedDeals[i].id === deal.id) {
+                savedDeals[i] = deal;
+                break;
+            }
+        }
+        this.persistDeals(savedDeals);
+    }
+
     markAsExpired(id: string, expire: boolean) {
         return new Promise((resolve, reject) => {
             this._dealsRepository.markDealAsExpired(id, expire)

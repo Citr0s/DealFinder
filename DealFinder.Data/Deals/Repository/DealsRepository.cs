@@ -25,7 +25,7 @@ namespace DealFinder.Data.Deals.Repository
             {
                 try
                 {
-                    var dealRecords = context.Deals.Where(x => x.Expired == false).Include(x => x.User).ToList();
+                    var dealRecords = context.Deals.Include(x => x.User).ToList();
 
                     foreach (var dealRecord in dealRecords)
                     {
