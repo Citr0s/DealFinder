@@ -45,12 +45,9 @@ namespace DealFinder.Data.Tests.Deals.Service.GivenARequestToGetAllDeals
                 });
 
             var encryptor = new Mock<IAesEncryptor>();
-            encryptor.Setup(x => x.Decrypt(It.IsAny<string>(), It.IsAny<string>())).Returns("SOME_STRING");
+            encryptor.Setup(x => x.Decrypt(It.IsAny<string>())).Returns("SOME_STRING");
 
-            var keyReader = new Mock<IKeyReader>();
-            keyReader.Setup(x => x.GetKey()).Returns("SOME_KEY");
-
-            var subject = new DealsService(dealsRepository.Object, new DealsMapper(new UserMapper(encryptor.Object, keyReader.Object)));
+            var subject = new DealsService(dealsRepository.Object, new DealsMapper(new UserMapper(encryptor.Object)), null);
             _result = subject.GetByLocation(1, 2, null);
         }
 

@@ -8,5 +8,7 @@ namespace DealFinder.Data.Users.Service
         public string UserToken { get; set; }
         public string Username { get; set; }
         public string Picture { get; set; }
+        public double? Longitude { get; set; }
+        public double? Latitude { get; set; }
     }
 }

@@ -47,14 +47,11 @@ export class DealsService {
                     if (this.getPersistedDeals() === null)
                         shouldEmit = false;
 
-                    if (!DealsComparer.areEqual(mappedDeals, this.getPersistedDeals())) {
-                        resolve(this.getPersistedDeals());
-
-                        if (shouldEmit)
-                            this.onChange.emit();
-                    }
+                    if (!DealsComparer.areEqual(mappedDeals, this.getPersistedDeals()) && shouldEmit)
+                        this.onChange.emit();
 
                     this.persistDeals(mappedDeals);
+                    resolve(this.getPersistedDeals());
                 },
                 (error) => {
                     reject(error);

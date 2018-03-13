@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using DealFinder.Core.Communication;
 using DealFinder.Data.Deals.Repository;
+using DealFinder.Data.Users.Service;
 
 namespace DealFinder.Data.Deals.Service
 {
@@ -14,11 +15,13 @@ namespace DealFinder.Data.Deals.Service
     {
         private readonly IDealsRepository _dealsRepository;
         private readonly IDealsMapper _dealsMapper;
+        private readonly IUserService _userService;
 
-        public DealsService(IDealsRepository dealsRepository, IDealsMapper dealsMapper)
+        public DealsService(IDealsRepository dealsRepository, IDealsMapper dealsMapper, IUserService userService)
         {
             _dealsRepository = dealsRepository;
             _dealsMapper = dealsMapper;
+            _userService = userService;
         }
 
         public GetDealsByLocationResponse GetByLocation(double latitude, double longitude, string userIdentifier)
@@ -32,6 +35,9 @@ namespace DealFinder.Data.Deals.Service
                 response.AddError(getDealsByLocationResponse.Error);
                 return response;
             }
+
+            if(userIdentifier != null)
+                _userService.SaveLastKnownLocation(latitude, longitude, userIdentifier);
 
             response.Deals = _dealsMapper.Map(getDealsByLocationResponse.Deals, userIdentifier).OrderBy(x => x.DistanceInMeters).ToList();
             return response;

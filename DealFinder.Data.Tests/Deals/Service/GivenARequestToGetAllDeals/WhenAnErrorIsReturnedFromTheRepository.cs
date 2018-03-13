@@ -26,7 +26,7 @@ namespace DealFinder.Data.Tests.Deals.Service.GivenARequestToGetAllDeals
                 }
             });
 
-            var subject = new DealsService(dealsRepository.Object, null);
+            var subject = new DealsService(dealsRepository.Object, null, null);
             _result = subject.GetByLocation(1, 2, null);
         }
 

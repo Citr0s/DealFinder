@@ -33,7 +33,7 @@ namespace DealFinder.Data.Tests.Deals.Service.GivenARequestToSaveADeal
             var keyReader = new Mock<IKeyReader>();
             keyReader.Setup(x => x.GetKey()).Returns("KEY");
 
-            var subject = new DealsService(_dealsRepository.Object, new DealsMapper(new UserMapper(new AesEncryptor(), keyReader.Object)));
+            var subject = new DealsService(_dealsRepository.Object, new DealsMapper(new UserMapper(new AesEncryptor(keyReader.Object.GetKey()))), null);
             _result = subject.SaveDealDetails(new DealModel
             {
                 Location = new Location

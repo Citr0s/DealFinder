@@ -45,7 +45,7 @@ namespace DealFinder.Data.Tests.Users.Service.GivenARequestToRegisterAUser
             var keyReader = new Mock<IKeyReader>();
             keyReader.Setup(x => x.GetKey()).Returns("SOME_KEY");
 
-            var subject = new UserService(_userRepository.Object, _authenticationFactory.Object, new UserMapper(new AesEncryptor(), keyReader.Object));
+            var subject = new UserService(_userRepository.Object, _authenticationFactory.Object, new UserMapper(new AesEncryptor(keyReader.Object.GetKey())));
             _result = subject.Register(new RegisterRequest
             {
                 UserToken = "SOME_TOKEN",

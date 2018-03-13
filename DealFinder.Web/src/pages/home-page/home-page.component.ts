@@ -68,7 +68,6 @@ export class HomePageComponent {
     }
 
     reloadDeals() {
-        console.log('here');
         this.dealsModel.feedback = "";
         this.dealsModel.deals = this._dealsService.getLastSavedDeals();
     }

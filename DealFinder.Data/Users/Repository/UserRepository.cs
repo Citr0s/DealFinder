@@ -15,12 +15,10 @@ namespace DealFinder.Data.Users.Repository
     public class UserRepository : IUserRepository
     {
         private readonly IAesEncryptor _encryptor;
-        private readonly IKeyReader _keyReader;
 
-        public UserRepository(IAesEncryptor encryptor, IKeyReader keyReader)
+        public UserRepository(IAesEncryptor encryptor)
         {
             _encryptor = encryptor;
-            _keyReader = keyReader;
         }
 
         public CreateUserResponse CreateUser(CreateUserRequest request)
@@ -32,16 +30,16 @@ namespace DealFinder.Data.Users.Repository
             {
                 try
                 {
-                    var user = context.Users.FirstOrDefault(x => _encryptor.Decrypt(x.UserToken, _keyReader.GetKey()) == request.User.UserToken);
+                    var user = context.Users.FirstOrDefault(x => _encryptor.Decrypt(x.UserToken) == request.User.UserToken);
 
                     if (user != null)
                         throw new UserAlreadyExistsException("User has already been registered");
 
                     context.Add(new UserRecord
                     {
-                        UserToken = _encryptor.Encrypt(request.User.UserToken, _keyReader.GetKey()),
-                        Username = _encryptor.Encrypt(request.User.Username, _keyReader.GetKey()),
-                        Picture = _encryptor.Encrypt(request.User.Picture, _keyReader.GetKey())
+                        UserToken = _encryptor.Encrypt(request.User.UserToken),
+                        Username = _encryptor.Encrypt(request.User.Username),
+                        Picture = _encryptor.Encrypt(request.User.Picture)
                     });
                     context.SaveChanges();
                     transaction.Commit();
@@ -79,7 +77,7 @@ namespace DealFinder.Data.Users.Repository
             {
                 try
                 {
-                    response.User = context.Users.First(x => x.UserToken == userToken);
+                    response.User = context.Users.FirstOrDefault(x => _encryptor.Decrypt(x.UserToken) == userToken);
                 }
                 catch (Exception exception)
                 {
@@ -105,8 +103,20 @@ namespace DealFinder.Data.Users.Repository
                 try
                 {
                     var user = context.Users.First(x => x.Identifier == request.User.Identifier);
-                    user.Username = _encryptor.Encrypt(request.User.Username, _keyReader.GetKey());
-                    response.User = user;
+
+                    if(request.User.Username != null)
+                        user.Username = _encryptor.Encrypt(request.User.Username);
+
+                    if (request.User.Latitude != null && request.User.Longitude != null)
+                    {
+                        user.Latitude = _encryptor.Encrypt(request.User.Latitude.ToString());
+                        user.Longitude = _encryptor.Encrypt(request.User.Longitude.ToString());
+                    }
+
+                    response.User = new UserRecord
+                    {
+                        UserToken = _encryptor.Decrypt(user.UserToken)
+                    };
 
                     context.SaveChanges();
                     transaction.Commit();
@@ -117,7 +127,7 @@ namespace DealFinder.Data.Users.Repository
                     response.AddError(new Error
                     {
                         Code = ErrorCodes.DatabaseError,
-                        UserMessage = "Something went wrong when updating your account. Please try again later.",
+                        UserMessage = "Something went wrong while updating your account. Please try again later.",
                         TechnicalMessage = $"The following exception was thrown: {exception.Message}"
                     });
                 }

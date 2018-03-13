@@ -11,8 +11,8 @@ namespace DealFinder.Core.Tests.Security.GivenARequestToEncrypt
         [OneTimeSetUp]
         public void SetUp()
         {
-            var subject = new AesEncryptor();
-            _result = subject.Encrypt("PASSWORD", "SOME_KEY");
+            var subject = new AesEncryptor("SOME_KEY");
+            _result = subject.Encrypt("PASSWORD");
         }
 
         [Test]

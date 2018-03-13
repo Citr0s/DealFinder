@@ -1,6 +1,8 @@
 ﻿using DealFinder.Core.Security;
 using DealFinder.Data.Deals.Repository;
 using DealFinder.Data.Deals.Service;
+using DealFinder.Data.ThirdPartyAuthenticator;
+using DealFinder.Data.Users.Repository;
 using DealFinder.Data.Users.Service;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,7 +15,7 @@ namespace DealFinder.Api.Controllers.Deal
         
         public DealController()
         {
-            _dealsService = new DealsService(new DealsRepository(), new DealsMapper(new UserMapper(new AesEncryptor(), KeyReader.Instance())));
+            _dealsService = new DealsService(new DealsRepository(), new DealsMapper(new UserMapper(new AesEncryptor(KeyReader.Instance().GetKey()))), new UserService(new UserRepository(new AesEncryptor(KeyReader.Instance().GetKey())), new AuthenticatorFactory(), new UserMapper(new AesEncryptor(KeyReader.Instance().GetKey()))));
         }
 
         [HttpGet("{latitude}/{longitude}/{userIdentifier?}")]

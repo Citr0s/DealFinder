@@ -1,4 +1,5 @@
-﻿using DealFinder.Core.Communication;
+﻿using System;
+using DealFinder.Core.Communication;
 using DealFinder.Data.ThirdPartyAuthenticator;
 using DealFinder.Data.Users.Repository;
 
@@ -8,6 +9,7 @@ namespace DealFinder.Data.Users.Service
     {
         RegisterResponse Register(RegisterRequest request);
         UpdateResponse Update(UpdateRequest request);
+        SaveLocationResponse SaveLastKnownLocation(double latitude, double longitude, string userIdentifier);
     }
 
     public class UserService : IUserService
@@ -82,6 +84,50 @@ namespace DealFinder.Data.Users.Service
             }
 
             var getUserResponse = _userRepository.GetUser(createUserResponse.User.UserToken);
+
+            if (getUserResponse.HasError)
+            {
+                response.AddError(getUserResponse.Error);
+                return response;
+            }
+
+            response.User = _userMapper.Map(getUserResponse.User);
+
+            return response;
+        }
+
+        public SaveLocationResponse SaveLastKnownLocation(double latitude, double longitude, string userIdentifier)
+        {
+            var response = new SaveLocationResponse();
+
+            if (Guid.TryParse(userIdentifier, out var userId))
+            {
+                response.AddError(new Error
+                {
+                    Code = ErrorCodes.InvalidGuidProvided,
+                    UserMessage = "Something went wrong. Please try again later",
+                    TechnicalMessage = $"Invalid User Identifier provided {userIdentifier}"
+                });
+                return response;
+            }
+
+            var updateUserResponse = _userRepository.UpdateUser(new UpdateUserRequest
+            {
+                User = new UserModel
+                {
+                    Identifier = userId,
+                    Latitude = latitude,
+                    Longitude = longitude
+                }
+            });
+
+            if (updateUserResponse.HasError)
+            {
+                response.AddError(updateUserResponse.Error);
+                return response;
+            }
+
+            var getUserResponse = _userRepository.GetUser(updateUserResponse.User.UserToken);
 
             if (getUserResponse.HasError)
             {

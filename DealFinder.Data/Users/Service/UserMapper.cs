@@ -11,12 +11,10 @@ namespace DealFinder.Data.Users.Service
     public class UserMapper: IUserMapper
     {
         private readonly IAesEncryptor _encryptor;
-        private readonly IKeyReader _keyReader;
 
-        public UserMapper(IAesEncryptor encryptor, IKeyReader keyReader)
+        public UserMapper(IAesEncryptor encryptor)
         {
             _encryptor = encryptor;
-            _keyReader = keyReader;
         }
 
         public UserModel Map(UserRecord user)
@@ -24,8 +22,8 @@ namespace DealFinder.Data.Users.Service
             return new UserModel
             {
                 Identifier = user.Identifier, 
-                Username = _encryptor.Decrypt(user.Username, _keyReader.GetKey()),
-                Picture = _encryptor.Decrypt(user.Picture, _keyReader.GetKey())
+                Username = _encryptor.Decrypt(user.Username),
+                Picture = _encryptor.Decrypt(user.Picture)
             };
         }
     }
