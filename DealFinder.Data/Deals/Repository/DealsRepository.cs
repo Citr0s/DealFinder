@@ -80,7 +80,7 @@ namespace DealFinder.Data.Deals.Repository
                         Latitude = request.Deal.Location.Latitude,
                         Longitude = request.Deal.Location.Longitude,
                         User = context.Users.First(x => x.Identifier.ToString() == request.Deal.UserIdentifier),
-                        DealTags = request.Deal.Tags.ConvertAll(x => new DealTagRecord { Tag = new TagRecord { Name = x } }),
+                        DealTags = request.Deal.Tags.ConvertAll(x => new DealTagRecord { Tag = context.Tags.FirstOrDefault(y => y.Name.ToLower() == x.ToLower()) ?? new TagRecord { Name = x } }),
                         CreatedAt = DateTime.Now
                     });
                     context.SaveChanges();
