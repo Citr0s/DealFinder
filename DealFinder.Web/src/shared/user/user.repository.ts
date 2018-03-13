@@ -20,4 +20,8 @@ export class UserRepository {
     updateUser(request: UpdateUserRequest) {
         return this._httpClient.put(`${environment.backendUrl}user/update`, request);
     }
+
+    deleteUser(userIdentifier: string) {
+        return this._httpClient.delete(`${environment.backendUrl}user/delete/${userIdentifier}`);
+    }
 }

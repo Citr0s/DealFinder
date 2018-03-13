@@ -10,6 +10,7 @@ namespace DealFinder.Data.Users.Repository
         CreateUserResponse CreateUser(CreateUserRequest request);
         GetUserResponse GetUser(string userToken);
         UpdateUserResponse UpdateUser(UpdateUserRequest updateUserRequest);
+        DeleteUserResponse DeleteUser(Guid userIdentifier);
     }
 
     public class UserRepository : IUserRepository
@@ -32,17 +33,32 @@ namespace DealFinder.Data.Users.Repository
                 {
                     var user = context.Users.FirstOrDefault(x => _encryptor.Decrypt(x.UserToken) == request.User.UserToken);
 
-                    if (user != null)
-                        throw new UserAlreadyExistsException("User has already been registered");
-
-                    context.Add(new UserRecord
+                    if (user == null)
                     {
-                        UserToken = _encryptor.Encrypt(request.User.UserToken),
-                        Username = _encryptor.Encrypt(request.User.Username),
-                        Picture = _encryptor.Encrypt(request.User.Picture)
-                    });
-                    context.SaveChanges();
-                    transaction.Commit();
+                        context.Add(new UserRecord
+                        {
+                            UserToken = _encryptor.Encrypt(request.User.UserToken),
+                            Username = _encryptor.Encrypt(request.User.Username),
+                            Picture = _encryptor.Encrypt(request.User.Picture),
+                            Active = true
+                        });
+
+                        context.SaveChanges();
+                        transaction.Commit();
+                    }
+                    else
+                    {
+                        if (user.Active)
+                            throw new UserAlreadyExistsException("User has already been registered");
+
+                        user.UserToken = _encryptor.Encrypt(request.User.UserToken);
+                        user.Username = _encryptor.Encrypt(request.User.Username);
+                        user.Picture = _encryptor.Encrypt(request.User.Picture);
+                        user.Active = true;
+
+                        context.SaveChanges();
+                        transaction.Commit();
+                    }
                 }
                 catch (UserAlreadyExistsException exception)
                 {
@@ -77,7 +93,7 @@ namespace DealFinder.Data.Users.Repository
             {
                 try
                 {
-                    response.User = context.Users.FirstOrDefault(x => _encryptor.Decrypt(x.UserToken) == userToken);
+                    response.User = context.Users.FirstOrDefault(x => _encryptor.Decrypt(x.UserToken) == userToken && x.Active);
                 }
                 catch (Exception exception)
                 {
@@ -102,9 +118,9 @@ namespace DealFinder.Data.Users.Repository
             {
                 try
                 {
-                    var user = context.Users.First(x => x.Identifier == request.User.Identifier);
+                    var user = context.Users.First(x => x.Identifier == request.User.Identifier && x.Active);
 
-                    if(request.User.Username != null)
+                    if (request.User.Username != null)
                         user.Username = _encryptor.Encrypt(request.User.Username);
 
                     if (request.User.Latitude != null && request.User.Longitude != null)
@@ -128,6 +144,36 @@ namespace DealFinder.Data.Users.Repository
                     {
                         Code = ErrorCodes.DatabaseError,
                         UserMessage = "Something went wrong while updating your account. Please try again later.",
+                        TechnicalMessage = $"The following exception was thrown: {exception.Message}"
+                    });
+                }
+            }
+
+            return response;
+        }
+
+        public DeleteUserResponse DeleteUser(Guid userIdentifier)
+        {
+            var response = new DeleteUserResponse();
+
+            using (var context = new DatabaseContext())
+            using (var transaction = context.Database.BeginTransaction())
+            {
+                try
+                {
+                    var user = context.Users.First(x => x.Identifier == userIdentifier);
+                    user.Active = false;
+
+                    context.SaveChanges();
+                    transaction.Commit();
+                }
+                catch (Exception exception)
+                {
+                    transaction.Rollback();
+                    response.AddError(new Error
+                    {
+                        Code = ErrorCodes.DatabaseError,
+                        UserMessage = "Something went wrong while deleting your account. Please try again later.",
                         TechnicalMessage = $"The following exception was thrown: {exception.Message}"
                     });
                 }

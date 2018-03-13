@@ -10,6 +10,7 @@ namespace DealFinder.Data.Users.Service
         RegisterResponse Register(RegisterRequest request);
         UpdateResponse Update(UpdateRequest request);
         SaveLocationResponse SaveLastKnownLocation(double latitude, double longitude, string userIdentifier);
+        DeleteResponse Delete(string userIdentifier);
     }
 
     public class UserService : IUserService
@@ -100,7 +101,7 @@ namespace DealFinder.Data.Users.Service
         {
             var response = new SaveLocationResponse();
 
-            if (Guid.TryParse(userIdentifier, out var userId))
+            if (!Guid.TryParse(userIdentifier, out var userId))
             {
                 response.AddError(new Error
                 {
@@ -136,6 +137,29 @@ namespace DealFinder.Data.Users.Service
             }
 
             response.User = _userMapper.Map(getUserResponse.User);
+
+            return response;
+        }
+
+        public DeleteResponse Delete(string userIdentifier)
+        {
+            var response = new DeleteResponse();
+
+            if (!Guid.TryParse(userIdentifier, out var userId))
+            {
+                response.AddError(new Error
+                {
+                    Code = ErrorCodes.InvalidGuidProvided,
+                    UserMessage = "Something went wrong. Please try again later",
+                    TechnicalMessage = $"Invalid User Identifier provided {userIdentifier}"
+                });
+                return response;
+            }
+
+            var deleteUserResponse = _userRepository.DeleteUser(userId);
+
+            if(deleteUserResponse.HasError)
+                response.AddError(deleteUserResponse.Error);
 
             return response;
         }

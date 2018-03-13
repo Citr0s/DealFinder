@@ -7,10 +7,30 @@
         <p>{{ successMessage }}</p>
     </mat-card>
     <div class="account-form">
+        <h2>Update Your Account</h2>
         <mat-form-field>
-            <input matInput placeholder="Username" (change)="updateUsernameValue($event)" value="{{username}}">
+            <input matInput placeholder="Username" (change)="updateUsernameValue($event)" value="{{user.username}}">
         </mat-form-field>
         <br>
         <button mat-raised-button class="button" color="primary" (click)="submit()">Save</button>
     </div>
+    <h2>Settings</h2>
+    <h3>Your Last Known Location</h3>
+    <agm-map class="map" *ngIf="user.latitude && user.longitude" [latitude]="user.latitude"
+             [longitude]="user.longitude"
+             [zoom]="15"
+             [streetViewControl]="false"
+             [mapTypeControl]="true" [fullscreenControl]="false">
+        <agm-marker [latitude]="user.latitude" [longitude]="user.longitude"
+                    [iconUrl]="'assets/pin.png'"></agm-marker>
+    </agm-map>
+    <h3>Danger Zone</h3>
+    <button mat-raised-button class="button" (click)="clearLocalStorage()">
+        Remove Local Storage
+        <small>(This will log you off)</small>
+    </button>
+    <button mat-raised-button class="button danger" (click)="deleteAccount()">
+        Delete Account
+        <small>(Your deals will not be deleted)</small>
+    </button>
 </mat-card>

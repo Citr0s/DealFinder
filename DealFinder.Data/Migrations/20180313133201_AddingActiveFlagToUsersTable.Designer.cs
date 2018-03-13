@@ -11,9 +11,10 @@ using System;
 namespace DealFinder.Data.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DealContextModelSnapshot : ModelSnapshot
+    [Migration("20180313133201_AddingActiveFlagToUsersTable")]
+    partial class AddingActiveFlagToUsersTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -27,5 +27,11 @@ namespace DealFinder.Api.Controllers.Users
         {
             return Ok(_userService.Update(request));
         }
+
+        [HttpDelete("delete/{userIdentifier}")]
+        public ActionResult Delete(string userIdentifier)
+        {
+            return Ok(_userService.Delete(userIdentifier));
+        }
     }
 }

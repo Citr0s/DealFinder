@@ -3,6 +3,7 @@ import { UserRepository } from "./user.repository";
 import { RegisterUserResponse } from "./register-user-response";
 import { User } from "./user";
 import { UpdateUserResponse } from "./update-user-response";
+import { DeleteUserResponse } from "./delete-user-response";
 
 @Injectable()
 export class UserService {
@@ -56,6 +57,17 @@ export class UserService {
             this._userRepository.updateUser(request)
             .subscribe((payload: UpdateUserResponse) => {
                 this.persistUser(payload.user);
+                resolve(payload);
+            }, (error) => {
+                reject(error);
+            });
+        });
+    }
+
+    deleteAccount(userIdentifier: string): Promise<DeleteUserResponse> {
+        return new Promise((resolve, reject) => {
+            this._userRepository.deleteUser(userIdentifier)
+            .subscribe((payload: DeleteUserResponse) => {
                 resolve(payload);
             }, (error) => {
                 reject(error);
