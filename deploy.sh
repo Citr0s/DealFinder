@@ -24,5 +24,5 @@ cd ../DealFinder.Api/
 echo -e "${GREEN}*** Compiling dotnet files... ***${NC}";
 dotnet restore
 
-echo "${GREEN}*** Starting dotnet process... ***${NC}";
+echo -e "${GREEN}*** Starting dotnet process... ***${NC}";
 dotnet run > stdout.txt 2> stderr.txt &
