@@ -28,6 +28,7 @@ namespace DealFinder.Api.Controllers.Deal
         public ActionResult Post([FromBody]DealModel deal)
         {
             return Ok(_dealsService.SaveDealDetails(deal));
+            
         }
     }
 }
