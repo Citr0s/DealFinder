@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using DealFinder.Core.Communication;
 using DealFinder.Data.Deals.Repository;
 using DealFinder.Data.Users.Service;
@@ -9,6 +10,7 @@ namespace DealFinder.Data.Deals.Service
     {
         GetDealsByLocationResponse GetByLocation(double latitude, double longitude, string userIdentifier);
         SaveDealDetailsResponse SaveDealDetails(DealModel deal);
+        MarkDealAsExpiredResponse MarkDealAsExpired(MarkDealAsExpiredRequest request);
     }
 
     public class DealsService : IDealsService
@@ -61,6 +63,47 @@ namespace DealFinder.Data.Deals.Service
             var saveDealDetailsResponse = _dealsRepository.SaveDeal(new SaveDealRequest
             {
                 Deal = deal
+            });
+
+            if (saveDealDetailsResponse.HasError)
+                response.AddError(saveDealDetailsResponse.Error);
+
+            return response;
+        }
+
+        public MarkDealAsExpiredResponse MarkDealAsExpired(MarkDealAsExpiredRequest request)
+        {
+            var response = new MarkDealAsExpiredResponse();
+
+            if (request.Id == null)
+            {
+                response.AddError(new Error
+                {
+                    Code = ErrorCodes.ValidationError,
+                    UserMessage = "Something went wrong. Please try again later.",
+                    TechnicalMessage = "Deal Identifier was not specified."
+                });
+                return response;
+            }
+
+            if (!Guid.TryParse(request.Id, out var dealId))
+            {
+                response.AddError(new Error
+                {
+                    Code = ErrorCodes.ValidationError,
+                    UserMessage = "Something went wrong. Please try again later.",
+                    TechnicalMessage = $"Deal Identifier was not in the correct format. Provided DealId: {request.Id}."
+                });
+                return response;
+            }
+
+            var saveDealDetailsResponse = _dealsRepository.MarkDealAsExpired(new UpdateDealRequest
+            {
+                Deal = new DealModel
+                {
+                    Id = dealId,
+                    Expired = request.Expired
+                }
             });
 
             if (saveDealDetailsResponse.HasError)

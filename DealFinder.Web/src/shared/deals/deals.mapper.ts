@@ -36,7 +36,8 @@ export class DealsMapper {
                     finalScore: item.votes.finalScore,
                     hasAlreadyVoted: item.votes.hasAlreadyVoted
                 },
-                tags: item.tags
+                tags: item.tags,
+                expired: item.expired
             });
         });
 

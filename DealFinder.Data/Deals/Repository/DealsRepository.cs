@@ -11,6 +11,7 @@ namespace DealFinder.Data.Deals.Repository
     {
         GetByLocationResponse GetByLocation(double latitude, double longitude);
         SaveDealResponse SaveDeal(SaveDealRequest request);
+        UpdateDealResponse MarkDealAsExpired(UpdateDealRequest markDealAsExpiredRequest);
     }
 
     public class DealsRepository : IDealsRepository
@@ -83,6 +84,48 @@ namespace DealFinder.Data.Deals.Repository
                         DealTags = request.Deal.Tags.ConvertAll(x => new DealTagRecord { Tag = context.Tags.FirstOrDefault(y => y.Name.ToLower() == x.ToLower()) ?? new TagRecord { Name = x } }),
                         CreatedAt = DateTime.Now
                     });
+                    context.SaveChanges();
+                    transaction.Commit();
+                }
+                catch (Exception exception)
+                {
+                    transaction.Rollback();
+                    response.AddError(new Error
+                    {
+                        Code = ErrorCodes.DatabaseError,
+                        UserMessage = "Something went wrong when saving your deal. Please try again later.",
+                        TechnicalMessage = $"The following exception was thrown: {exception.Message}"
+                    });
+                }
+            }
+
+            return response;
+        }
+
+        public UpdateDealResponse MarkDealAsExpired(UpdateDealRequest request)
+        {
+            var response = new UpdateDealResponse();
+
+            using (var context = new DatabaseContext())
+            using (var transaction = context.Database.BeginTransaction())
+            {
+                try
+                {
+                    var deal = context.Deals.FirstOrDefault(x => x.Identifier == request.Deal.Id);
+
+                    if (deal == null)
+                    {
+                        response.AddError(new Error
+                        {
+                            Code = ErrorCodes.DealNotFound,
+                            UserMessage = "Deal with provided identifier does not exist.",
+                            TechnicalMessage = $"User attempted to update a deal with unknown idetifier. DealId: {request.Deal.Id}"
+                        });
+                        return response;
+                    }
+
+                    deal.Expired = request.Deal.Expired;
+                    
                     context.SaveChanges();
                     transaction.Commit();
                 }

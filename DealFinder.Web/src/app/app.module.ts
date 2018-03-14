@@ -38,6 +38,8 @@ import { environment } from "../environments/environment";
 import { MomentModule } from "angular2-moment";
 import { OnlyVisibleFilter } from "../pages/home-page/deals.filter";
 import { AccountPageComponent } from "../pages/account-page/account-page.component";
+import { AgmDirectionModule } from "agm-direction/src/agm-direction.module";
+import { DealDetailsService } from "../shared/deal-details/deal-details.service";
 
 export function getAuthServiceConfigs() {
     return new AuthServiceConfig(
@@ -82,6 +84,7 @@ export function getAuthServiceConfigs() {
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyAHYBwqaOLSFxAQvK439xrVHIL7Tp_fobk'
         }),
+        AgmDirectionModule,
         ServiceWorkerModule.register('/ngsw-worker.js', {
             enabled: environment.production
         }),
@@ -98,7 +101,8 @@ export function getAuthServiceConfigs() {
         UserRepository,
         LocationService,
         VoteService,
-        VoteRepository
+        VoteRepository,
+        DealDetailsService
     ],
     bootstrap: [AppComponent],
     entryComponents: [

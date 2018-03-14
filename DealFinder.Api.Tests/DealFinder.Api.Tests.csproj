@@ -15,4 +15,8 @@
     <ProjectReference Include="..\DealFinder.Api\DealFinder.Api.csproj" />
     <ProjectReference Include="..\DealFinder.Data\DealFinder.Data.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Deal\" />
+  </ItemGroup>
 </Project>

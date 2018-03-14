@@ -5,7 +5,9 @@ mono: none
 dotnet: 2.1.4
 script:
  - dotnet restore
- - dotnet test
+ - cd DealFinder.Api.Tests && dotnet test
+ - cd ../DealFinder.Core.Tests && dotnet test
+ - cd ../DealFinder.Data.Tests && dotnet test
 
 notifications:
   email: false

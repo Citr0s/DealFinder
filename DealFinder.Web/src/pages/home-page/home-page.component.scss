@@ -86,3 +86,37 @@
     color: #fff;
   }
 }
+
+.mark-as-expired {
+  position: absolute;
+  bottom: 15px;
+  right: 60px;
+
+  .mat-mini-fab.mat-accent {
+    background-color: $failure-dark;
+  }
+
+  &:hover {
+    .mat-mini-fab.mat-accent {
+      background-color: $failure-light;
+    }
+  }
+
+  &.enable {
+    .mat-mini-fab.mat-accent {
+      background-color: $success-dark;
+    }
+
+    &:hover {
+      .mat-mini-fab.mat-accent {
+        background-color: $success-light;
+      }
+    }
+  }
+}
+
+.get-directions {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+}

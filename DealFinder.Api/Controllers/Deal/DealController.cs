@@ -30,5 +30,11 @@ namespace DealFinder.Api.Controllers.Deal
             return Ok(_dealsService.SaveDealDetails(deal));
             
         }
+
+        [HttpPut("")]
+        public ActionResult Put([FromBody]MarkDealAsExpiredRequest request)
+        {
+            return Ok(_dealsService.MarkDealAsExpired(request));
+        }
     }
 }

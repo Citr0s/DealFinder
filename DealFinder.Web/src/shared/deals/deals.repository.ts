@@ -19,4 +19,8 @@ export class DealsRepository {
     saveDeal(request: SaveDealRequest) {
         return this._httpClient.post(`${environment.backendUrl}deal`, request);
     }
+
+    markDealAsExpired(id: string, expire: boolean) {
+        return this._httpClient.put(`${environment.backendUrl}deal`, {id: id, expired: expire});
+    }
 }

@@ -23,5 +23,6 @@ namespace DealFinder.Data.Deals.Service
         public DateTime CreatedAt { get; set; }
         public UserModel User { get; set; }
         public VoteDetailsModel Votes { get; set; }
+        public bool Expired { get; set; }
     }
 }

@@ -1,5 +1,6 @@
-import { Component, Inject } from "@angular/core";
+import { Component, EventEmitter, Inject, Output } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
+import { DealDetailsService } from "../../../shared/deal-details/deal-details.service";
 
 @Component({
     selector: 'deal-details-modal',
@@ -8,13 +9,16 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 })
 export class DealDetailsModal {
     dialogRef: MatDialogRef<DealDetailsModal>;
+    @Output() directionsRequired: EventEmitter<any> = new EventEmitter();
+    private _dealDetailsService: DealDetailsService;
 
-    constructor(dialogRef: MatDialogRef<DealDetailsModal>, @Inject(MAT_DIALOG_DATA) public data: any) {
+    constructor(dialogRef: MatDialogRef<DealDetailsModal>, @Inject(MAT_DIALOG_DATA) public data: any, dealDetailsService: DealDetailsService) {
         this.dialogRef = dialogRef;
+        this._dealDetailsService = dealDetailsService;
     }
 
-    onNoClick(): void {
+    displayRoute(destinationCoordinates) {
+        this._dealDetailsService.requireDirections(destinationCoordinates);
         this.dialogRef.close();
     }
-
 }

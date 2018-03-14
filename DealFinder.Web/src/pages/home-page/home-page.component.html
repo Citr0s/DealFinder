@@ -56,6 +56,19 @@
                         <mat-chip color="primary" *ngFor="let tag of deal.tags">{{ tag }}</mat-chip>
                     </mat-chip-list>
                 </div>
+                <div class="mark-as-expired" [ngClass]="{ 'enable': deal.expired }"
+                     *ngIf="user && deal.user.identifier === user.identifier">
+                    <button mat-mini-fab (click)="markAsExpired(deal)"
+                            title="{{ !deal.expired ? 'Mark as Expired' : 'Mark as Active' }}">
+                        <i class="material-icons" *ngIf="!deal.expired">clear</i>
+                        <i class="material-icons" *ngIf="deal.expired">done</i>
+                    </button>
+                </div>
+                <div class="get-directions">
+                    <button mat-mini-fab (click)="viewDealDetails(deal, {onlyMap:true})">
+                        <i class="material-icons">&#xe52e;</i>
+                    </button>
+                </div>
             </mat-card>
         </mat-tab>
         <mat-tab label="Map View">
@@ -72,6 +85,8 @@
                 <agm-marker [latitude]="currentCoordinates.latitude"
                             [longitude]="currentCoordinates.longitude"
                             [iconUrl]="'assets/pin.png'" (markerClick)="viewYouAreHere()"></agm-marker>
+                <agm-direction *ngIf="destinationCoordinates" [origin]="originCoordinates"
+                               [destination]="destinationCoordinates"></agm-direction>
             </agm-map>
         </mat-tab>
     </mat-tab-group>
