@@ -8,6 +8,7 @@ script:
  - cd DealFinder.Api.Tests && dotnet test
  - cd ../DealFinder.Core.Tests && dotnet test
  - cd ../DealFinder.Data.Tests && dotnet test
+ - cd ../DealFinder.Web && yarn && ng build --prod
 
 notifications:
   email: false
