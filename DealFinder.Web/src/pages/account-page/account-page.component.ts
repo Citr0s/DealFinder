@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
-import { UserService } from "../../shared/user/user.service";
-import { UpdateUserResponse } from "../../shared/user/update-user-response";
-import { Router } from "@angular/router";
-import { User } from "../../shared/user/user";
-import { DealsService } from "../../shared/deals/deals.service";
-import { DeleteUserResponse } from "../../shared/user/delete-user-response";
+import {Component} from '@angular/core';
+import {UserService} from '../../shared/user/user.service';
+import {UpdateUserResponse} from '../../shared/user/update-user-response';
+import {Router} from '@angular/router';
+import {User} from '../../shared/user/user';
+import {DealsService} from '../../shared/deals/deals.service';
+import {DeleteUserResponse} from '../../shared/user/delete-user-response';
 
 @Component({
     selector: 'account-page',
@@ -18,6 +18,7 @@ export class AccountPageComponent {
     private _userService: UserService;
     private _router: Router;
     private _dealsService: DealsService;
+    
 
     constructor(userService: UserService, router: Router, dealsService: DealsService) {
         this._userService = userService;
@@ -37,16 +38,16 @@ export class AccountPageComponent {
 
     submit() {
         this._userService.updateUser(this.user)
-        .then((payload: UpdateUserResponse) => {
-            if (payload.hasError) {
-                this.errorMessage = payload.error.userMessage;
-                return;
-            }
+            .then((payload: UpdateUserResponse) => {
+                if (payload.hasError) {
+                    this.errorMessage = payload.error.userMessage;
+                    return;
+                }
 
-            this._userService.persistUser(payload.user);
-            this.successMessage = 'Account Updated Successfully';
-            this.user.username = payload.user.username;
-        });
+                this._userService.persistUser(payload.user);
+                this.successMessage = 'Account Updated Successfully';
+                this.user.username = payload.user.username;
+            });
     }
 
     clearLocalStorage() {
@@ -58,14 +59,14 @@ export class AccountPageComponent {
 
     deleteAccount() {
         this._userService.deleteAccount(this.user.identifier)
-        .then((payload: DeleteUserResponse) => {
-            if (payload.hasError) {
-                this.errorMessage = payload.error.userMessage;
-                return;
-            }
+            .then((payload: DeleteUserResponse) => {
+                if (payload.hasError) {
+                    this.errorMessage = payload.error.userMessage;
+                    return;
+                }
 
-            this._userService.logOut();
-            this._router.navigate(['']);
-        });
+                this._userService.logOut();
+                this._router.navigate(['']);
+            });
     }
 }
