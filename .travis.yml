@@ -3,6 +3,10 @@ solution: DealFinder.sln
 language: csharp
 mono: none
 dotnet: 2.1.4
+
+before_script:
+  - npm install -g @angular/cli
+
 script:
  - dotnet restore
  - cd DealFinder.Api.Tests && dotnet test
