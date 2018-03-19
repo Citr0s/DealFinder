@@ -7,7 +7,7 @@ namespace DealFinder.Api.Controllers.Deploy
     [Route("api/[controller]")]
     public class DeployController : Controller
     {
-        [HttpGet("")]
+        [HttpPost("")]
         public ActionResult Get()
         {
             return Ok("cd .. && sudo bash deploy.sh > stdout.txt 2> stderr.txt &".Bash());
