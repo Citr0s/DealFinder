@@ -104,7 +104,7 @@ export class NewDealPageComponent {
             this.tags.splice(index, 1);
     }
 
-    handleCorrectCaptcha() {
+    handleCorrectCaptcha(event) {
         this.allowSubmit = true;
     }
 }
