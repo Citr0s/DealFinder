@@ -1,5 +1,5 @@
-import { Injectable, Pipe, PipeTransform } from "@angular/core";
-import { Deal } from "../../shared/deals/deal";
+import {Injectable, Pipe, PipeTransform} from '@angular/core';
+import {Deal} from '../../shared/deals/deal';
 
 @Pipe({
     name: 'onlyVisibleFilter',
@@ -8,6 +8,6 @@ import { Deal } from "../../shared/deals/deal";
 @Injectable()
 export class OnlyVisibleFilter implements PipeTransform {
     transform(deals: Deal[], args: any[]): any {
-        return deals.filter(deal => deal.visible === true);
+        return deals.filter(deal => deal.expired === false);
     }
 }
