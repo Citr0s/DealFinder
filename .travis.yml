@@ -17,8 +17,10 @@ script:
 notifications:
   email: false
   webhooks:
-  urls:
-    - https://fyp.miloszdura.com/api/deploy
-  on_start: false
-  on_success: always
-  on_failure: false
+    urls:
+      - https://fyp.miloszdura.com/api/deploy
+    on_success: always # default: always
+    on_failure: never # default: always
+    on_start: never   # default: never
+    on_cancel: never # default: always
+    on_error: never # default: always
