@@ -33,9 +33,12 @@
                         [iconUrl]="'assets/pin.png'"></agm-marker>
         </agm-map>
         <br>
+        <re-captcha (captchaResponse)="handleCorrectCaptcha($event)"
+                    site_key="6Lcrnk0UAAAAAB5wV7DG28GouLFvxo4zLW1PorRS"></re-captcha>
+        <br>
         <mat-card class="deal-card error-message" *ngIf="errorMessage">
             <p>{{ errorMessage }}</p>
         </mat-card>
-        <button mat-raised-button class="button" color="primary" (click)="submit()">Submit</button>
+        <button mat-raised-button class="button" color="primary" (click)="submit()" *ngIf="allowSubmit">Submit</button>
     </div>
 </mat-card>

@@ -340,6 +340,10 @@ angular2-moment@^1.8.0:
   dependencies:
     moment "^2.16.0"
 
+angular2-recaptcha@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/angular2-recaptcha/-/angular2-recaptcha-0.6.0.tgz#1d67363925d169b9213adefcfacd03a40125efe3"
+
 angular5-social-login@^1.0.9:
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/angular5-social-login/-/angular5-social-login-1.0.9.tgz#6e4808da883da273c52618decca8c2274158fabf"

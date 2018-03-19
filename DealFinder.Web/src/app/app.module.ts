@@ -40,6 +40,7 @@ import { OnlyVisibleFilter } from "../pages/home-page/deals.filter";
 import { AccountPageComponent } from "../pages/account-page/account-page.component";
 import { AgmDirectionModule } from "agm-direction/src/agm-direction.module";
 import { DealDetailsService } from "../shared/deal-details/deal-details.service";
+import {ReCaptchaModule} from 'angular2-recaptcha';
 
 export function getAuthServiceConfigs() {
     return new AuthServiceConfig(
@@ -88,7 +89,8 @@ export function getAuthServiceConfigs() {
         ServiceWorkerModule.register('/ngsw-worker.js', {
             enabled: environment.production
         }),
-        MomentModule
+        MomentModule,
+        ReCaptchaModule
     ],
     providers: [
         DealsService,

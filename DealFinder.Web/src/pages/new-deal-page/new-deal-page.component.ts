@@ -1,11 +1,11 @@
-import { Component, Input } from '@angular/core';
-import { DealsService } from '../../shared/deals/deals.service';
-import { Location } from '../../shared/deals/location';
-import { UserService } from '../../shared/user/user.service';
-import { Router } from '@angular/router';
-import { LocationService } from "../../shared/location/location.service";
-import { MatChipInputEvent } from "@angular/material";
-import { COMMA, ENTER } from "@angular/cdk/keycodes";
+import {Component, Input} from '@angular/core';
+import {DealsService} from '../../shared/deals/deals.service';
+import {Location} from '../../shared/deals/location';
+import {UserService} from '../../shared/user/user.service';
+import {Router} from '@angular/router';
+import {LocationService} from '../../shared/location/location.service';
+import {MatChipInputEvent} from '@angular/material';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
 
 @Component({
     selector: 'new-deal-page',
@@ -25,6 +25,7 @@ export class NewDealPageComponent {
     removable: boolean = true;
     addOnBlur: boolean = true;
     separatorKeysCodes: number[];
+    allowSubmit: boolean;
     private _dealsService: DealsService;
     private _userService: UserService;
     private _router: Router;
@@ -38,6 +39,7 @@ export class NewDealPageComponent {
         this.coordinates = new Location();
         this.initialCoordinates = new Location();
         this.separatorKeysCodes = [ENTER, COMMA];
+        this.allowSubmit = false;
 
         this.tags = [
             {name: 'General'}
@@ -48,25 +50,25 @@ export class NewDealPageComponent {
             this._router.navigate(['']);
 
         this._locationService.getCurrentLocation()
-        .then((coordinates) => {
-            this.initialCoordinates = coordinates;
-            this.coordinates = coordinates;
-        });
+            .then((coordinates) => {
+                this.initialCoordinates = coordinates;
+                this.coordinates = coordinates;
+            });
     }
 
     submit() {
         this._dealsService.saveDeal(this.title, this.summary, this.coordinates, this._userService.getPersistedUser().identifier, this.tags.map(x => x.name))
-        .then((payload: any) => {
-            if (payload.hasError) {
-                this.errorMessage = payload.error.userMessage;
-                return;
-            }
+            .then((payload: any) => {
+                if (payload.hasError) {
+                    this.errorMessage = payload.error.userMessage;
+                    return;
+                }
 
-            this._router.navigate(['']);
-        })
-        .catch(() => {
-            this.errorMessage = "Something went wrong. Please try again later.";
-        });
+                this._router.navigate(['']);
+            })
+            .catch(() => {
+                this.errorMessage = 'Something went wrong. Please try again later.';
+            });
     }
 
     updateTitleValue(event) {
@@ -100,5 +102,9 @@ export class NewDealPageComponent {
 
         if (index >= 0)
             this.tags.splice(index, 1);
+    }
+
+    handleCorrectCaptcha() {
+        this.allowSubmit = true;
     }
 }
