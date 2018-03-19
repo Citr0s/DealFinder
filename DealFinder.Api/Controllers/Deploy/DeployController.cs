@@ -10,7 +10,7 @@ namespace DealFinder.Api.Controllers.Deploy
         [HttpGet("")]
         public ActionResult Get()
         {
-            return Ok("cd .. && bash deploy.sh > stdout.txt 2> stderr.txt &".Bash());
+            return Ok("cd .. && sudo bash deploy.sh > stdout.txt 2> stderr.txt &".Bash());
         }
     }
     
