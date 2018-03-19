@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { AuthService, FacebookLoginProvider, GoogleLoginProvider } from 'angular5-social-login';
-import { UserService } from '../../shared/user/user.service';
-import { Router } from '@angular/router';
+import {Component} from '@angular/core';
+import {AuthService, FacebookLoginProvider, GoogleLoginProvider} from 'angular5-social-login';
+import {UserService} from '../../shared/user/user.service';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'sign-up-page',
@@ -31,20 +31,20 @@ export class SignUpPageComponent {
         }
 
         this._authService.signIn(socialPlatformProvider)
-        .then((userData) => {
-                this._userService.registerUser(userData.idToken, socialPlatform)
-                .then(() => {
-                    this._router.navigate(['']);
-                })
-                .catch(() => {
-                    // TODO: display error
-                });
-            }
-        );
+            .then((userData) => {
+                    this._userService.registerUser(userData.idToken, socialPlatform)
+                        .then(() => {
+                            this._router.navigate(['']);
+                        })
+                        .catch(() => {
+                            // TODO: display error
+                        });
+                }
+            );
     }
 
     replaceSrc(source: string) {
-        let element = document.querySelector('img');
+        let element = document.querySelector('img.login-button');
         element.setAttribute('src', source);
     }
 }
