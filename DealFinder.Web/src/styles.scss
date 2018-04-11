@@ -8,6 +8,10 @@ $success-light: #2ecc71;
 $failure-dark: #c0392b;
 $failure-light: #e74c3c;
 
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
 .content-wrapper {
   padding: 15px;
 }
