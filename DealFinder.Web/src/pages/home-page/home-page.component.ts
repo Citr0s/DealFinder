@@ -1,16 +1,16 @@
-import { Component, Input, ViewChild } from '@angular/core';
-import { DealsService } from '../../shared/deals/deals.service';
-import { Deal } from '../../shared/deals/deal';
-import { DealsModel } from './deals.model';
-import { LocationService } from '../../shared/location/location.service';
-import { Location } from '../../shared/deals/location';
-import { MatDialog } from '@angular/material';
-import { DealDetailsModal } from './deal-details/deal-details.modal';
-import { AgmMap } from '@agm/core';
-import { VoteService } from '../../shared/vote/vote.service';
-import { UserService } from '../../shared/user/user.service';
-import { User } from '../../shared/user/user';
-import { DealDetailsService } from "../../shared/deal-details/deal-details.service";
+import {Component, Input, ViewChild} from '@angular/core';
+import {DealsService} from '../../shared/deals/deals.service';
+import {Deal} from '../../shared/deals/deal';
+import {DealsModel} from './deals.model';
+import {LocationService} from '../../shared/location/location.service';
+import {Location} from '../../shared/deals/location';
+import {MatDialog} from '@angular/material';
+import {DealDetailsModal} from './deal-details/deal-details.modal';
+import {AgmMap} from '@agm/core';
+import {VoteService} from '../../shared/vote/vote.service';
+import {UserService} from '../../shared/user/user.service';
+import {User} from '../../shared/user/user';
+import {DealDetailsService} from '../../shared/deal-details/deal-details.service';
 
 @Component({
     selector: 'home-page',
@@ -50,32 +50,32 @@ export class HomePageComponent {
         });
 
         this._locationService.getCurrentLocation()
-        .then((coordinates) => {
-            this.findLocation(coordinates);
-            this.currentCoordinates = coordinates;
-            this.originCoordinates = {lat: coordinates.latitude, lng: coordinates.longitude};
-        });
+            .then((coordinates) => {
+                this.findLocation(coordinates);
+                this.currentCoordinates = coordinates;
+                this.originCoordinates = {lat: coordinates.latitude, lng: coordinates.longitude};
+            });
 
         this.user = this._userService.getPersistedUser();
 
         this._userService.onChange
-        .subscribe((user) => {
-            this.user = user;
-        });
+            .subscribe((user) => {
+                this.user = user;
+            });
 
         this._dealsService.onChange
-        .subscribe(() => {
-            this.dealsModel.feedback = 'New deals are available! Click here to load them.';
-        });
+            .subscribe(() => {
+                this.dealsModel.feedback = 'New deals are available! Click here to load them.';
+            });
 
         this._dealDetailsService.directionsRequired
-        .subscribe((destinationCoordinates: any) => {
-            this.destinationCoordinates = destinationCoordinates;
-        });
+            .subscribe((destinationCoordinates: any) => {
+                this.destinationCoordinates = destinationCoordinates;
+            });
     }
 
     reloadDeals() {
-        this.dealsModel.feedback = "";
+        this.dealsModel.feedback = '';
         this.dealsModel.deals = this._dealsService.getLastSavedDeals();
     }
 
@@ -86,23 +86,23 @@ export class HomePageComponent {
             userIdentifier = this.user.identifier;
 
         this._dealsService.getDealsByLocation(coordinates, userIdentifier)
-        .then((payload: Deal[]) => {
-            this.dealsModel.deals = payload;
+            .then((payload: Deal[]) => {
+                this.dealsModel.deals = payload;
 
-            if (this.dealsModel.deals.length === 0) {
-                this.dealsModel.feedback = 'No deals found!';
-                return;
-            }
+                if (this.dealsModel.deals.length === 0) {
+                    this.dealsModel.feedback = 'No deals found!';
+                    return;
+                }
 
-            this.highestDistance = 0;
-            this.dealsModel.deals.forEach((deal) => {
-                if (deal.distanceInMiles > this.highestDistance)
-                    this.highestDistance = Math.ceil(deal.distanceInMiles);
+                this.highestDistance = 0;
+                this.dealsModel.deals.forEach((deal) => {
+                    if (deal.distanceInMiles > this.highestDistance)
+                        this.highestDistance = Math.ceil(deal.distanceInMiles);
+                });
+            })
+            .catch((error) => {
+                this.dealsModel.addError(error.message);
             });
-        })
-        .catch((error) => {
-            this.dealsModel.addError(error.message);
-        });
     }
 
     viewDealDetails(deal: Deal, options: { onlyMap: boolean }) {
@@ -162,8 +162,8 @@ export class HomePageComponent {
         deal.expired = !deal.expired;
 
         this._dealsService.markAsExpired(deal.id, deal.expired)
-        .then(() => {
-            this._dealsService.updatePersistedDeal(deal);
-        });
+            .then(() => {
+                this._dealsService.updatePersistedDeal(deal);
+            });
     }
 }
