@@ -16,7 +16,7 @@ namespace DealFinder.Core.Tests.Security.GivenARequestToEncrypt
         }
 
         [Test]
-        public void ThenStringIsEncryptedCorrectly()
+        public void ThenStringIsDecryptedCorrectly()
         {
             Assert.That(_result, Is.EqualTo("PASSWORD"));
         }

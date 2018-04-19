@@ -1,7 +1,7 @@
 ﻿using DealFinder.Core.Security;
 using NUnit.Framework;
 
-namespace DealFinder.Core.Tests.Security.GivenARequestToEncrypt
+namespace DealFinder.Core.Tests.Security.GivenARequestToUseEncryption
 {
     [TestFixture]
     public class WhenEncryptingAString
